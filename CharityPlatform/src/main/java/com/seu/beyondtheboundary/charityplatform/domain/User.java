@@ -12,7 +12,7 @@ public class User{
 
 	@Id // 主键
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
-	private Integer id; // 用户的唯一标识
+	private Long id; // 用户的唯一标识
 
 	@Column(nullable = false, length = 20) // 映射为字段，值不能为空
 	private String realname;
@@ -44,11 +44,11 @@ public class User{
 
 	private String password; // 登录时密码
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

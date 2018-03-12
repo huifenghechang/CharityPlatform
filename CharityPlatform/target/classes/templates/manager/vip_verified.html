@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title></title>
+    <link href="../css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/Iframe.css" rel="stylesheet" type="text/css" media="all" />
+    <style type="text/css">
+        a {color: #2aaf42;}
+    </style>
+</head>
+<body>
+<div class="table_con">
+    <table>
+        <tr class="tb_title">
+            <td width="100px">姓名</td>
+            <td width="230px">身份证</td>
+            <td width="200px">手机号</td>
+            <td width="100px">获取凭证</td>
+            <td width="150px">删除用户</td>
+        </tr>
+        <tr th:each="menu: ${userModel.userList}">
+            <td width="100px" th:text="${menu.realname}"></td>
+            <td width="230px" th:text="${menu.user_id_card}"></td>
+            <td width="200px" th:text="${menu.tel}"></td>
+
+            <td width="100px">
+                <form th:action="@{/admins/vipcertificate}" method="post" target="_blank">
+                    <input type="hidden" name="id"  th:value="${menu.id}"/>
+                    <input type="hidden" name="confirmation_link" th:value="${menu.confirmation_link}" />
+                    <input class="bj_btn" type="submit" value="凭证"/>
+                </form>
+            </td>
+
+
+
+            <td width="150px">
+                <a id="sj_btn_a" th:href="@{'/admins/deleteUser/'+${menu.id}}" style="width:75px">删除信息</a>
+            </td>
+
+        </tr>
+    </table>
+</div>
+</body>
+</html>

@@ -80,6 +80,15 @@ public class UserServiceImpl implements UserService {
 	public List<User> userNotVerified() {
 		return userRepository.findAllByVerified(2);
 	}
+	//将所有待审核的用户筛选出来，并返回需要的信息
+	public List<User> userVerified1() {
+		return userRepository.findAllByVerified(1);
+	}
+
+    //将所有审核通过的用户筛选出来，并返回需要的信息
+    public List<User> userHasVerified() {
+        return userRepository.findAllByVerified(1);
+    }
 
     //将所有审核通过的用户筛选出来，并返回需要的信息
     public List<User> userHasVerified() {
@@ -87,7 +96,15 @@ public class UserServiceImpl implements UserService {
     }
 
 	//审核通过用户状态设为1，审核未通过设为0
+<<<<<<< HEAD
 	public void userCheckPass(Integer id, Integer verified) {
+=======
+<<<<<<< HEAD
+	public void userCheckPass(@PathVariable("") Long id, @PathVariable("verified") Integer verified) {
+=======
+	public void userCheckPass(Integer id, Integer verified) {
+>>>>>>> 784895319605aae83824089c6ae9b4f2487dc3e5
+>>>>>>> wc
 
 		User user = userRepository.findById(id);
 		user.setVerified(verified);
