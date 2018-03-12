@@ -10,13 +10,12 @@ import javax.validation.constraints.Size;
 
 public class User{
 
-
 	@Id // 主键
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
 	private Integer id; // 用户的唯一标识
 
 	@Column(nullable = false, length = 20) // 映射为字段，值不能为空
-	private String name;
+	private String realname;
 
 	@Column(nullable = false, length = 50, unique = true)
 	private String email;
@@ -24,20 +23,33 @@ public class User{
 	@Column(nullable = false, length = 20, unique = true)
 	private String username; // 用户账号，用户登录时的唯一标识
 
+	private Integer don_id;
+
+	private boolean sex;
+
+	private String user_id_card;
+
+	private String tel;
+
+	private String address;
+
+	private String confirmation_link;
+
+	private String avator;
+
+	private Integer verified;
+
+	private boolean admin;
+	@Column(length = 100)
+
+	private String password; // 登录时密码
+
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getEmail() {
@@ -64,46 +76,24 @@ public class User{
 		this.password = password;
 	}
 
-	private Integer donateId;
 
-	private String realname;
-
-	private boolean sex;
-
-	private String user_id_card;
-
-	private String tel;
-
-	private String address;
-
-	private String confirmation_link;
-
-	private String avator;
-
-	private Integer verified;
-
-	private boolean admin;
-	@Column(length = 100)
-
-	private String password; // 登录时密码
 
 	public User() { // JPA 的规范要求无参构造函数；设为 protected 防止直接使用
 	}
 
-	public User(String name, String email,String username,String password) {
-		this.name = name;
-		this.email = email;
+	public User(String username, String email,String realname,String password) {
 		this.username = username;
+		this.email = email;
+		this.realname = realname;
 		this.password = password;
 	}
 
-
-	public Integer getDonateId() {
-		return donateId;
+	public Integer getDon_id() {
+		return don_id;
 	}
 
-	public void setDonateId(Integer donateId) {
-		this.donateId = donateId;
+	public void setDon_id(Integer don_id) {
+		this.don_id = don_id;
 	}
 
 	public boolean isSex() {
