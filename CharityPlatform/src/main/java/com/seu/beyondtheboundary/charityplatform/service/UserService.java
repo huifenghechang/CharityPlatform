@@ -54,5 +54,5 @@ public interface UserService {
      * @param user
      * @return
      */
-    Page<User> listUsersByNameLike(String name, Pageable pageable);
+    Page<User> listUsersByNameLike(String realname, Pageable pageable);
 }
