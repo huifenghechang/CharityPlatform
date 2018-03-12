@@ -35,7 +35,7 @@ public class User{
 
 	private String confirmation_link;
 
-	private String avator;
+	private String avatar;
 
 	private Integer verified;
 
@@ -144,15 +144,15 @@ public class User{
 		this.realname = realname;
 	}
 
-	public String getAvator() {
-		return avator;
-	}
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public void setAvator(String avator) {
-		this.avator = avator;
-	}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-	public Integer getVerified() {
+    public Integer getVerified() {
 		return verified;
 	}
 
