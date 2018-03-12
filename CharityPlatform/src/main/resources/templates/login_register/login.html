@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popup.js"></script>
+    <link href="css/style1.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <style>
+
+        .form-group {
+            margin-bottom: 1rem;
+            float: none;
+            font-size: 16px;
+
+        }
+        .form-group label{
+            font-weight: 400 ;}
+
+        .btn {
+            border: 1px solid #ccc;
+            outline: 0;
+            padding: 5px 15px;
+            cursor: pointer;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            font-size: 18px;
+            line-height: 1.4;
+
+
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="header container">
+    <div class="logo">
+        <a href="index.html"><img src="images/logo.png" alt="click this to homepage" /></a>
+    </div>
+    <div class="top-nav">
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/login" class="scroll">登录</a></li>
+                <li><a href="/register" class="scroll">注册</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="container blog-content-container" style="margin-top: 160px">
+    <h2 style="margin-bottom: 10px">请登录</h2>
+    <form  th:action="@{/login}" method="post">
+        <div class="form-group col-md-5">
+            <label for="username" class="col-form-label">账号</label>
+            <input type="text" class="form-control" id="username" name="username" maxlength="50" placeholder="请输入账号"/>
+
+        </div>
+        <div class="form-group col-md-5">
+            <label for="password" class="col-form-label">密码</label>
+            <input type="password" class="form-control" id="password" name="password" maxlength="30" placeholder="请输入密码" />
+        </div>
+        <div class="form-group col-md-5">
+            <input type="checkbox" name="remember-me"/> 记住我
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="border: 1px solid #ccc;
+            outline: 0;
+            margin-bottom: -48px;
+            cursor: pointer;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            font-size: 18px;
+            line-height: 1.4;
+                    margin-left: 15px;
+                    background-color: #11A782;
+                    color: #fff;">提交</button>
+        <div class=" col-md-5" th:if="${loginError}">
+            <p class="blog-label-error" th:text="${errorMsg}"></p>
+        </div>
+
+
+
+    </form>
+</div> <!-- /container -->
+
+
+
+
+<!--footer-->
+<div class="footer" style="margin-top: 80px">
+    <div class="container">
+        <ul>
+            <li><a href="#" >联系我们</a></li>
+            <li>|</li>
+            <li><a href="#" >关于境界的彼方</a> </li>
+            <li>|</li>
+            <li><a href="/admins">管理中心</a></li>
+            <li>|</li>
+            <li><a href="#" >意见反馈</a> </li>
+        </ul>
+        <span class="drop"> </span>
+        <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
+        <p class="footer-class">Copyright &copy; 1Q84.</p>
+        <ul class="social-icons">
+            <li class="twitter"><a href="#"><span> </span></a></li>
+            <li class="gmail"><a href="#"><span> </span></a></li>
+            <li class="print"><a href="#"><span> </span></a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

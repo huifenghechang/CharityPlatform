@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>完善个人信息</title>
+    <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+
+<body>
+
+<div class="header container">
+  <div class="logo">
+    <a href="../index.html"><img src="../images/logo.png" alt="click this to homepage" /></a>
+  </div>
+  <div class="top-nav">
+    <nav class="main_nav">
+      <ul>
+        <li><a href="/login" class="scroll">登录</a></li>
+        <li><a href="/register" class="scroll">注册</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+
+
+<div class="container blog-content-container" style="margin-top: 160px">
+  <h2 style="margin: 31px 14px">个人信息完善</h2>
+  <form  th:action="@{/login}" method="post">
+    <div class="form-group col-md-5">
+      <label for="username" class="col-form-label">账号</label>
+      <input type="text" class="form-control required" id="username" name="username" maxlength="50" placeholder="请输入账号"/>
+    </div>
+    <div class="form-group col-md-5">
+      <label for="password" class="col-form-label">密码</label>
+      <input type="password" class="form-control" id="password" name="password" maxlength="30" placeholder="请输入密码" />
+    </div>
+    <div class="form-group col-md-5">
+      <label for="name" class="col-form-label">姓名</label>
+      <input type="text" class="form-control" id="name" name="name" maxlength="40" placeholder="请输入真实姓名" />
+    </div>
+    <div class="form-group col-md-5">
+      <p>性别</p>
+      男<input type="radio" checked="checked" name="Sex" value="male" />
+      女<input type="radio" name="Sex" value="female" />
+    </div>
+    <div class="form-group col-md-5">
+      <label for="id_number" class="col-form-label">身份证</label>
+      <input type="text" class="form-control" id="id_number" name="name" maxlength="40" placeholder="请输入身份证号" />
+    </div>
+    <div class="form-group col-md-5">
+      <label for="email" class="col-form-label">邮箱</label>
+      <input type="text" class="form-control" id="email" name="name" maxlength="40" placeholder="请输入邮箱地址" />
+    </div>
+    <div class="form-group col-md-5">
+      <label for="telephone" class="col-form-label">手机</label>
+      <input type="text" class="form-control" id="telephone" name="name" maxlength="40" placeholder="请输入手机号码" />
+    </div>
+    <div class="form-group col-md-5">
+      <label for="address" class="col-form-label">住址</label>
+      <input type="text" class="form-control" id="address" name="name" maxlength="40" placeholder="请输入住址" />
+    </div>
+
+
+    <div class="form-group col-md-5">
+      <input type="checkbox" name="remember-me"/> 记住我
+    </div>
+
+    <button class="btn-form" type="submit" >提交</button>
+    <div class=" col-md-5" th:if="${loginError}">
+      <p class="blog-label-error" th:text="${errorMsg}"></p>
+    </div>
+  </form>
+</div> <!-- /container -->
+
+
+<script type="text/javascript">
+  //为表单的必填文本框添加提示信息（选择form中的所有后代input元素）
+  $("form :input.required").each(function () {
+    //创建元素
+    var $required = $("<strong class='high'>*</strong>");
+    //将它追加到文档中
+    $(this).parent().append($required);
+  });
+</script>
+
+<!--footer-->
+<div class="footer" style="margin-top: 80px">
+  <div class="container">
+    <ul>
+      <li><a href="#" >联系我们</a></li>
+      <li>|</li>
+      <li><a href="#" >关于境界的彼方</a> </li>
+      <li>|</li>
+      <li><a href="../manager/manage_center.html">管理中心</a></li>
+      <li>|</li>
+      <li><a href="#" >意见反馈</a> </li>
+    </ul>
+    <span class="drop"> </span>
+    <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
+    <p class="footer-class">Copyright &copy; 1Q84.</p>
+    <ul class="social-icons">
+      <li class="twitter"><a href="#"><span> </span></a></li>
+      <li class="gmail"><a href="#"><span> </span></a></li>
+      <li class="print"><a href="#"><span> </span></a></li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
+
+
+<!--footer-->
+<div class="footer">
+  <div class="container">
+    <ul>
+      <li><a href="#" >联系我们</a></li>
+      <li>|</li>
+      <li><a href="#" >关于境界的彼方</a> </li>
+      <li>|</li>
+      <li><a href="manager/manage_approve_program.html">管理中心</a></li>
+      <li>|</li>
+      <li><a href="#" >意见反馈</a> </li>
+    </ul>
+    <span class="drop"> </span>
+    <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
+    <p class="footer-class">Copyright &copy; 1Q84.</p>
+    <ul class="social-icons">
+      <li class="twitter"><a href="#"><span> </span></a></li>
+      <li class="gmail"><a href="#"><span> </span></a></li>
+      <li class="print"><a href="#"><span> </span></a></li>
+    </ul>
+  </div>
+</div>
+
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</body>
+</html>

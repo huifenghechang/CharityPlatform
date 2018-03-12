@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title></title>
+    <link href="../css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/Iframe.css" rel="stylesheet" type="text/css" media="all" />
+    <style type="text/css">
+        a {color: #2aaf42;}
+    </style>
+</head>
+<body>
+<div class="table_con">
+    <table>
+        <tr class="tb_title">
+            <td width="200px">项目名</td>
+            <td width="330px">项目简介</td>
+            <td width="100px">获取凭证</td>
+            <td width="150px">审核</td>
+        </tr>
+        <tr th:each="menu : ${projectModel.projectList}">
+            <td width="200px" th:text="${menu.title}"></td>
+            <td width="330px" th:text="${menu.summary}" class="limit-words">menu.text</td>
+            <td width="100px"><a href="#">获取凭证</a></td>
+            <td width="150px">
+                <!--<input class="bj_btn" type="button" value="通过" />-->
+                <a id="sj_btn_a"  th:href="@{'/admins/change1to2/'+${menu.id}}">通过</a>
+
+                <a id="sj_btn_b"  th:href="@{'/admins/change1to0/'+${menu.id}}">不通过</a>
+                <!--<input class="sj_btn" type="button" value="不通过" th:action="@{'/admins/change1to2/'+${menu.id}}"/>-->
+            </td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>

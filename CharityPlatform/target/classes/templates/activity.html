@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <link href="../css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="../js/jquery.min.js"></script>
+    <link href="../css/style1.css" rel="stylesheet" type="text/css" media="all" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+</head>
+<body>
+<!--login and register-->
+
+<div class="header container">
+    <div class="logo">
+        <a href="../index.html"><img src="../images/logo.png" alt="click this to homepage" /></a>
+    </div>
+    <div class="top-nav">
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/login" class="scroll">登录</a></li>
+                <li><a href="/register" class="scroll">注册</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!---->
+<!-- styles for the page -->
+<style>
+.project_page_metadata h6{
+    padding: 0.5em 0 0 0;
+    font-size: 0.9em;
+    text-align: center;
+    font-weight:bold;
+}
+.project_page_metadata h1{
+    padding: 0 0 0 1em;
+    font-size: 2.4em;
+    font-weight:bold;
+}
+.project_page_metadata p{
+    padding: 1em 0 0 2em;
+    font-size: 1.2em;
+    line-height: 1em;
+    font-weight:bold;
+}
+
+.project_page_switch_content btn{
+	border: none;
+	font-family: inherit;
+	color: inherit;
+	display: inline-block;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	border-radius:7px !important;
+	text-decoration: none;
+	border: 2px solid #ff0505;
+	/*#3c763dab*/
+	font-weight: 900;
+	background:#ff0505;
+	color:#fff;
+	z-index:1;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	font-size:1.5em;
+}
+.project_page_switch_content btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	color:#000000;
+}
+
+.project_page_main_story h1{
+    padding: 0 0 0.2em 0;
+    width: 100%;
+    font-size: 1.7em;
+    font-weight:600;
+}
+.project_page_main_story p{
+    text-indent: 2em;
+    padding: 0 0 0.5em 0;
+    width: 90%;
+    font-size: 1.3em;
+    line-height: 150%
+}
+.project_page_main_story img{
+    padding: 1em 0 1em 0;
+    width: 90%
+}
+.project_page_progress li{
+    background-color: #f0f4f7;
+	position: relative;
+	border-color: #eff5f5;
+	margin-bottom: 20px;
+	padding: 10px 20px;
+}
+.project_page_progress li .listIcon{
+	position: absolute;
+	top: 14px;
+	left: -28px;
+	_left: -48px;
+	display: inline-block;
+	height: 14px;
+	width: 30px;
+	background: url('../images/activity_DaShanLiDe/progress_list_icon.png') no-repeat;
+}
+</style>
+
+<!-- 本页的主体 -->
+
+<!-- 临时空行，后面再调整 -->
+<br/><br/><br/><br/>
+<div class="content">
+    <div class="container">
+        <!-- 页面左边故事主体 -->
+        <div class="col-md-9 ">
+
+            <!-- 项目封面图和元数据 -->
+            <div class="row">
+                <div class="project_page_metadata" th:object="${projectModel.project}">
+                    <!-- cover image -->
+                    <div class="col-md-4 ">
+                        <!-- insert image, scaled to column width -->
+                        <img th:src="@{'/project_img_big/'+${projectModel.project.propaganda_map}}" width="100%" style="margin:1em 0 0 0;"/>
+                        <h6 th:text="'运营机构：'+*{initiator}"></h6>
+                    </div>
+                    <!-- meta data -->
+                    <div class="col-md-7" >
+                        <h1 th:text="*{title}"></h1>
+                        <p th:text="'已募善款：'+*{already_donation}"></p>
+                        <p th:text="'参捐人数：'+*{donate_people_counter}"></p>
+                        <p>项目时间：2018年1月32日 至 2018年2月29日</p>
+                        <a href="#" style="background:#da7400; font-size: 1em; margin: 0 0 0 0;">
+                            <h1>我来捐助</h1>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-1 ">
+                </div>
+            </div>
+
+            <!-- 在介绍和进展间切换，暂未实现 -->
+            <!-- <br><br>
+            <div class="row">
+                <div class="project_page_switch_content">
+                    <a href="#" class="btn btn-1c" style="font-size: 1.5em; margin: 0 0 0 0">项目介绍</a>
+                    <a href="#" class="btn btn-1c" style="font-size: 1.5em; margin: 0 0 0 0">项目进展</a>
+                </div>
+            </div> -->
+
+            <!-- 项目故事的主体，文字和图 -->
+            <div class="row">
+                <div class="project_page_main_story" th:utext="${projectModel.project.html_content}">
+
+                </div>
+            </div>
+
+            <!-- 项目进展 -->
+            <div class="row">
+                <div class="project_page_progress">
+                    <ul>
+                        <li>
+                            <span class="listIcon"></span>
+                            暂时没有<br/>
+                            暂时没有<br/>
+                            暂时没有<br/>
+                        </li>
+                        <li>
+                            暂时没有<br/>
+                            暂时没有<br/>
+                            暂时没有<br/>
+                        </li>
+                        <li>
+                            暂时没有<br/>
+                            暂时没有<br/>
+                            暂时没有<br/>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="store-right">
+                <h6> 推荐项目</h6>
+                <ul class="store-men">
+                    <li><a href="activity_KunJingErTong.html"><span> </span>
+                        [医疗救助] 给困境儿童送面包 </a>
+                        <p>HELLO小孩”爱心套餐是中国儿童少年基金会面向广大贫困家庭儿童和留守儿童以及因自然灾害、突发事故的儿童于2015年底启动的公益项目。包括日常学生套餐和灾后应急套餐两款，根据季节不同，又分为春夏和秋冬两个搭配方案</p>
+                    </li>
+                    <li class="last"><a href="activity_AiDeFenBei.html"><span> </span>
+                        [其他] 爱的分贝 救救耳朵 </a>
+                        <p>2017年9月1日，极重度听力障碍的康康成为了一名一年级的新生，康康妈妈像所有的学生家长一样，开始每天检查康康作业督促他学习；跟其他妈妈不一样是，她要不时开导康康：耳蜗就像眼镜，不能摘，摘了就听不到了。因为康康现在就读于普通小学，他非常渴望和同学们一样不用带他的“小耳朵”去上学</p>
+                    </li>
+                </ul>
+            </div>									
+        </div>
+        <div class="clearfix"> </div>
+        <div class="row">
+            <br/><br/><br/>
+        </div>
+    </div>
+</div>
+<!-- contents end -->
+
+
+
+
+<div class="footer">
+    <div class="container">
+        <ul>
+            <li><a href="#" >联系我们</a></li>
+            <li>|</li>
+            <li><a href="#" >关于境界的彼方</a> </li>
+            <li>|</li>
+            <li><a href="../manager/manage_center.html">管理中心</a></li>
+            <li>|</li>
+            <li><a href="#" >意见反馈</a> </li>
+        </ul>
+        <span class="drop"> </span>
+        <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
+        <p class="footer-class">Copyright &copy; 1Q84.</p>
+        <ul class="social-icons">
+            <li class="twitter"><a href="#"><span> </span></a></li>
+            <li class="gmail"><a href="#"><span> </span></a></li>
+            <li class="print"><a href="#"><span> </span></a></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
+

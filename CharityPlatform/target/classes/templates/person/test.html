@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+
+    <input  type="text" placeholder="请填写公益项目标题"  id="title" name="title"   maxlength="50"/>
+    <input  type="text" placeholder="请填写公益项目简介"  id="summary" name="summary"   maxlength="50"/>
+    <input  type="text" placeholder="请填写公益项目内容"  id="content" name="content"   maxlength="50"/>
+
+
+    <button id = "testBtn">发送</button>
+
+
+    <script src="../../js/jquery-3.1.1.min.js" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+
+    <script>
+        var title = $('input#title').val();
+
+        // 发布項目
+        $("#testBtn").click(function() {
+            var title = $('#title').val();
+            var summary = $('#summary').val();
+            var content = $('#content').val();
+
+            $.ajax({
+                type: "POST",
+                url: '/testpost',
+                datatype:"json",
+//                contentType: "application/json; charset=utf-8",
+//                data: JSON.stringify({
+//                    "title": title,
+//                    "summary": summary ,
+//                    "content": content}),
+                 data: {title: title, summary: summary , content: content},
+                success: function(data){
+                    if (data.success) {
+                        // 成功后，重定向
+                        window.location = data.body;
+                    } else {
+//                        toastr.error("error! i failed"+data.message);
+                    }
+                },
+                error : function() {
+//                    toastr.error("error!-function");
+                }
+            })
+
+            /*$.ajax({
+                url: '/testpost',
+//                type: 'post',
+//                contentType: "json",
+                type: "POST",
+                datatype:"json",
+                contentType: "application/json; charset=utf-8",
+                data: {title: title, summary: summary, content: content},
+
+                success: function (data) {
+                    if (data.success) {
+                        // 成功后，重定向
+                        window.location = data.body;
+                    } else {
+                        toastr.error("error! i failed" + data.message);
+                    }
+
+                },
+                error: function () {
+                    toastr.error("test-post-failed!");
+                }
+            })
+*/
+        })
+
+
+    </script>
+
+
+</body>
+</html>
