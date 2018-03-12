@@ -9,18 +9,13 @@
 &lt;!&ndash; default header name is X-CSRF-TOKEN &ndash;&gt;
 <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>-->
+<head>
 
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/blog.css" rel="stylesheet" type="text/css" media="all" />
+</head>
 <body>
-<style type="text/css">
- 
-    @import "/css/emoji/nature.css";
-    @import "/css/emoji/object.css";
-    @import "/css/emoji/people.css";
-    @import "/css/emoji/place.css";
-    @import "/css/emoji/Sysmbols.css";
-    @import "/css/emoji/twemoji.css";
- 
-</style>
+
 <!-- Page Content -->
 <div class="container blog-content-container">
 
@@ -38,7 +33,7 @@
                     <textarea class="blog-textarea" placeholder="请填写公益项目摘要"  id="summary" name="summary"  th:text="*{summary}" maxlength="300"></textarea>
 
                     <hr>
-                    <textarea data-provide="markdown" data-hidden-buttons="cmdImage" name="content" id="content" th:text="*{content}"></textarea>
+                    <textarea data-provide="markdown" data-hidden-buttons="cmdImage" name="content" id="content" th:text="*{content}" style="width: 100%; min-height: 209px"></textarea>
 
                     </hr>
                 </div>
