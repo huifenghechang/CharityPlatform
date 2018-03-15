@@ -3,16 +3,12 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
-    <link href="css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popup.js"></script>
-    <link href="css/style1.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
-<body>
+
+<body style="position: relative;">
 
 <!--header-->
 <!--banner-->
@@ -64,27 +60,25 @@
         <a href="index.html"><img src="images/logo.png" alt="click this to homepage" /></a>
     </div>
     <div class="top-nav">
-        <nav class="main_nav">
+        <div class="main_nav" th:if="${session.user} == null">
             <ul>
-                <li><a href="/login" class="scroll">登录</a></li>
-                <li><a href="/register" class="scroll">注册</a></li>
+                <li><a href="/login">登录</a></li>
+                <li><a href="/register">注册</a></li>
             </ul>
-        </nav>
+        </div>
 
-        <nav class="main_nav">
-            <p style="color: #ffffff">您好,111</p>
-            <p>用户姓名</p>
+        <div class="main_nav" th:if="${session.user} != null" style="width: 100%; margin-right: 150px">
 
-            <a href="/personal_center" >个人中心</a>
-            <a href="/u/projects/edit" >我要求助</a>
-            <a href="#">注销</a>
-        </nav>
+
+
+            <ul>
+                <li style="color: #fff;font-size: 17.6px; font-weight: 700 ;border-bottom:none"  ><span>您好！</span><span th:text="${session.user.username}"></span></li>
+                <li><a href="/personal_center">个人中心</a></li>
+                <li><a href="/loginout">注销</a></li>
+            </ul>
+        </div>
 
     </div>
-
-
-
-
 </div>
 <!---->
 
@@ -109,10 +103,6 @@
                     <p th:text="${menu.summary}"></p>
 
                 </div>
-
-
-
-
 
             </div>
         </div>
@@ -139,7 +129,6 @@
         </div>
     </div>
 
-
     <!--医疗救助-->
     <div class="container">
         <a href="#" class="btn btn-1c">医疗救助</a>
@@ -161,7 +150,6 @@
         </div>
     </div>
 
-
     <!--其他-->
     <div class="container">
         <a href="#" class="btn btn-1c">其他</a>
@@ -182,33 +170,11 @@
             </div>
         </div>
     </div>
-
 </div>
-
 
 
 <!--footer-->
-<div class="footer">
-    <div class="container">
-        <ul>
-            <li><a href="#" >联系我们</a></li>
-            <li>|</li>
-            <li><a href="#" >关于境界的彼方</a> </li>
-            <li>|</li>
-            <li><a href="/admins">管理中心</a></li>
-            <li>|</li>
-            <li><a href="#" >意见反馈</a> </li>
-        </ul>
-        <span class="drop"> </span>
-        <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
-        <p class="footer-class">Copyright &copy; 1Q84.</p>
-        <ul class="social-icons">
-            <li class="twitter"><a href="#"><span> </span></a></li>
-            <li class="gmail"><a href="#"><span> </span></a></li>
-            <li class="print"><a href="#"><span> </span></a></li>
-        </ul>
-    </div>
-</div>
+<div th:include="fragments/footer_w::footer"></div>
 
 </body>
 </html>

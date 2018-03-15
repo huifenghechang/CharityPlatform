@@ -17,16 +17,16 @@
 <div class="table_con">
     <table>
         <tr class="tb_title">
-            <td width="200px">项目名</td>
-            <td width="330px">项目简介</td>
-            <td width="100px">修改信息</td>
-            <td width="150px">删除活动</td>
+            <td width="180px">项目名</td>
+            <td width="320px">项目简介</td>
+            <td width="130px">修改信息</td>
+            <td width="130px">删除活动</td>
         </tr>
         <tr th:each="menu : ${projectModel.projectList}">
-            <td width="200px" th:text="${menu.title}"></td>
-            <td width="330px" th:text="${menu.summary}" class="product-buyer-name">menu.text</td>
-            <td width="100px"><a href="#" class="limit-words">修改信息</a></td>
-            <td width="150px">
+            <td width="180px" th:text="${menu.title}"></td>
+            <td width="320px" th:text="${menu.summary}" class="product-buyer-name">menu.text</td>
+            <td width="130px"><a href="#" class="limit-words">修改信息</a></td>
+            <td width="130px">
                 <a id="sj_btn_a" th:href="@{'/admins/delete/'+${menu.id}}" style="width:75px">删除信息</a>
             </td>
         </tr>

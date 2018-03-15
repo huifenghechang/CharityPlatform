@@ -1,6 +1,7 @@
 package com.seu.beyondtheboundary.charityplatform.service;
 
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
+import com.seu.beyondtheboundary.charityplatform.domain.User;
 
 import java.util.List;
 

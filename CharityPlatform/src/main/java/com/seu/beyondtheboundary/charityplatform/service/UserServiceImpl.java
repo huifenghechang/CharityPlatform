@@ -66,14 +66,15 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
-	public boolean findMeet(String username, String password){
+	public User findMeet(String username, String password){
 		User user = userRepository.findByUsernameAndPassword(username,password);
-		if (user!= null){
-			return true;
-		}else {
-			return false;
-
-		}
+		return user;
+//		if (user!= null){
+//			return true;
+//		}else {
+//			return false;
+//
+//		}
 	}
 
 	//将所有待审核的用户筛选出来，并返回需要的信息
@@ -87,12 +88,15 @@ public class UserServiceImpl implements UserService {
     }
 
 	//审核通过用户状态设为1，审核未通过设为0
-	public void userCheckPass(Integer id, Integer verified) {
+	public void userCheckPass(Long id, Integer verified) {
 
 		User user = userRepository.findById(id);
 		user.setVerified(verified);
 		userRepository.save(user);
 	}
-
+	//将所有待审核的用户筛选出来，并返回需要的信息
+	public List<User> userVerified1() {
+		return userRepository.findAllByVerified(1);
+	}
 
 }
