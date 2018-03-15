@@ -44,6 +44,12 @@ h2,h3,h4,h5,h6,p{
 }
 /*target*/
 
+.top-nav-common {
+	float: right;
+	margin-top: 62px;
+	margin-right: 11%;
+}
+
 .profile{
 	float: left;
 	margin: 45px;

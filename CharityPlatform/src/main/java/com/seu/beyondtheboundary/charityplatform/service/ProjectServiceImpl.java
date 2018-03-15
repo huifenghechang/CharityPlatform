@@ -2,9 +2,11 @@ package com.seu.beyondtheboundary.charityplatform.service;
 
 
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
+import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -56,6 +58,13 @@ public class ProjectServiceImpl implements ProjectService {
 	@Override
 	public List<Project> listProjects() {
 		return projectRepository.findAll();
+	}
+
+
+
+	public List<Project> listProjectsByStatusAndCategory(Long category, Long status) {
+
+		return projectRepository.findAllByCategoryAndStatus(category , status);
 	}
 }
 

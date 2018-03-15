@@ -2,33 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>完善个人信息</title>
     <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 
-<body>
+<body style="position: relative">
 
-<div class="header container">
-  <div class="logo">
-    <a href="../index.html"><img src="../images/logo.png" alt="click this to homepage" /></a>
-  </div>
-  <div class="top-nav">
-    <nav class="main_nav">
-      <ul>
-        <li><a href="/login" class="scroll">登录</a></li>
-        <li><a href="/register" class="scroll">注册</a></li>
-      </ul>
-    </nav>
-  </div>
-</div>
+<div th:include="fragments/header_w::header"></div>
 
 
 
-<div class="container blog-content-container" style="margin-top: 160px">
+<div class="container blog-content-container" style="margin: 20px auto 80px;">
   <h2 style="margin: 31px 14px">个人信息完善</h2>
   <form  th:action="@{/login}" method="post">
     <div class="form-group col-md-5">
@@ -88,57 +76,12 @@ xmlns:th="http://www.thymeleaf.org">
   });
 </script>
 
+
 <!--footer-->
-<div class="footer" style="margin-top: 80px">
-  <div class="container">
-    <ul>
-      <li><a href="#" >联系我们</a></li>
-      <li>|</li>
-      <li><a href="#" >关于境界的彼方</a> </li>
-      <li>|</li>
-      <li><a href="../manager/manage_center.html">管理中心</a></li>
-      <li>|</li>
-      <li><a href="#" >意见反馈</a> </li>
-    </ul>
-    <span class="drop"> </span>
-    <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
-    <p class="footer-class">Copyright &copy; 1Q84.</p>
-    <ul class="social-icons">
-      <li class="twitter"><a href="#"><span> </span></a></li>
-      <li class="gmail"><a href="#"><span> </span></a></li>
-      <li class="print"><a href="#"><span> </span></a></li>
-    </ul>
-  </div>
-</div>
+<div th:include="fragments/footer_w::footer"></div>
+
 </body>
 </html>
 
 
-<!--footer-->
-<div class="footer">
-  <div class="container">
-    <ul>
-      <li><a href="#" >联系我们</a></li>
-      <li>|</li>
-      <li><a href="#" >关于境界的彼方</a> </li>
-      <li>|</li>
-      <li><a href="manager/manage_approve_program.html">管理中心</a></li>
-      <li>|</li>
-      <li><a href="#" >意见反馈</a> </li>
-    </ul>
-    <span class="drop"> </span>
-    <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
-    <p class="footer-class">Copyright &copy; 1Q84.</p>
-    <ul class="social-icons">
-      <li class="twitter"><a href="#"><span> </span></a></li>
-      <li class="gmail"><a href="#"><span> </span></a></li>
-      <li class="print"><a href="#"><span> </span></a></li>
-    </ul>
-  </div>
-</div>
 
-<script src="../js/jquery-1.10.2.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-
-</body>
-</html>

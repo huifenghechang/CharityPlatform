@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+</head>
+
+<!--上边栏加图片/header-->
+<body style="position: relative;">
+<div th:fragment="header">
+    <div class="banner-in"></div>
+    <div class="header container">
+        <div class="logo">
+            <a href="/index"><img src="/images/logo.png" alt="click this to homepage"/></a>
+        </div>
+        <div class="top-nav">
+            <div class="main_nav" th:if="${session.user} == null">
+                <ul>
+                    <li><a href="/login">登录</a></li>
+                    <li><a href="/register">注册</a></li>
+                </ul>
+            </div>
+
+            <div class="main_nav" th:if="${session.user} != null">
+                <ul>
+                    <li>您好,</li>
+                    <li th:text="${session.user.username}"></li>
+                    <li><a href="/personal_center">个人中心</a></li>
+                    <li><a href="/u/projects/edit">我要求助</a></li>
+                    <li><a href="#">注销</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -65,6 +65,11 @@ public class UserspaceController {
 		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
 	}
 
+	@GetMapping("/complete_user_info")
+	public String complete_user_info() {
+		return "/person/complete_personal_information";
+	}
+
 }
 
 

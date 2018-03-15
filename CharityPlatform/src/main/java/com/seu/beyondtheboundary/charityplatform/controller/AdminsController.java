@@ -34,14 +34,11 @@ public class AdminsController {
         projectServiceImpl.removeProject(id);
         return new ModelAndView("redirect:/admins/published");
     }
-
     @GetMapping("/deleteUser/{id}")
     public ModelAndView deleteUser(@PathVariable("id") Long id){
         userService.removeUser(id);
         return new ModelAndView("redirect:/admins/vip_verified");
     }
-
-
     @GetMapping("/change1to0/{id}")
     public ModelAndView change1to0(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)0);
@@ -130,17 +127,14 @@ public class AdminsController {
 
         return new ModelAndView("/manager/vip_to_verify", "userModel", model);
     }
-
     @GetMapping("/vip_verified")
     public ModelAndView vip_verified(Model model) {
 
-        List<User> selectUser = userService.userVerified();
+        List<User> selectUser = userService.userVerified1();
         model.addAttribute("userList", selectUser);
 
         return new ModelAndView("/manager/vip_verified", "userModel", model);
     }
-
-
     @GetMapping("/vipcertificate")
     public String showCertificate(Model model) {
 

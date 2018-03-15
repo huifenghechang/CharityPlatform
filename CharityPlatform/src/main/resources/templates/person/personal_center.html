@@ -43,23 +43,12 @@
 
 
 </head>
-<body>
+<body style="position: relative">
 
 
 
 <!--顶栏-->
-<div class="banner-in"></div>
-<div class="header container">
-    <div class="logo">
-        <a href="../index.html"><img src="../images/logo.png" alt="click this to homepage" /></a>
-    </div>
-    <div class="top-nav">
-        <ul>
-            <li><a href="../login/login_person.html" class="scroll">登录</a></li>
-            <li><a href="../register/register_person.html" class="scroll">注册</a></li>
-        </ul>
-    </div>
-</div>
+<div th:include="fragments/header_w::header"></div>
 
 <!--main-content-->
 <div class="main_content">
@@ -67,7 +56,7 @@
         <img src="../images/logo.png"/>
         <h2>曹营希</h2>
         <div class="single_a">
-            <a class="btn-primary" href="complete_personal_information.html">完善个人资料</a>
+            <a class="btn-primary" href="/u/complete_user_info">完善个人资料</a>
         </div>
     </div>
 
@@ -110,28 +99,9 @@
 
 
 
+
 <!--footer-->
-<div class="footer">
-    <div class="container">
-        <ul>
-            <li><a href="#" >联系我们</a></li>
-            <li>|</li>
-            <li><a href="#" >关于境界的彼方</a> </li>
-            <li>|</li>
-            <li><a href="../manager/manage_center.html">管理中心</a></li>
-            <li>|</li>
-            <li><a href="#" >意见反馈</a> </li>
-        </ul>
-        <span class="drop"> </span>
-        <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
-        <p class="footer-class">Copyright &copy; 1Q84.</p>
-        <ul class="social-icons">
-            <li class="twitter"><a href="#"><span> </span></a></li>
-            <li class="gmail"><a href="#"><span> </span></a></li>
-            <li class="print"><a href="#"><span> </span></a></li>
-        </ul>
-    </div>
-</div>
+<div th:include="fragments/footer_w::footer"></div>
 
 <script src="../js/jquery-1.10.2.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>

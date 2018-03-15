@@ -2,9 +2,12 @@ package com.seu.beyondtheboundary.charityplatform.repository;
 
 
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
+import com.seu.beyondtheboundary.charityplatform.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
 
 /**
  * 用户仓库.
@@ -20,5 +23,5 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 	 * @param pageable
 	 * @return
 	 */
-
+	public List<Project> findAllByCategoryAndStatus(Long category , Long status);
 }

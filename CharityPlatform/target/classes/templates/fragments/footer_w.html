@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+</head>
+<body>
+
+<!--footer-->
+<div th:fragment="footer">
+    <div class="footer">
+        <div class="container">
+            <ul>
+                <li><a href="#">联系我们</a></li>
+                <li>|</li>
+                <li><a href="#">关于境界的彼方</a></li>
+                <li>|</li>
+                <li><a href="/admins">管理中心</a></li>
+                <li>|</li>
+                <li><a href="#">意见反馈</a></li>
+            </ul>
+            <span class="drop"> </span>
+
+            <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
+
+            <p class="footer-class">Copyright &copy; 1Q84.</p>
+            <ul class="social-icons">
+                <li class="twitter"><a href="#"><span> </span></a></li>
+                <li class="gmail"><a href="#"><span> </span></a></li>
+                <li class="print"><a href="#"><span> </span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <link th:href="@{/css/bootstrap1.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style1.css}" rel="stylesheet"/>
+    <link th:href="@{/css/manage.css}" rel="stylesheet"/>
+    <link th:href="@{/css/popup.css}" rel="stylesheet"/>
+    <link th:href="@{/css/Iframe.css}" rel="stylesheet"/>
+
+
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/tendina.min.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+
+</div>
+</body>
+</html>

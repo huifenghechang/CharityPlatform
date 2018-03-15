@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,11 +94,17 @@ public class IndexController {
 
     //登录页面
     @PostMapping("/login")
-    public String login(User user,Model model){
+    public String login(User user, Model model, HttpServletRequest request, HttpServletResponse response){
         String username = user.getUsername();
         String password = user.getPassword();
 
         if (userServiceImpl.findMeet(username,password)==true){
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+            //使用request对象的getSession()获取session，如果session不存在则创建一个
+            HttpSession session = request.getSession();
+            //将数据存储到session中
+            session.setAttribute("user", user);
             return "redirect:/index";
         }else {
             model.addAttribute("loginError", true);
