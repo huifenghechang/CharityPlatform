@@ -134,7 +134,7 @@ public class AdminsController {
     @GetMapping("/vip_verified")
     public ModelAndView vip_verified(Model model) {
 
-        List<User> selectUser = userService.userVerified1();
+        List<User> selectUser = userService.userVerified();
         model.addAttribute("userList", selectUser);
 
         return new ModelAndView("/manager/vip_verified", "userModel", model);
