@@ -2,6 +2,7 @@ package com.seu.beyondtheboundary.charityplatform.controller;
 
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
+import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,21 @@ public class IndexController {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("/")
     public String root() {
         return "redirect:/index";
     }
 
-
-
     @GetMapping("/admins")
     public String admins() {
         return "manager/manage_center";
     }
+
+
     //index页面
-
-
     @GetMapping("/index")
     public ModelAndView index(Model model) {
         List<Project> beSelected1= new ArrayList<>();
@@ -97,23 +99,23 @@ public class IndexController {
     public String login(User user, Model model, HttpServletRequest request, HttpServletResponse response){
         String username = user.getUsername();
         String password = user.getPassword();
+        User user1 = userServiceImpl.findMeet(username,password);
+        if (userServiceImpl.findMeet(username,password) == null){
+            model.addAttribute("loginError", true);
+            model.addAttribute("errorMsg", "登陆失败，账号或者密码错误！");
+            return "login_register/login";
+        } else {
 
-        if (userServiceImpl.findMeet(username,password)==true){
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=UTF-8");
             //使用request对象的getSession()获取session，如果session不存在则创建一个
             HttpSession session = request.getSession();
             //将数据存储到session中
-            session.setAttribute("user", user);
+            session.setAttribute("user", user1);
             return "redirect:/index";
-        }else {
-            model.addAttribute("loginError", true);
-            model.addAttribute("errorMsg", "登陆失败，账号或者密码错误！");
-            return "login_register/login";
-
         }
-
     }
+
 
     @GetMapping("/login")
     public String login(){

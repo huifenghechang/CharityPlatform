@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -66,25 +65,15 @@ public class UserServiceImpl implements UserService {
 		return users;
 	}
 
-	public boolean findMeet(String username, String password){
+	public User findMeet(String username, String password){
 		User user = userRepository.findByUsernameAndPassword(username,password);
-		if (user!= null){
-			return true;
-		}else {
-			return false;
-
-		}
+	return user;
 	}
 
 	//将所有待审核的用户筛选出来，并返回需要的信息
 	public List<User> userNotVerified() {
 		return userRepository.findAllByVerified(2);
 	}
-
-    //将所有审核通过的用户筛选出来，并返回需要的信息
-    public List<User> userHasVerified() {
-        return userRepository.findAllByVerified(1);
-    }
 
 	//审核通过用户状态设为1，审核未通过设为0
 	public void userCheckPass(Long id, Integer verified) {
@@ -93,9 +82,12 @@ public class UserServiceImpl implements UserService {
 		user.setVerified(verified);
 		userRepository.save(user);
 	}
+
 	//将所有待审核的用户筛选出来，并返回需要的信息
-	public List<User> userVerified1() {
+	public List<User> userHasVerified() {
 		return userRepository.findAllByVerified(1);
 	}
+
+
 
 }

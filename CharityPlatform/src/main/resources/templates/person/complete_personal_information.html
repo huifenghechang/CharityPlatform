@@ -18,44 +18,31 @@ xmlns:th="http://www.thymeleaf.org">
 
 <div class="container blog-content-container" style="margin: 20px auto 80px;">
   <h2 style="margin: 31px 14px">个人信息完善</h2>
-  <form  th:action="@{/login}" method="post">
+  <form  th:action="@{/u/complete_user_info}" method="post">
     <div class="form-group col-md-5">
-      <label for="username" class="col-form-label">账号</label>
-      <input type="text" class="form-control required" id="username" name="username" maxlength="50" placeholder="请输入账号"/>
-    </div>
-    <div class="form-group col-md-5">
-      <label for="password" class="col-form-label">密码</label>
-      <input type="password" class="form-control" id="password" name="password" maxlength="30" placeholder="请输入密码" />
-    </div>
-    <div class="form-group col-md-5">
-      <label for="name" class="col-form-label">姓名</label>
-      <input type="text" class="form-control" id="name" name="name" maxlength="40" placeholder="请输入真实姓名" />
+      <label for="realname" class="col-form-label">姓名</label>
+      <input type="text" class="form-control" id="realname" name="realname" maxlength="40" placeholder="请输入真实姓名" />
     </div>
     <div class="form-group col-md-5">
       <p>性别</p>
-      男<input type="radio" checked="checked" name="Sex" value="male" />
-      女<input type="radio" name="Sex" value="female" />
+      男<input type="radio" checked="checked" name="sex" value="1" />
+      女<input type="radio" name="sex" value="0" />
     </div>
     <div class="form-group col-md-5">
-      <label for="id_number" class="col-form-label">身份证</label>
-      <input type="text" class="form-control" id="id_number" name="name" maxlength="40" placeholder="请输入身份证号" />
+      <label for="user_id_card" class="col-form-label">身份证</label>
+      <input type="text" class="form-control" id="user_id_card" name="user_id_card" maxlength="40" placeholder="请输入身份证号" />
     </div>
     <div class="form-group col-md-5">
       <label for="email" class="col-form-label">邮箱</label>
-      <input type="text" class="form-control" id="email" name="name" maxlength="40" placeholder="请输入邮箱地址" />
+      <input type="text" class="form-control" id="email" name="email" maxlength="40" placeholder="请输入邮箱地址" />
     </div>
     <div class="form-group col-md-5">
-      <label for="telephone" class="col-form-label">手机</label>
-      <input type="text" class="form-control" id="telephone" name="name" maxlength="40" placeholder="请输入手机号码" />
+      <label for="tel" class="col-form-label">手机</label>
+      <input type="text" class="form-control" id="tel" name="tel" maxlength="40" placeholder="请输入手机号码" />
     </div>
     <div class="form-group col-md-5">
       <label for="address" class="col-form-label">住址</label>
-      <input type="text" class="form-control" id="address" name="name" maxlength="40" placeholder="请输入住址" />
-    </div>
-
-
-    <div class="form-group col-md-5">
-      <input type="checkbox" name="remember-me"/> 记住我
+      <input type="text" class="form-control" id="address" name="address" maxlength="40" placeholder="请输入住址" />
     </div>
 
     <button class="btn-form" type="submit" >提交</button>

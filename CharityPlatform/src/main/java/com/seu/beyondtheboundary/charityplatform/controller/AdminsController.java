@@ -88,9 +88,6 @@ public class AdminsController {
             }
         }
         model.addAttribute("projectList", beSelected);
-        //System.out.println("===="+projectService.listProjects());
-       // ModelAndView mv = new ModelAndView("/admins/to_verify", "projectModel", model);
-        //mv.addObject("projectModel", model);
         return new ModelAndView("/manager/to_verify", "projectModel", model);
     }
 
@@ -118,7 +115,7 @@ public class AdminsController {
     }
 
     @PostMapping("/vip_to_verify")
-    public ModelAndView  vip_to_verify_update(@Valid User user, Model model) {
+    public ModelAndView  vip_to_verify_update(User user, Model model) {
 
         userService.userCheckPass(user.getId(), user.getVerified());
 
@@ -130,7 +127,7 @@ public class AdminsController {
     @GetMapping("/vip_verified")
     public ModelAndView vip_verified(Model model) {
 
-        List<User> selectUser = userService.userVerified1();
+        List<User> selectUser = userService.userHasVerified();
         model.addAttribute("userList", selectUser);
 
         return new ModelAndView("/manager/vip_verified", "userModel", model);
@@ -142,12 +139,14 @@ public class AdminsController {
     }
 
     @PostMapping("/vipcertificate")
-    public ModelAndView showCertificate1(@Valid User user, Model model) {
+    public ModelAndView showCertificate1(User user, Model model) {
 
         model.addAttribute("imgsrc", user.getConfirmation_link().split(";"));
 
         return new ModelAndView("/manager/vip_get_certificate", "imgModel", model);
     }
+
+
 
     @GetMapping("/apply_for_refund")
     public String apply_for_refund() {
