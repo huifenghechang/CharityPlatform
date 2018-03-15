@@ -66,6 +66,7 @@
                 <li><a href="/register">注册</a></li>
             </ul>
         </div>
+<<<<<<< HEAD
 
         <div class="main_nav" th:if="${session.user} != null">
             <ul>
@@ -77,6 +78,20 @@
             </ul>
         </div>
 
+=======
+
+        <div class="main_nav" th:if="${session.user} != null" style="width: 100%; margin-right: 150px">
+
+
+
+            <ul>
+                <li style="color: #fff;font-size: 17.6px; font-weight: 700 ;border-bottom:none"  ><span>您好！</span><span th:text="${session.user.username}"></span></li>
+                <li><a href="/personal_center">个人中心</a></li>
+                <li><a href="/loginout">注销</a></li>
+            </ul>
+        </div>
+
+>>>>>>> wzt
     </div>
 </div>
 <!---->
