@@ -67,17 +67,15 @@ public class UserServiceImpl implements UserService {
 
 	public User findMeet(String username, String password){
 		User user = userRepository.findByUsernameAndPassword(username,password);
-<<<<<<< HEAD
+
 	return user;
-=======
-		return user;
+
 //		if (user!= null){
 //			return true;
 //		}else {
 //			return false;
 //
 //		}
->>>>>>> efbbadcb968df5269b0b684c19be00c021dfdc71
 	}
 
 	//将所有待审核的用户筛选出来，并返回需要的信息
