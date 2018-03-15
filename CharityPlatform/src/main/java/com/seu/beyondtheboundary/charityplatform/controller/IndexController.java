@@ -99,16 +99,12 @@ public class IndexController {
     public String login(User user, Model model, HttpServletRequest request, HttpServletResponse response){
         String username = user.getUsername();
         String password = user.getPassword();
-<<<<<<< HEAD
         User user1 = userServiceImpl.findMeet(username,password);
         if (userServiceImpl.findMeet(username,password) == null){
             model.addAttribute("loginError", true);
             model.addAttribute("errorMsg", "登陆失败，账号或者密码错误！");
             return "login_register/login";
         } else {
-=======
-<<<<<<< HEAD
->>>>>>> efbbadcb968df5269b0b684c19be00c021dfdc71
 
             response.setCharacterEncoding("UTF-8");
             response.setContentType("text/html;charset=UTF-8");
@@ -117,25 +113,8 @@ public class IndexController {
             //将数据存储到session中
             session.setAttribute("user", user1);
             return "redirect:/index";
-<<<<<<< HEAD
-        }
-=======
-        }else {
-            model.addAttribute("loginError", true);
-            model.addAttribute("errorMsg", "登陆失败，账号或者密码错误！");
-            return "login_register/login";
-        }else{
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("text/html;charset=UTF-8");
-            //使用request对象的getSession()获取session，如果session不存在则创建一个
-            HttpSession session = request.getSession();
-            //将数据存储到session中
-            session.setAttribute("user", userTmp);
-            return "redirect:/index";
         }
 
-
->>>>>>> efbbadcb968df5269b0b684c19be00c021dfdc71
     }
 
 
