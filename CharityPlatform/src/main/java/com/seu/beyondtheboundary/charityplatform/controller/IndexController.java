@@ -143,6 +143,28 @@ public class IndexController {
         return "/person/personal_center";
     }
 
+    @GetMapping("/contact_us")
+    public String contact_us(){
+        return "/bottom_page/contact_us";
+    }
+
+    @GetMapping("/about_us")
+    public String about_us(){
+        return "/bottom_page/about_us";
+    }
+
+    @GetMapping("/feedback")
+    public String feedback(){
+        return "/bottom_page/feedback";
+    }
+
+    @GetMapping("/map")
+    public String map(){
+        return "/bottom_page/map";
+    }
+
+
+
 
 
 

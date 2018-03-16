@@ -1,0 +1,112 @@
+/*包括联系我们，意见反馈和关于境界的彼方三个页面的样式文件*/
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+li {
+    list-style: none;
+}
+
+.form-feedback {
+    height: 350px;
+    width: 80%;
+}
+
+.text-area {
+    font-size: 20px;
+    margin: 20px 65px;
+    padding: 20px 20px;
+    float: left;
+}
+
+#submit {
+    margin-left: 308px;
+}
+
+.title {
+    color: #8a6d3b;
+    font-size: 22px;
+    font-weight: 700;
+    width: 817px;
+    height: 57px;
+    box-shadow: 5px 5px 8px #888888;
+}
+
+.title h6 {
+    font-size: 20px;
+    font-weight: 800;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+.right-content p {
+    font-size: 19px;
+    margin: 20px 50px;
+}
+
+/*icon*/
+.icon-chevron-right1:before {
+    padding-right: 10px;
+    content: url(../images/bi.png)
+}
+
+.icon-chevron-right2:before {
+    padding-right: 10px;
+    content: url(../images/menu.png)
+}
+
+.icon-chevron-right3:before {
+    padding-right: 10px;
+    content: url(../images/w_cloud.png)
+}
+
+.icon-user:before {
+}
+
+.icon-signout:before {
+}
+
+.glyph-icon {
+    vertical-align: middle;
+    font-size: 12px;
+    font-style: normal;
+    margin-top: 6px;
+    float: left;
+}
+
+/*left-菜单*/
+.left-menu {
+    /*position:absolute;*/
+    float: left;
+    min-height: 796px;
+    box-shadow: 0 0 10px #31708f;
+    width: 180px;
+    background: #32323a;
+}
+
+.left-menu a {
+    text-decoration: none;
+    background: #3c3c46;
+    padding-top: 17px;
+    padding-left: 36px;
+    color: #fff;
+    font-size: 16px;
+    display: block;
+    height: 57px;
+}
+
+/*.left-menu a:hover {*/
+    /*color: #fff;*/
+    /*text-decoration: none;*/
+/*}*/
+
+/*main内容显示*/
+.right-content {
+    margin-left: 180px;
+    background: #fff;
+    height: 800px;
+    min-height: 100%;
+    /*overflow:auto;*/
+}
