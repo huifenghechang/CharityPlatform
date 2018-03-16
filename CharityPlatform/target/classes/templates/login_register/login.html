@@ -3,12 +3,9 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popup.js"></script>
-    <link href="css/style1.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="css/popup.css" rel="stylesheet" type="text/css" media="all" />
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <title>登录</title>
     <style>
 
         .form-group {
@@ -17,8 +14,10 @@
             font-size: 16px;
 
         }
-        .form-group label{
-            font-weight: 400 ;}
+
+        .form-group label {
+            font-weight: 400;
+        }
 
         .btn {
             border: 1px solid #ccc;
@@ -31,31 +30,47 @@
             font-size: 18px;
             line-height: 1.4;
 
-
         }
     </style>
 
 </head>
 <body style="position: relative">
 
+<!--header-->
 <div th:include="fragments/header_w::header"></div>
-<div class="container blog-content-container" style="margin: 40px auto 80px;">
-    <h2 style="margin-bottom: 10px">请登录</h2>
-    <form  th:action="@{/login}" method="post">
-        <div class="form-group col-md-5">
-            <label for="username" class="col-form-label">账号</label>
-            <input type="text" class="form-control" id="username" name="username" maxlength="50" placeholder="请输入账号"/>
 
-        </div>
-        <div class="form-group col-md-5">
-            <label for="password" class="col-form-label">密码</label>
-            <input type="password" class="form-control" id="password" name="password" maxlength="30" placeholder="请输入密码" />
-        </div>
-        <div class="form-group col-md-5">
-            <input type="checkbox" name="remember-me"/> 记住我
-        </div>
+<!--main-content-->
+<div class="main_content" style="min-height: 900px;">
+    <div class="left-menu" style="min-height: 896px">
+        <ul>
+            <li><a href="#"><i class="glyph-icon icon-chevron-right1"></i>登录</a></li>
+        </ul>
+    </div>
 
-        <button type="submit" class="btn btn-primary" style="border: 1px solid #ccc;
+    <div class="right-content" style="overflow: hidden">
+        <div class="title">
+            <h6>境界的彼方</h6>
+        </div>
+        <br/>
+        <div class="container blog-content-container" style="margin: 60px 60px;">
+            <h2 style="margin-bottom: 10px">请登录</h2>
+            <form th:action="@{/login}" method="post">
+                <div class="form-group col-md-5">
+                    <label for="username" class="col-form-label">账号</label>
+                    <input type="text" class="form-control" id="username" name="username" maxlength="50"
+                           placeholder="请输入账号"/>
+
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="password" class="col-form-label">密码</label>
+                    <input type="password" class="form-control" id="password" name="password" maxlength="30"
+                           placeholder="请输入密码"/>
+                </div>
+                <div class="form-group col-md-5">
+                    <input type="checkbox" name="remember-me"/> 记住我
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="border: 1px solid #ccc;
             outline: 0;
             margin-bottom: -48px;
             cursor: pointer;
@@ -66,18 +81,16 @@
             line-height: 1.4;
                     margin-left: 15px;
                     background-color: #11A782;
-                    color: #fff;">提交</button>
-        <div class=" col-md-5" th:if="${loginError}">
-            <p class="blog-label-error" th:text="${errorMsg}"></p>
+                    color: #fff;">提交
+                </button>
+                <div class=" col-md-5" th:if="${loginError}">
+                    <p class="blog-label-error" th:text="${errorMsg}"></p>
+                </div>
+
+            </form>
         </div>
-
-
-
-    </form>
-</div> <!-- /container -->
-
-
-
+    </div>
+</div>
 
 
 <!--footer-->

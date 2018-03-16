@@ -16,26 +16,24 @@
 </head>
 <body>
 
-    <div class="header container">
-        <div class="logo">
-            <a href="../index.html"><img src="../images/logo.png" alt="click this to homepage" /></a>
-        </div>
-        <div class="top-nav">
-            <nav class="main_nav">
-                <ul>
-                    <li><a href="/login" class="scroll">登录</a></li>
-                    <li><a href="/register" class="scroll">注册</a></li>
-                </ul>
-            </nav>
-        </div>
+<div class="header container">
+    <div class="logo">
+        <a href="../index.html"><img src="../images/logo.png" alt="click this to homepage" /></a>
     </div>
-    <div class="container blog-content-container" style="margin-top: 200px" >
-        <div th:each="eachsrc: ${imgModel.imgsrc}">
-            <h3>凭证:</h3>
-            <img th:src="${eachsrc}" />
-
-        </div>
-
+    <div class="top-nav">
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/login" class="scroll">登录</a></li>
+                <li><a href="/register" class="scroll">注册</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="container blog-content-container" style="margin-top: 200px" >
+    <div th:each="eachsrc: ${imgModel.imgsrc}">
+        <h3>凭证:</h3>
+        <img th:src="@{'/userimages/'+${eachsrc}}" />
+    </div>
 </div> <!-- /container -->
 
 
