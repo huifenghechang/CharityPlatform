@@ -64,6 +64,11 @@ h2,h3,h4,h5,h6,p{
 	margin-top: 5em;
 }
 
+.donate-simple-block{
+	margin: 40px 60px;
+	font-size: 19px;
+	line-height: 37px;
+}
 
 .form-group {
 	margin-bottom: 1rem;
