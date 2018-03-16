@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>捐助界面</title>
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
+
+<body style="position: relative;overflow-y:scroll;">
+
+<!--header-->
+<div th:include="fragments/header_w::header"></div>
+
+
+<!--main-content-->
+<div class="main_content" style="min-height: 900px;">
+    <div class="left-menu" style="min-height: 896px">
+        <ul>
+            <li><a href="#"><i class="glyph-icon icon-chevron-right1"></i>捐助</a></li>
+        </ul>
+    </div>
+
+    <div class="right-content">
+        <div class="title">
+            <h6>境界的彼方</h6>
+        </div>
+        <br/>
+
+
+        <div class="donate-simple-block">
+            <div class="donate-simple-block-left">
+                <div class="donate-item-view-simple">
+                    <dl>
+                        <dd>
+                            <img src="" alt="给困境儿童送生活包" width="217" height="137" seed="donateItemViewSimple-tfsimgImagesCommunityTB1dbaxXR9m" smartracker="on"/>
+                        </dd>
+                        <dt>给困境儿童送生活包</dt>
+                        <dd>
+                            已募善款： <em class="ft-amount-16 ft-orange ft-bold">4797687.60</em>元
+                        </dd>
+                        <dd>参与人数：2657359 人参与捐助</dd>
+                        <dd>
+                            项目时间：2015-11-12 至 2020-02-28
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="donate-simple-block-right">
+                <div class="donate-form-block">
+                    <div class="ui-form-item">
+                        <label for="" class="ui-label">收 款 方：</label> <em class="ui-form-text">中国儿童少年基金会</em>
+                    </div>
+                    <div class="ui-form-item">
+                        <label for="" class="ui-label">捐款金额：</label>
+                        <input id="amount" type="text" class="ui-input " name="amount" value="5" seed="donateFormBlock-amount" smartracker="on" data-widget-cid="widget-3" data-validator-set="widget-3" data-explain=""/>&nbsp; 元
+                        <div class="ui-form-explain"> </div></div>
+                    <div class="ui-form-item ">
+                        <label for="" class="ui-label"></label>
+                        <input id="J-isAnonymous" class="ui-hidden" type="checkbox" name="isAnonymous" value="true" seed="donateFormBlock-JIsAnonymous" smartracker="on"/>
+                        <label for="J-isAnonymous">匿名捐赠</label>
+                    </div>
+                    <div class="ui-form-item">
+                        <label for="" class="ui-label">验证码：</label>
+                        <input id="checkNumber" name="checkNumber" class="ui-input ui-checkcode-input " type="text" data-explain="请输入右图中字符，不区分大小写。" maxlength="4" autocomplete="off" seed="donateFormBlock-checkNumber" smartracker="on" data-widget-cid="widget-4" data-validator-set="widget-4"/>
+                        <input type="hidden" id="sessionId" value="6200b55fbaa22b299c99960472cf300f"/>
+                        <img id="authCodeImg" class="ui-checkcode-imgcode-img" align="absMiddle" alt="请输入您看到的内容" src="./蚂蚁金服公益平台-以公益的方式，为世界带来更多平等的机会_files/checkcode" title="点击刷新图片校验码" seed="donateFormBlock-authCodeImg" smartracker="on"/>
+                        <a id="reload-checkcode" class="ui-checkcode-imgcode-text" href="https://love.alipay.com/donate/donateSingle.htm?name=2015111209541666187#" seed="donateFormBlock-reloadCheckcode" smartracker="on">看不清 换一张</a>
+                        <div class="ui-form-explain">请输入右图中字符，不区分大小写。</div>
+                    </div>
+                    <div class="ui-form-item">
+
+                    </div>
+                </div>
+            </div>
+            <div class="fn-clear"></div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+<!--footer-->
+<div th:include="fragments/footer_w::footer"></div>
+</body>
+</html>

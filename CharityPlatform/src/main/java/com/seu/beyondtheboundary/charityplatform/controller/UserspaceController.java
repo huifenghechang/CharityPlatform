@@ -89,6 +89,11 @@ public class UserspaceController {
 		return "/person/I_want_verify";
 	}
 
+	@GetMapping("/user_donate")
+	public String user_donate() {
+		return "/person/user_donate";
+	}
+
     @PostMapping("/complete_user_info")
     public String complete_user_info1(User user, HttpServletRequest request, HttpServletResponse response) {
 
