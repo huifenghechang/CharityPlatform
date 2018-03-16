@@ -78,6 +78,11 @@ public class UserspaceController {
         return "/person/complete_personal_information";
     }
 
+	@GetMapping("/I_want_verify")
+	public String I_want_verify() {
+		return "/person/I_want_verify";
+	}
+
     @PostMapping("/complete_user_info")
     public String complete_user_info1(User user, HttpServletRequest request, HttpServletResponse response) {
 
