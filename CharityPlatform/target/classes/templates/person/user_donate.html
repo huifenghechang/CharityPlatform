@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>捐助界面</title>
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
+
+<body style="position: relative;overflow-y:scroll;">
+
+<!--header-->
+<div th:include="fragments/header_w::header"></div>
+
+
+<!--main-content-->
+<div class="main_content" style="min-height: 900px;">
+    <div class="left-menu" style="min-height: 896px">
+        <ul>
+            <li><a href="#"><i class="glyph-icon icon-chevron-right1"></i>捐助</a></li>
+        </ul>
+    </div>
+
+    <div class="right-content">
+        <div class="title">
+            <h6>境界的彼方</h6>
+        </div>
+        <br/>
+
+
+        <div class="donate-simple-block">
+            <div class="donate-simple-block-left">
+                <div class="donate-item-view-simple">
+                    <dl>
+                        <dd>
+                            <img src="/images/pic.jpg" alt="给困境儿童送生活包" width="40%" height="40%"/>
+                        </dd>
+                        <dt>给困境儿童送生活包</dt>
+                        <dd>
+                            已募善款： <em class="ft-amount-16 ft-orange ft-bold">4797687.60</em>元
+                        </dd>
+                        <dd>参与人数：2657359 人参与捐助</dd>
+                        <dd>
+                            项目时间：2015-11-12 至 2020-02-28
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="donate-simple-block-right">
+                <div class="donate-form-block">
+                    <div class="ui-form-item">
+                        <label for="" class="ui-label">收 款 方：</label> <em class="ui-form-text">中国儿童少年基金会</em>
+                    </div>
+                    <div class="ui-form-item">
+                        <label for="" class="ui-label">捐款金额：</label>
+                        <input id="amount" type="text" class="ui-input" name="amount" value="5" />&nbsp; 元
+                        <div class="ui-form-explain"> </div></div>
+                    <div class="ui-form-item ">
+                        <label for="" class="ui-label"></label>
+                        <input id="J-isAnonymous" class="ui-hidden" type="checkbox" name="isAnonymous"/>
+                        <label for="J-isAnonymous">匿名捐赠</label>
+                    </div>
+                    <div class="ui-form-item" style="margin-left: 20%;">
+                        <!--点击确定弹出bootstrap模态框-->
+                        <button class="btn-form" data-toggle="modal" data-target="#myModal">确定</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                请扫描下方二维码：
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <img src="/images/pay_QRcode.png"  width="60%"  height="60%"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                确定
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+
+<!--footer-->
+<div th:include="fragments/footer_w::footer"></div>
+</body>
+</html>
