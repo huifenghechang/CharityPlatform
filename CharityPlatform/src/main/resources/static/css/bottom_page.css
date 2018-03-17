@@ -9,6 +9,17 @@ li {
     list-style: none;
 }
 
+.intro {
+    margin: 40px 80px;
+    position: relative;
+}
+
+.intro-text {
+    padding-top: 57px;
+    position: absolute;
+    display: inline-block;
+}
+
 .form-feedback {
     height: 350px;
     width: 80%;
@@ -43,6 +54,7 @@ li {
 
 .right-content p {
     font-size: 19px;
+    font-weight: 700;
     margin: 20px 50px;
 }
 
