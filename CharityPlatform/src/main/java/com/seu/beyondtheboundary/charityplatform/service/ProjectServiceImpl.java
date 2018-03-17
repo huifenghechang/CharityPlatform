@@ -5,6 +5,9 @@ import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -60,11 +63,37 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectRepository.findAll();
 	}
 
+	public List<Project> listProjects(Sort var1) {
+		return projectRepository.findAll(var1);
+	}
 
 
-	public List<Project> listProjectsByStatusAndCategory(Long category, Long status) {
 
-		return projectRepository.findAllByCategoryAndStatus(category , status);
+	public List<Project> listProjectsByStatusAndCategoryOrderAlreadyDonation(Long category, Long status, String title) {
+		title = "%" + title + "%";
+		List<Project> projects = projectRepository.findByTitleLikeAndCategoryAndStatusOrderByAlreadyDonationAsc( title, category , status);
+		return projects;
+	}
+	public List<Project> listProjectsByStatusAndCategoryOrderId(Long category, Long status, String title) {
+		title = "%" + title + "%";
+		List<Project> projects = projectRepository.findByTitleLikeAndCategoryAndStatusOrderByIdDesc( title, category , status);
+		return projects;
+	}
+//	public List<Project> listProjectsByStatusAndCategory(Long category, Long status) {
+//
+//		return projectRepository.findByCategoryAndStatusByTitleLike(category , status);
+//	}
+	public List<Project> listProjectsByTitleLikeOrderByAlreadyDonationAsc(String title) {
+		// 模糊查询
+		title = "%" + title + "%";
+		List<Project> projects = projectRepository.findByTitleLikeOrderByAlreadyDonationAsc(title);
+		return projects;
+	}
+	public List<Project> listProjectsByTitleLikeOrderByIdDesc(String title) {
+		// 模糊查询
+		title = "%" + title + "%";
+		List<Project> projects = projectRepository.findByTitleLikeOrderByIdDesc(title);
+		return projects;
 	}
 }
 
