@@ -48,22 +48,16 @@ public class UserspaceController {
 
 	@Autowired
     private UserRepository userRepository;
-	//@RequestBody Project project
-	//String title ,String summary, String content
-
-	@GetMapping("/projects/edit")
-	public String show() {
-		return "/person/projectedit";
-	}
-
-	@GetMapping("/person/hello")
+	//获取单个项目详情的界面
+	@GetMapping("/person/project_details")
 	public  ModelAndView  Test(@RequestParam(value="id") Long id,
 							   Model model) {
 		Project project = projectService.getProjectById(id);
 		System.out.println(project.getContent());
 		model.addAttribute("project", project);
-		return new ModelAndView("/person/hello", "projectModel", model);
+		return new ModelAndView("/person/project_details", "projectModel", model);
 	}
+	//获取项目的编辑发布项目
 	@PostMapping("/projects/edit")
 	public ResponseEntity<Response> saveProject(String title ,String summary, String content,String html_content) {
 		System.out.println("before saving project" );
@@ -80,9 +74,35 @@ public class UserspaceController {
 		}
 
 		System.out.println("I am saving project");
-		String redirectUrl="/u/person/hello?id="+id;
+		String redirectUrl="/u/person/project_details?id="+id;
 		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
 	}
+
+	@PostMapping("/projects/edit_complete")
+	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String html_content,String id) {
+		System.out.println("before saving project" );
+		try {
+			if(id!=null){
+				Long Lid = Long.parseLong(id);
+				Project project = projectService.getProjectById(Lid);
+				project.setTitle(title);
+				project.setSummary(summary);
+				project.setContent(content);
+				projectService.updateProject(project);
+			}
+			System.out.println("这里是更新数据中的Project！！！！！！！！！");
+		} catch (ConstraintViolationException e)  {
+			return ResponseEntity.ok().body(new Response(false, ConstraintViolationExceptionHandler.getMessage(e)));
+		} catch (Exception e) {
+			return ResponseEntity.ok().body(new Response(false, e.getMessage()));
+		}
+
+		System.out.println("I am saving project");
+		String redirectUrl="/u/person/project_details?id="+id;
+		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
+	}
+
+
 
 
 	@GetMapping("/complete_user_info")

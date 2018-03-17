@@ -17,48 +17,47 @@
 </head>
 <body>
 <h1>项目编辑页面</h1>
-<input  type="text"  placeholder="请填写公益项目标题"  id="title" name="title"  maxlength="50" style="display: block"></input>
-<textarea  placeholder="请填写公益项目摘要"  id="summary" name="summary" maxlength="300" style="display: block"></textarea>
+<textarea  type="text"  placeholder="请填写公益项目标题"  id="title" name="title"  maxlength="50" style="display: block" th:text="${projectModel.project.title}"></textarea>
+<textarea  placeholder="请填写公益项目摘要"  id="summary" name="summary" maxlength="300" style="display: block" th:text="${projectModel.project.summary}"></textarea>
+<textarea    id="html_value" name ="html_value" th:text="${projectModel.project.html_content} " style="visibility: hidden"></textarea>
+<textarea    id="id_value" name ="id_value" th:text="${projectModel.project.id} " style="visibility: hidden"></textarea>
 
 <script id="editor" type="text/plain" style="width:1024px;height:500px;">
         这里写你的初始化内容
 </script>
 
     <div id="btns">
-            <button onclick="submitProj()" >提交申请项目</button>
+            <button onclick="submitProj()" >提交修改</button>
     </div>
 
     <script src="/js/jquery-3.1.1.min.js"></script>
     <script src="/js/toastr.min.js"></script>
 
 
-<script type="text/javascript">
+<script type="text/javascript" >
 
     //实例化编辑器
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     var ue = UE.getEditor('editor');
+    UE.getEditor('editor').ready(function () {
+        var html_content = document.getElementById("html_value").value;
+        ue.execCommand('insertHtml', html_content);
+    });
+
 
     // 这个按钮是用来实现将文本存储之后，发送到后台的
     function  submitProj() {
-        var arr = [];
-        arr.push("Hello ,This is a test !");
-        arr.push("内容为：");
-        arr.push(UE.getEditor('editor').getContent());
-
-
         var ue = UE.getEditor('editor');
-        /* var title = document.getElementById("title").value;
-         var summary = document.getElementById("summary").value;*/
-        var title = $('input#title').val();
+        var id = document.getElementById("id_value").value;
+        var title = document.getElementById("title").value;
         var summary = $('#summary').val();
         var content =  UE.getEditor('editor').getContentTxt();
         var html_content = UE.getEditor('editor').getContent();
-        alert("确定要提交吗？");
         $.ajax({
             type: "POST",
-            url: '/u/projects/edit',
+            url: '/u/projects/edit_complete',
             datatype:"json",
-            data: {title: title, summary: summary , content: content,html_content:html_content,},
+            data: {id:id, title: title, summary: summary , content: content,html_content:html_content,},
             success: function(data){
                 if (data.success) {
                     // 成功后，重定向
