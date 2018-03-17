@@ -5,6 +5,7 @@ import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
+import com.seu.beyondtheboundary.charityplatform.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -99,7 +100,12 @@ public class IndexController {
     public String login(User user, Model model, HttpServletRequest request, HttpServletResponse response){
         String username = user.getUsername();
         String password = user.getPassword();
+
+        password = MD5.EncoderByMd5(password);
+
+        System.out.println(password);
         User user1 = userServiceImpl.findMeet(username,password);
+
         if (userServiceImpl.findMeet(username,password) == null){
             model.addAttribute("loginError", true);
             model.addAttribute("errorMsg", "登陆失败，账号或者密码错误！");
@@ -133,6 +139,7 @@ public class IndexController {
     //注册方法
     @PostMapping("/register")
     public String register(User user){
+        user.setPassword(MD5.EncoderByMd5(user.getPassword()));
         userServiceImpl.saveUser(user);
         return "redirect:/login";
 
