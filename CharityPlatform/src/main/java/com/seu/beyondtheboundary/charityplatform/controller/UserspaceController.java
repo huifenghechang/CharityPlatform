@@ -57,29 +57,35 @@ public class UserspaceController {
 	}
 
 	@GetMapping("/person/hello")
-	public String ss() {
-		return "/person/hello";
+	public  ModelAndView  Test(@RequestParam(value="id") Long id,
+							   Model model) {
+		Project project = projectService.getProjectById(id);
+		System.out.println(project.getContent());
+		model.addAttribute("project", project);
+		return new ModelAndView("/person/hello", "projectModel", model);
 	}
-
 	@PostMapping("/projects/edit")
-	public ResponseEntity<Response> saveProject(String title ,String summary, String content) {
-		System.out.println("before  saving project" );
-		Project project = new Project(title,summary,content);
+	public ResponseEntity<Response> saveProject(String title ,String summary, String content,String html_content) {
+		System.out.println("before saving project" );
+		Project project = new Project(title,summary,content,html_content);
+		Long id = 0L;
 		try {
 			projectService.saveProject(project);
+			id = project.getId();
+			System.out.println("This projId is"+id);
 		} catch (ConstraintViolationException e)  {
 			return ResponseEntity.ok().body(new Response(false, ConstraintViolationExceptionHandler.getMessage(e)));
 		} catch (Exception e) {
 			return ResponseEntity.ok().body(new Response(false, e.getMessage()));
 		}
-		System.out.println(title+"||||||"+summary+"||||||"+content);
-//		System.out.println(project.getSummary()+"summary!");
-			System.out.println("I am saving project");
-        String redirectUrl="/u/person/hello";
-        return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
-    }
 
-    @GetMapping("/complete_user_info")
+		System.out.println("I am saving project");
+		String redirectUrl="/u/person/hello?id="+id;
+		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
+	}
+
+
+	@GetMapping("/complete_user_info")
     public String complete_user_info() {
         return "/person/complete_personal_information";
     }

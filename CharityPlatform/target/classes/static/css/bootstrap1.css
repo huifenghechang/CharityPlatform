@@ -287,7 +287,7 @@ a {
 a:hover,
 a:focus {
   color: #E74C3C;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:focus {
   outline: thin dotted;
@@ -591,7 +591,7 @@ dl {
 }
 dt,
 dd {
-  line-height: 1.42857143;
+  line-height: 2.3;
 }
 dt {
   font-weight: bold;

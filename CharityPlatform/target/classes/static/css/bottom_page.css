@@ -105,8 +105,8 @@ li {
 /*main内容显示*/
 .right-content {
     margin-left: 180px;
-    background: #fff;
-    height: 800px;
+    background: #ceceb838;
+    height: 897px;
     min-height: 100%;
     /*overflow:auto;*/
 }

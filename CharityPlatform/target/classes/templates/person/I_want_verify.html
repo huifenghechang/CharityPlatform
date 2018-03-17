@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>个人认证</title>
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+</head>
+
+<body style="position: relative;overflow-y:scroll;">
+
+<!--header-->
+<div th:include="fragments/header_w::header"></div>
+
+
+<!--main-content-->
+<div class="main_content" style="min-height: 900px;">
+    <div class="left-menu" style="min-height: 896px">
+        <ul>
+            <li><a href="#"><i class="glyph-icon icon-chevron-right1"></i>个人认证</a></li>
+        </ul>
+    </div>
+
+    <div class="right-content" style="overflow: hidden">
+        <div class="title">
+            <h6>境界的彼方</h6>
+        </div>
+        <!-- /container -->
+        <div class="container blog-content-container" style="margin: 20px 60px;">
+            <h2 style="margin: 31px 14px">个人认证</h2>
+            <form  th:action="@{/u/complete_user_info}" method="post">
+                <div class="form-group col-md-5">
+                    <label for="realname" class="col-form-label">姓名</label>
+                    <input type="text" class="form-control" id="realname" name="realname" maxlength="40" placeholder="请输入真实姓名" />
+                </div>
+                <div class="form-group col-md-5">
+                    <label>性别</label><br/>
+                    男<input type="radio" checked="checked" name="sex" value="1" />
+                    女<input type="radio" name="sex" value="0" />
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="user_id_card" class="col-form-label">身份证</label>
+                    <input type="text" class="form-control" id="user_id_card" name="user_id_card" maxlength="40" placeholder="请输入身份证号" />
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="email" class="col-form-label">邮箱</label>
+                    <input type="text" class="form-control" id="email" name="email" maxlength="40" placeholder="请输入邮箱地址" />
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="tel" class="col-form-label">手机</label>
+                    <input type="text" class="form-control" id="tel" name="tel" maxlength="40" placeholder="请输入手机号码" />
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="address" class="col-form-label">住址</label>
+                    <input type="text" class="form-control" id="address" name="address" maxlength="40" placeholder="请输入住址" />
+                </div>
+                <div class="form-group col-md-5">
+                    <input type="file" id="uploadImgInput" onclick="uploadImg()"/>
+                    <button class="btn-form" type="submit" >提交</button>
+                </div>
+                <div class=" col-md-5" th:if="${loginError}">
+                    <p class="blog-label-error" th:text="${errorMsg}"></p>
+                </div>
+            </form>
+        </div>
+
+
+        <script type="text/javascript">
+            //为表单的必填文本框添加提示信息（选择form中的所有后代input元素）
+            $("form :input.required").each(function () {
+                //创建元素
+                var $required = $("<strong class='high'>*</strong>");
+                //将它追加到文档中
+                $(this).parent().append($required);
+            });
+
+            // function uploadImg()
+            // {
+            //     var file=document.getElementById("uploadImgInput").files[0];
+            //     if(!/image\/\w+/.test(file.type)) //判断获取的是否为图片文件
+            //     {
+            //         alert("请确保文件为图像文件");
+            //         return false;
+            //     }
+            // }
+            //     var reader=new FileReader();
+            //     reader.uploadImg(file);
+            //     reader.onload=function(e)
+            //     {
+            //         var result=document.getElementById("result");
+            //         result.innerHTML='<img src="'+this.result+'" alt=""/>'
+            //     }
+            // }
+
+        </script>
+    </div>
+</div>
+
+<!--footer-->
+<div th:include="fragments/footer_w::footer"></div>
+</body>
+</html>
+
+

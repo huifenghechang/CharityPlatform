@@ -82,6 +82,13 @@ public class Project implements Serializable {
         this.content = content;
     }
 
+    public Project(String title, String summary,String content,String html_content) {
+        this.title = title;
+        this.summary = summary;
+        this.content = content;
+        this.html_content = html_content;
+    }
+
     public Project(){
 
     }
