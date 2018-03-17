@@ -61,15 +61,15 @@ public class UserspaceController {
 	//@RequestBody Project project
 	//String title ,String summary, String content
 
-	@GetMapping("/projects/edit")
+/*	@GetMapping("/projects/edit")
 	public String show() {
 		return "/person/projectedit";
-	}
+	}*/
 	//获取项目的编辑发布项目
 	@PostMapping("/projects/edit")
-	public ResponseEntity<Response> saveProject(String title ,String summary, String content,String html_content) {
+	public ResponseEntity<Response> saveProject(String title ,String summary, String content,String htmlContent) {
 		System.out.println("before saving project" );
-		Project project = new Project(title,summary,content,html_content);
+		Project project = new Project(title,summary,content,htmlContent);
 		Long id = 0L;
 		try {
 			projectService.saveProject(project);
@@ -87,7 +87,7 @@ public class UserspaceController {
 	}
 
 	@PostMapping("/projects/edit_complete")
-	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String html_content,String id) {
+	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String htmlContent,String id) {
 		System.out.println("before saving project" );
 		try {
 			if(id!=null){
@@ -113,19 +113,19 @@ public class UserspaceController {
 
 
 
-	@GetMapping("/complete_user_info")
+	/*@GetMapping("/complete_user_info")
     public String complete_user_info() {
         return "/person/complete_personal_information";
-    }
+    }*/
 
 	@GetMapping("/I_want_verify")
 	public String I_want_verify() {
 		return "/person/I_want_verify";
-		System.out.println(title+"||||||"+summary+"||||||"+content);
+//		System.out.println(title+"||||||"+summary+"||||||"+content);
 //		System.out.println(project.getSummary()+"summary!");
-		System.out.println("I am saving project");
-		String redirectUrl="/u/person/hello";
-		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
+//		System.out.println("I am saving project");
+//		String redirectUrl="/u/person/hello";
+//		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
 	}
 
 	@GetMapping("/complete_user_info")

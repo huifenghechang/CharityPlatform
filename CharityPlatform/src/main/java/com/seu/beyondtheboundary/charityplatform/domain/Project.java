@@ -77,11 +77,11 @@ public class Project implements Serializable {
         this.content = content;
     }
 
-    public Project(String title, String summary,String content,String html_content) {
+    public Project(String title, String summary,String content,String htmlContent) {
         this.title = title;
         this.summary = summary;
         this.content = content;
-        this.html_content = html_content;
+        this.htmlContent = htmlContent;
     }
 
     public Project(){

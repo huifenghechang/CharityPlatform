@@ -52,13 +52,13 @@
         var title = $('input#title').val();
         var summary = $('#summary').val();
         var content =  UE.getEditor('editor').getContentTxt();
-        var html_content = UE.getEditor('editor').getContent();
+        var htmlContent = UE.getEditor('editor').getContent();
         alert("确定要提交吗？");
         $.ajax({
             type: "POST",
             url: '/u/projects/edit',
             datatype:"json",
-            data: {title: title, summary: summary , content: content,html_content:html_content,},
+            data: {title: title, summary: summary , content: content,htmlContent:htmlContent,},
             success: function(data){
                 if (data.success) {
                     // 成功后，重定向
