@@ -17,45 +17,41 @@ public class Project implements Serializable {
 
     @Column(name = "category" ,length = 100)
     private Long category = 1L;  //类别
+
     @Column(name = "status")
     private Long status = 1L;  //状态,状态1表示待审核，2表示已审核通过未发布，3，表示审核通过已发布，0表示已审核未通过
 
-    @Column(nullable = false)
-    private Long aim_donation = 0L;  //目标金额
+    @Column(name ="aimDonation")
+    private Long aimDonation = 0L;  //目标金额
 
-    @Column(nullable = false)
-    private Long already_donation = 0L;  //目前已筹
+    @Column(name ="alreadyDonation")
+    private Long alreadyDonation = 0L;  //目前已筹
 
     @Column(name = "reading")
     private Long reading = 0L;  //阅读量
 
-    @Column(name ="donate_people_counter")
-    private Long donate_people_counter = 0L;  //捐款人数
+    @Column(name ="donatePeopleCounter")
+    private Long donatePeopleCounter = 0L;  //捐款人数
 
 
     @NotEmpty(message = "标题不能为空")
-    @Size(min=2, max=50)
-    @Column(nullable = false, length = 50) //映射字段不能为空
+
+
     private String title;  //项目名称
 
     @NotEmpty(message = "摘要不能为空")
-    @Size(min=2, max = 300)
-    @Column(nullable = false) //映射字段不能为空
+
     private String summary;  //摘要
 
     @Lob //大对象，映射MySQL的Long Text类型
     @Basic(fetch = FetchType.LAZY) //懒加载
-    @NotEmpty(message = "内容不能为空")
-    @Size(min=2)
-    @Column(nullable = false) //映射字段不能为空
+
     private String content;  //项目正文
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
-//    @NotEmpty(message = "内容不能为空")
-    @Size(min = 2)
-//    @Column(nullable = false)
-    private String html_content;  //项目html正文,将md 转换为html
+
+    private String htmlContent;  //项目html正文,将md 转换为html
 
 
   /*  @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
@@ -64,15 +60,14 @@ public class Project implements Serializable {
 
 //    @Column(nullable = false)  //映射字段不能为空
     @org.hibernate.annotations.CreationTimestamp
-    private Timestamp created_time;  //项目时间开始
+    private Timestamp createdTime;  //项目时间开始
 
 //    @Column(nullable = false)  //映射字段不能为空
     @org.hibernate.annotations.CreationTimestamp
-    private Timestamp end_time;  //项目结束开始
+    private Timestamp endTime;  //项目结束开始
 
-//    @Column(nullable = false)  //映射字段不能为空
     private String initiator;  //发起人
-    private String propaganda_map;  //首页大图
+    private String propagandaMap;  //首页大图
 
 
 
@@ -118,20 +113,20 @@ public class Project implements Serializable {
         this.status = status;
     }
 
-    public Long getAim_donation() {
-        return aim_donation;
+    public Long getAimDonation() {
+        return aimDonation;
     }
 
-    public void setAim_donation(Long aim_donation) {
-        this.aim_donation = aim_donation;
+    public void setAimDonation(Long aimDonation) {
+        this.aimDonation = aimDonation;
     }
 
-    public Long getAlready_donation() {
-        return already_donation;
+    public Long getAlreadyDonation() {
+        return alreadyDonation;
     }
 
-    public void setAlready_donation(Long already_donation) {
-        this.already_donation = already_donation;
+    public void setAlreadyDonation(Long alreadyDonation) {
+        this.alreadyDonation = alreadyDonation;
     }
 
     public Long getReading() {
@@ -142,28 +137,12 @@ public class Project implements Serializable {
         this.reading = reading;
     }
 
-    public Long getDonate_people_counter() {
-        return donate_people_counter;
+    public Long getDonatePeopleCounter() {
+        return donatePeopleCounter;
     }
 
-    public void setDonate_people_counter(Long donate_people_counter) {
-        this.donate_people_counter = donate_people_counter;
-    }
-
-    public Timestamp getCreated_time() {
-        return created_time;
-    }
-
-    public void setCreated_time(Timestamp created_time) {
-        this.created_time = created_time;
-    }
-
-    public Timestamp getEnd_time() {
-        return end_time;
-    }
-
-    public void setEnd_time(Timestamp end_time) {
-        this.end_time = end_time;
+    public void setDonatePeopleCounter(Long donatePeopleCounter) {
+        this.donatePeopleCounter = donatePeopleCounter;
     }
 
     public String getTitle() {
@@ -174,6 +153,14 @@ public class Project implements Serializable {
         this.title = title;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     public String getContent() {
         return content;
     }
@@ -182,20 +169,28 @@ public class Project implements Serializable {
         this.content = content;
     }
 
-    public String getHtml_content() {
-        return html_content;
+    public String getHtmlContent() {
+        return htmlContent;
     }
 
-    public void setHtml_content(String html_content) {
-        this.html_content = html_content;
+    public void setHtmlContent(String htmlContent) {
+        this.htmlContent = htmlContent;
     }
 
-    public String getSummary() {
-        return summary;
+    public Timestamp getCreatedTime() {
+        return createdTime;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setCreatedTime(Timestamp createdTime) {
+        this.createdTime = createdTime;
+    }
+
+    public Timestamp getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Timestamp endTime) {
+        this.endTime = endTime;
     }
 
     public String getInitiator() {
@@ -206,19 +201,11 @@ public class Project implements Serializable {
         this.initiator = initiator;
     }
 
-    public String getPropaganda_map() {
-        return propaganda_map;
+    public String getPropagandaMap() {
+        return propagandaMap;
     }
 
-    public void setPropaganda_map(String propaganda_map) {
-        this.propaganda_map = propaganda_map;
+    public void setPropagandaMap(String propagandaMap) {
+        this.propagandaMap = propagandaMap;
     }
-
-   /* public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }*/
 }

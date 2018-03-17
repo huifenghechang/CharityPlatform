@@ -89,10 +89,10 @@
                 </li>
             </ul>
             <ul class="donate-sort">
-                <li class="donate-sort-startDate donate-sort-desc hover"><a th:href="@{'/column/'+${projectModel.projectID}+'?order=new'}" >
+                <li class="donate-sort-startDate donate-sort-desc hover"><a th:href="@{'/column/'+${projectModel.projectID}+'/search/?order=new'+'&amp;search='+${projectModel.projectSearch}}">
                     <span th:classappend="${projectModel.order} == 'new'?'ft-orange':''">发起时间</span></a></li>
                 <!--<li class="donate-sort-endDate"><a href="/column?order=hot"  ><span>结束时间</span></a></li>-->
-                <li class="donate-sort-amount hover"><a th:href="@{'/column/'+${projectModel.projectID}+'?order=more'}">
+                <li class="donate-sort-amount hover"><a th:href="@{'/column/'+${projectModel.projectID}+'/search/?order=more'+'&amp;search='+${projectModel.projectSearch}}">
                     <span th:classappend="${projectModel.order} == 'more'?'ft-orange':''">已募金额</span></a></li>
             </ul>
         </div>
@@ -108,13 +108,6 @@
                     <a th:href="@{'/activity/'+${menu.id}}" class="donate-item-default-pic-a b-link-stripe b-animate-go  thickbox"><div class="b-line b-line1"></div><div class="b-line b-line2"></div><div class="b-line b-line3"></div><div class="b-line b-line4"></div><div class="b-line b-line5"></div>
                         <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propagandaMap}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
                         </div></a>
-                    <div class="donate-item-default-progress">
-                        <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short" >
-                            <div class="ui-progressbar-s ui-progressbar-s-short" th:style="'width:' + ${menu.alreadyDonation}/ ${menu.aimDonation} *100+'%'" th:with="component =${menu.alreadyDonation}/ ${menu.aimDonation}*100">
-                                <span th:text="${#numbers.formatDecimal(component,1,2)}+'%'"></span>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="donate-item-default-active">
                         <a class="donate-button donate-button-medium-orange donate-button-single" href="#">
@@ -147,10 +140,7 @@
                         <p class="donate-list-info donate-info-content-item">
                             已募善款：<em class="ft-orange ft-bold" th:text="${menu.alreadyDonation}"></em>
                             元
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;筹款目标：<span class="donate-info-amount-left" th:text="${menu.aimDonation}"></span> 元
                         </p>
-
-
                         <p class="donate-item-default-dd">项目时间：2012-05-04   至 2020-02-28</p>
                         <dd class="donate-item-default-dd">参捐人数：<span class="ft-green" th:text="${menu.donatePeopleCounter}"></span> 人</dd>
                     </dl>
