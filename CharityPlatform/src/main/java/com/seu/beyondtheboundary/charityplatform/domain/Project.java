@@ -141,6 +141,8 @@ public class Project implements Serializable {
         this.reading = reading;
     }
 
+    public Long getDonatePeopleCounter() {
+        return donatePeopleCounter;
     }
 
     public void setDonatePeopleCounter(Long donatePeopleCounter) {
