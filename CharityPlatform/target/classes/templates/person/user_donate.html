@@ -7,6 +7,8 @@ xmlns:th="http://www.thymeleaf.org">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>捐助界面</title>
     <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
 </head>
 
 <body style="position: relative;overflow-y:scroll;">
@@ -63,14 +65,39 @@ xmlns:th="http://www.thymeleaf.org">
                         <label for="J-isAnonymous">匿名捐赠</label>
                     </div>
                     <div class="ui-form-item" style="margin-left: 20%;">
-                        <button class="btn-form">确定</button>
+                        <!--点击确定弹出bootstrap模态框-->
+                        <button class="btn-form" data-toggle="modal" data-target="#myModal">确定</button>
                     </div>
                 </div>
             </div>
-            <div class="fn-clear"></div>
+
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                请扫描下方二维码：
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <img src="/images/pay_QRcode.png"  width="60%"  height="60%"/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                确定
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+
         </div>
-
-
 
 
     </div>
