@@ -209,6 +209,7 @@ public class Project implements Serializable {
         return propagandaMap;
     }
 
+<<<<<<< HEAD
     public String getPro_confirmation_link() {
         return pro_confirmation_link;
     }
@@ -232,7 +233,9 @@ public class Project implements Serializable {
     public void setUserSet(Set<User> userSet) {
         this.userSet = userSet;
     }
+=======
     public void setPropagandaMap(String propagandaMap) {
         this.propagandaMap = propagandaMap;
     }
+>>>>>>> origin/316-sqc
 }
