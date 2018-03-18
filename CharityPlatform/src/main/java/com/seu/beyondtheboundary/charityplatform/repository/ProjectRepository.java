@@ -5,8 +5,10 @@ import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -24,4 +26,11 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 	 * @return
 	 */
 	public List<Project> findAllByCategoryAndStatus(Long category , Long status);
+
+	//public List<Project> findByCategoryAndStatusByTitleLike(Long category , Long statu);
+
+	public List<Project> findByTitleLikeAndCategoryAndStatusOrderByAlreadyDonationAsc(String title,Long category , Long statu );
+	public List<Project> findByTitleLikeAndCategoryAndStatusOrderByIdDesc(String title,Long category , Long statu);
+	List<Project> findByTitleLikeOrderByIdDesc( String title);
+	List<Project> findByTitleLikeOrderByAlreadyDonationAsc( String title);
 }

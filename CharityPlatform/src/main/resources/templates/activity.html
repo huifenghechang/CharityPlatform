@@ -134,14 +134,14 @@
                     <!-- cover image -->
                     <div class="col-md-4 ">
                         <!-- insert image, scaled to column width -->
-                        <img th:src="@{'/project_img_big/'+${projectModel.project.propaganda_map}}" width="100%" style="margin:1em 0 0 0;"/>
+                        <img th:src="@{'/project_img_big/'+${projectModel.project.propagandaMap}}" width="100%" style="margin:1em 0 0 0;"/>
                         <h6 th:text="'运营机构：'+*{initiator}"></h6>
                     </div>
                     <!-- meta data -->
                     <div class="col-md-7" >
                         <h1 th:text="*{title}"></h1>
-                        <p th:text="'已募善款：'+*{already_donation}"></p>
-                        <p th:text="'参捐人数：'+*{donate_people_counter}"></p>
+                        <p th:text="'已募善款：'+*{alreadyDonation}"></p>
+                        <p th:text="'参捐人数：'+*{donatePeopleCounter}"></p>
                         <p>项目时间：2018年1月32日 至 2018年2月29日</p>
                         <a href="#" style="background:#da7400; font-size: 1em; margin: 0 0 0 0;">
                             <h1>我来捐助</h1>
@@ -163,7 +163,7 @@
 
             <!-- 项目故事的主体，文字和图 -->
             <div class="row">
-                <div class="project_page_main_story" th:utext="${projectModel.project.html_content}">
+                <div class="project_page_main_story" th:utext="${projectModel.project.htmlContent}">
 
                 </div>
             </div>

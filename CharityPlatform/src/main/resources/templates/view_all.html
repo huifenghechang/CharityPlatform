@@ -40,46 +40,63 @@
 </head>
 
 
-
 <body style="position: relative">
 
 <div th:include="fragments/header_w::header"></div>
 
 <div class="main_content">
 
+    <style>
+        .searchWrapper .zoomIcon {
+            position: absolute;
+            right: 18px;
+            top: 18px;
+            margin-top: -12px;
+            width: 21px;
+            height: 21px;
+            display: inline-block;
+            text-decoration: none;
+            background-image: url("/images/icon.png")}
+        .searchWrapper{
+            position:relative;}
 
+    </style>
 <div class="searchWrapper">
-<input class="search" type="text" placeholder="搜索公益项目"/>
+    <form th:action="@{'/column/'+${projectModel.projectID}+'/search/'}"  method="post">
+        <input class="search" type="text" placeholder="搜索公益项目" name="search"/>
+        <button type="submit"><a  class="actionBtn zoomIcon" id="J_actionSearchBtn" seed="searchWrapper-J_actionSearchBtn" smartracker="on">&nbsp;</a></button>
+    </form>
+
 </div>
     <div class="content-left">
         <div class="ui-round-corner-content donate-gap">
             <ul class="donate-filter fn-clear">
                 <li class="charity-project-filter-item">项目类型：</li>
                 <li class="charity-project-filter-item">
-                    <a href="/column" seed="charityProjectFilterItem-link" smartracker="on">全部</a>
+                    <a href="/column/0" seed="charityProjectFilterItem-link" smartracker="on" th:classappend="${projectModel.projectID} == 0?'current':''">全部</a>
                 </li>
                 <li class="charity-project-filter-item">
-                    <a href="/column/1"  seed="charityProjectFilterItem-current" smartracker="on">教育助学</a>
+                    <a href="/column/1"  seed="charityProjectFilterItem-current" smartracker="on" th:classappend="${projectModel.projectID} == 1?'current':''">教育助学</a>
                 </li>
                 <li class="charity-project-filter-item">
-                    <a href="/column/2" seed="charityProjectFilterItem-linkT1" smartracker="on">扶贫救灾</a>
+                    <a href="/column/2" seed="charityProjectFilterItem-linkT1" smartracker="on" th:classappend="${projectModel.projectID} == 2?'current':''">扶贫救灾</a>
                 </li>
                 <li class="charity-project-filter-item">
-                    <a href="/column/3" seed="charityProjectFilterItem-linkT2" smartracker="on">医疗救助</a>
+                    <a href="/column/3" seed="charityProjectFilterItem-linkT2" smartracker="on" th:classappend="${projectModel.projectID} == 3?'current':''">医疗救助</a>
                 </li>
                 <li class="charity-project-filter-item">
-                    <a href="/column/4" seed="charityProjectFilterItem-linkT3" smartracker="on">其他</a>
+                    <a href="/column/4" seed="charityProjectFilterItem-linkT3" smartracker="on" th:classappend="${projectModel.projectID} == 4?'current':''">其他</a>
                 </li>
             </ul>
             <ul class="donate-sort">
-                <li class="donate-sort-startDate donate-sort-desc"><a href="#" seed="donateSortStartDate-link" smartracker="on"><span class="ft-orange">发起时间</span></a></li>
-                <li class="donate-sort-endDate"><a href="#" seed="donateSortEndDate-link" smartracker="on"><span>结束时间</span></a></li>
-                <li class="donate-sort-amount"><a href="#" seed="donateSortAmount-link" smartracker="on"><span>已募金额</span></a></li>
+                <li class="donate-sort-startDate donate-sort-desc hover"><a th:href="@{'/column/'+${projectModel.projectID}+'?order=new'}" >
+                    <span th:classappend="${projectModel.order} == 'new'?'ft-orange':''">发起时间</span></a></li>
+                <!--<li class="donate-sort-endDate"><a href="/column?order=hot"  ><span>结束时间</span></a></li>-->
+                <li class="donate-sort-amount hover"><a th:href="@{'/column/'+${projectModel.projectID}+'?order=more'}">
+                    <span th:classappend="${projectModel.order} == 'more'?'ft-orange':''">已募金额</span></a></li>
             </ul>
         </div>
     </div>
-
-
 
     <div class="ui-round-corner-content donate-gap">
         <ul class="donate-item-default">
@@ -89,8 +106,15 @@
             <li class="donate-item-default-li fn-clear" th:each="menu : ${projectModel.projectList1}">
                 <div class="donate-item-default-left">
                     <a th:href="@{'/activity/'+${menu.id}}" class="donate-item-default-pic-a b-link-stripe b-animate-go  thickbox"><div class="b-line b-line1"></div><div class="b-line b-line2"></div><div class="b-line b-line3"></div><div class="b-line b-line4"></div><div class="b-line b-line5"></div>
-                        <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propaganda_map}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
+                        <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propagandaMap}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
                         </div></a>
+                    <div class="donate-item-default-progress">
+                        <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short" >
+                            <div class="ui-progressbar-s ui-progressbar-s-short" th:style="'width:' + ${menu.alreadyDonation}/ ${menu.aimDonation} *100+'%'" th:with="component =${menu.alreadyDonation}/ ${menu.aimDonation}*100">
+                                <span th:text="${#numbers.formatDecimal(component,1,2)}+'%'"></span>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="donate-item-default-active">
                         <a class="donate-button donate-button-medium-orange donate-button-single" href="#">
@@ -121,11 +145,14 @@
 
                         <dd class="donate-item-default-dd"  th:text="'发 布 人 : '+${menu.initiator}"></dd>
                         <p class="donate-list-info donate-info-content-item">
-                            已募善款：<em class="ft-orange ft-bold" th:text="${menu.already_donation}"></em>
+                            已募善款：<em class="ft-orange ft-bold" th:text="${menu.alreadyDonation}"></em>
                             元
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;筹款目标：<span class="donate-info-amount-left" th:text="${menu.aimDonation}"></span> 元
                         </p>
+
+
                         <p class="donate-item-default-dd">项目时间：2012-05-04   至 2020-02-28</p>
-                        <dd class="donate-item-default-dd">参捐人数：<span class="ft-green" th:text="${menu.donate_people_counter}"></span> 人</dd>
+                        <dd class="donate-item-default-dd">参捐人数：<span class="ft-green" th:text="${menu.donatePeopleCounter}"></span> 人</dd>
                     </dl>
                 </div>
             </li>
@@ -145,17 +172,17 @@
 
 
 
-        <div class="ui-page">
+        <!--<div class="ui-page">-->
 
-            <span class="ui-page-current">1</span>
+            <!--<span class="ui-page-current">1</span>-->
 
-            <a class="ui-page-goto" href="#" seed="donateGap-link" smartracker="on"><span>2</span></a>
-            <a class="ui-page-goto" href="#" seed="donateGap-linkT1" smartracker="on"><span>3</span></a>
-            <span>...</span>
-            <a class="ui-page-goto" href="#" seed="donateGap-linkT2" smartracker="on"><span>6</span></a>
+            <!--<a class="ui-page-goto" href="#" seed="donateGap-link" smartracker="on"><span>2</span></a>-->
+            <!--<a class="ui-page-goto" href="#" seed="donateGap-linkT1" smartracker="on"><span>3</span></a>-->
+            <!--<span>...</span>-->
+            <!--<a class="ui-page-goto" href="#" seed="donateGap-linkT2" smartracker="on"><span>6</span></a>-->
 
-            <a class="sl-rc-wrap ui-page-turn" href="#" seed="donateGap-linkT3" smartracker="on"><span class="sl-rc-cnt ui-btn-copy">下一页</span></a>
-        </div>
+            <!--<a class="sl-rc-wrap ui-page-turn" href="#" seed="donateGap-linkT3" smartracker="on"><span class="sl-rc-cnt ui-btn-copy">下一页</span></a>-->
+        <!--</div>-->
 
     </div>
 
