@@ -6,10 +6,14 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity  //实体
 public class Project implements Serializable {
 
+    @ManyToMany(mappedBy = "projectList")
+    private Set<User> userSet = new HashSet<User>();
 
     @Id // 主键
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
@@ -57,10 +61,10 @@ public class Project implements Serializable {
 //    @Column(nullable = false)
     private String html_content;  //项目html正文,将md 转换为html
 
-
-  /*  @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    //1个求助者可对应多个活动
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;*/
+    private User user;
 
 //    @Column(nullable = false)  //映射字段不能为空
     @org.hibernate.annotations.CreationTimestamp
@@ -74,7 +78,7 @@ public class Project implements Serializable {
     private String initiator;  //发起人
     private String propaganda_map;  //首页大图
 
-
+    private String pro_confirmation_link;
 
     public Project(String title, String summary,String content) {
         this.title = title;
@@ -207,11 +211,27 @@ public class Project implements Serializable {
         this.propaganda_map = propaganda_map;
     }
 
-   /* public User getUser() {
+    public String getPro_confirmation_link() {
+        return pro_confirmation_link;
+    }
+
+    public void setPro_confirmation_link(String pro_confirmation_link) {
+        this.pro_confirmation_link = pro_confirmation_link;
+    }
+
+    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
+
+    public Set<User> getUserSet() {
+        return userSet;
+    }
+
+    public void setUserSet(Set<User> userSet) {
+        this.userSet = userSet;
+    }
 }

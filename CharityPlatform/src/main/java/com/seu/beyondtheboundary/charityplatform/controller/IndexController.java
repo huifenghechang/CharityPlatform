@@ -103,7 +103,6 @@ public class IndexController {
 
         password = MD5.EncoderByMd5(password);
 
-        System.out.println(password);
         User user1 = userServiceImpl.findMeet(username,password);
 
         if (userServiceImpl.findMeet(username,password) == null){
