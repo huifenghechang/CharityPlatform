@@ -82,7 +82,7 @@ public class UserspaceController {
 		}
 
 		System.out.println("I am saving project");
-		String redirectUrl="/u/person/project_details?id="+id;
+		String redirectUrl="/personal_center";
 		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
 	}
 
@@ -106,7 +106,7 @@ public class UserspaceController {
 		}
 
 		System.out.println("I am saving project");
-		String redirectUrl="/u/person/project_details?id="+id;
+		String redirectUrl="/admins/to_publish";
 		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
 	}
 
