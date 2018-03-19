@@ -4,7 +4,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 
@@ -43,6 +44,13 @@ public class User{
 	@Column(length = 100)
 
 	private String password; // 登录时密码
+
+	//捐助者与活动之间的连接表
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_donate_project",
+			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+			inverseJoinColumns = {@JoinColumn(name = "donated_project_id", referencedColumnName = "id")})
+	private Set<Project> projectList = new HashSet<Project>();
 
 	public Long getId() {
 		return id;
@@ -166,5 +174,13 @@ public class User{
 
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	public Set<Project> getProjectList() {
+		return projectList;
+	}
+
+	public void setProjectList(Set<Project> projectList) {
+		this.projectList = projectList;
 	}
 }

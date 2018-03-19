@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link href="../css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="../js/jquery.min.js"></script>
+    <link href="../css/style1.css" rel="stylesheet" type="text/css" media="all" />
+    <meta charset="UTF-8"/>
+    <title>项目凭证</title>
+    <style>
+        img {
+            margin: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header container">
+    <div class="logo">
+        <a href="../index.html"><img src="../images/logo.png" alt="click this to homepage" /></a>
+    </div>
+    <div class="top-nav">
+        <nav class="main_nav">
+            <ul>
+                <li><a href="/login" class="scroll">登录</a></li>
+                <li><a href="/register" class="scroll">注册</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="container blog-content-container" style="margin-top: 200px" >
+    <div th:each="eachsrc: ${pro_imgModel.pro_imgsrc}">
+        <h3>凭证:</h3>
+        <img th:src="@{'/project_certificate_images/'+${eachsrc}}"/>
+    </div>
+</div> <!-- /container -->
+
+
+
+
+<!--footer-->
+<div class="footer" style="margin-top: 80px">
+    <div class="container">
+        <ul>
+            <li><a href="#" >联系我们</a></li>
+            <li>|</li>
+            <li><a href="#" >关于境界的彼方</a> </li>
+            <li>|</li>
+            <li><a href="/admins">管理中心</a></li>
+            <li>|</li>
+            <li><a href="#" >意见反馈</a> </li>
+        </ul>
+        <span class="drop"> </span>
+        <p>境界の彼方 <span>S.E.U.</span> Suzhou, P.R.China</p>
+        <p class="footer-class">Copyright &copy; 1Q84.</p>
+        <ul class="social-icons">
+            <li class="twitter"><a href="#"><span> </span></a></li>
+            <li class="gmail"><a href="#"><span> </span></a></li>
+            <li class="print"><a href="#"><span> </span></a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
