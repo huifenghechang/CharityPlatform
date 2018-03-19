@@ -30,6 +30,7 @@ package com.seu.beyondtheboundary.charityplatform.controller;
 		import java.io.IOException;
 		import java.nio.file.Files;
 		import java.nio.file.Paths;
+		import java.util.Date;
 		import java.util.List;
 
 /**
@@ -87,7 +88,9 @@ public class UserspaceController {
 	}
 
 	@PostMapping("/projects/edit_complete")
-	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String htmlContent,String id) {
+	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String id
+				,String category,String aimDonation,String createdTime, String endTime
+				,String initiator) {
 		System.out.println("before saving project" );
 		try {
 			if(id!=null){
@@ -96,6 +99,13 @@ public class UserspaceController {
 				project.setTitle(title);
 				project.setSummary(summary);
 				project.setContent(content);
+				project.setCategory(Long.parseLong(category));
+				project.setAimDonation(Long.parseLong(aimDonation));
+				project.setInitiator(initiator);
+				//这段代码是用来存储时间属性的！
+
+				Date start_date = new Date(createdTime);
+				System.out.println(start_date);
 				projectService.updateProject(project);
 			}
 			System.out.println("这里是更新数据中的Project！！！！！！！！！");

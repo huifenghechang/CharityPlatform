@@ -16,7 +16,7 @@ public class Project implements Serializable {
     private Long id; // 用户的唯一标识
 
     @Column(name = "category" ,length = 100)
-    private Long category = 1L;  //类别
+    private Long category = 1L;  //类别 1 教育助学，2 医疗救助， 3 扶贫救灾 4 其他
 
     @Column(name = "status")
     private Long status = 1L;  //状态,状态1表示待审核，2表示已审核通过未发布，3，表示审核通过已发布，0表示已审核未通过
