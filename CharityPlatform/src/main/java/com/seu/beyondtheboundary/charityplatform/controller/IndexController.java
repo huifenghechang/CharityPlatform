@@ -30,19 +30,26 @@ public class IndexController {
     @Autowired
     private UserServiceImpl userServiceImpl;
 
-    @Autowired
-    private UserRepository userRepository;
-
     @GetMapping("/")
     public String root() {
         return "redirect:/index";
     }
 
     @GetMapping("/admins")
-    public String admins() {
-        return "manager/manage_center";
+    public String admins(HttpServletRequest request, HttpServletResponse response) {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        //使用request对象的getSession()获取session，如果session不存在则创建一个
+        HttpSession session = request.getSession();
+        //将数据存储到session中
+        if(session.getAttribute("user")==null){return "redirect:/login";}
+        User user = (User) session.getAttribute("user");
+        if(user.isAdmin()){
+            return "manager/manage_center";}
+        else {
+            return "redirect:/index";
+        }
     }
-
 
     //index页面
     @GetMapping("/index")
@@ -146,8 +153,15 @@ public class IndexController {
     }
 
     @GetMapping("/personal_center")
-    public String personal_center(){
-        return "/person/personal_center";
+    public String personal_center(HttpServletRequest request, HttpServletResponse response){
+
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        //使用request对象的getSession()获取session，如果session不存在则创建一个
+        HttpSession session = request.getSession();
+        //将数据存储到session中
+        if(session.getAttribute("user")==null) {return "redirect:/login";}
+        else{return "/person/personal_center";}
     }
 
     @GetMapping("/contact_us")
