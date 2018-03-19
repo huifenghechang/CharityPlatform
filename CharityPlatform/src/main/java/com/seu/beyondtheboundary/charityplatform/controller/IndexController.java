@@ -39,8 +39,19 @@ public class IndexController {
     }
 
     @GetMapping("/admins")
-    public String admins() {
-        return "manager/manage_center";
+    public String admins(HttpServletRequest request, HttpServletResponse response) {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        //使用request对象的getSession()获取session，如果session不存在则创建一个
+        HttpSession session = request.getSession();
+        //将数据存储到session中
+        if(session.getAttribute("user")==null){return "redirect:/register";}
+        User user = (User) session.getAttribute("user");
+        if(user.isAdmin()){
+            return "manager/manage_center";}
+        else {
+            return "redirect:/index";
+        }
     }
 
 
@@ -103,7 +114,6 @@ public class IndexController {
 
         password = MD5.EncoderByMd5(password);
 
-        System.out.println(password);
         User user1 = userServiceImpl.findMeet(username,password);
 
         if (userServiceImpl.findMeet(username,password) == null){
