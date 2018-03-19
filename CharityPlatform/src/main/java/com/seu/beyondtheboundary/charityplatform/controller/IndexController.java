@@ -144,6 +144,20 @@ public class IndexController {
 
     }
 
+    @GetMapping("/register_admin")
+    public String register_admin(){
+        return "login_register/register_admin";
+    }
+
+    @PostMapping("/register_admin")
+    public String register_admin(User user){
+        user.setPassword(MD5.EncoderByMd5(user.getPassword()));
+        user.setAdmin(true);
+        userServiceImpl.saveUser(user);
+        return "login_register/register_admin";
+
+    }
+
     @GetMapping("/personal_center")
     public String personal_center(){
         return "/person/personal_center";
