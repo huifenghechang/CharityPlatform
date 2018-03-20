@@ -146,6 +146,14 @@ public class AdminsController {
         return new ModelAndView("/manager/vip_get_certificate", "imgModel", model);
     }
 
+    @PostMapping("/project_certificate")
+    public ModelAndView showCertificate1(Project project, Model model) {
+
+        model.addAttribute("pro_imgsrc", project.getPro_confirmation_link().split(";"));
+
+        return new ModelAndView("/manager/pro_get_certificate", "pro_imgModel", model);
+    }
+
 
 
     @GetMapping("/apply_for_refund")
