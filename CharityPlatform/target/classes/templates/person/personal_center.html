@@ -52,16 +52,19 @@
 
 <!--main-content-->
 <div class="main_content">
-    <div class="profile">
-        <img src="../images/logo.png"/>
-        <h2 th:text="${session.user.username}"></h2>
+
+    <div class="profile" style="width: 225px">
+        <img src="/images/smile.jpg" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
+        <div style="padding: 25px 0 0 34px;">
+            <img src="/level_icon/level_1.png" style="width: 25%">
+            <h2 style="display: inline" th:text="${session.user.username}"></h2>
+        </div>
         <div class="single_a">
             <a class="btn-primary" href="/u/complete_user_info">完善个人资料</a>
-            <br/>
+            <br>
             <a style="margin-left: 19px;" class="btn-primary" href="/u/user_commit_verify">个人认证</a>
         </div>
     </div>
-
 
     <div class="demo">
         <div class="container">
