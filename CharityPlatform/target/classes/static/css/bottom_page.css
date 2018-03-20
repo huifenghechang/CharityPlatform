@@ -9,6 +9,54 @@ li {
     list-style: none;
 }
 
+.intro {
+    margin: 40px 80px;
+    position: relative;
+}
+
+.intro-text {
+    padding-top: 57px;
+    position: absolute;
+    display: inline-block;
+}
+
+/*a  upload */
+.a-upload {
+    font-size: 18px;
+    height: 32px;
+    width: 99px;
+    padding: 4px 10px;
+    line-height: 20px;
+    position: relative;
+    cursor: pointer;
+    color: #888;
+    background: #fafafa;
+    border: 2px solid #11a782;
+    border-radius: 4px;
+    overflow: hidden;
+    display: inline-block;
+    *display: inline;
+    *zoom: 1
+}
+
+.a-upload  input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    cursor: pointer
+}
+
+.a-upload:hover {
+    color: #444;
+    /*background: #eee;*/
+    border-color: #60820d;
+    text-decoration: none
+}
+
+
 .form-feedback {
     height: 350px;
     width: 80%;
@@ -29,9 +77,14 @@ li {
     color: #8a6d3b;
     font-size: 22px;
     font-weight: 700;
-    width: 817px;
+    width: 805px;
     height: 57px;
     box-shadow: 5px 5px 8px #888888;
+}
+
+.title h3 {
+    font-size: 30px;
+    width: 400px;
 }
 
 .title h6 {
@@ -43,6 +96,7 @@ li {
 
 .right-content p {
     font-size: 19px;
+    font-weight: 700;
     margin: 20px 50px;
 }
 

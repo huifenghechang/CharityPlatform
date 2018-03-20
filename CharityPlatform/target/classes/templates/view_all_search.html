@@ -3,8 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <script src="/js/jquery-3.3.1.min.js"></script>
+    <link href="/css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
+    <script src="/js/jquery.min.js"></script>
+    <link href="/css/style1.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/css/view_all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/popup.css" rel="stylesheet" type="text/css" media="all" />
     <meta charset="UTF-8"/>
     <title>Title</title>
 
@@ -86,10 +89,10 @@
                 </li>
             </ul>
             <ul class="donate-sort">
-                <li class="donate-sort-startDate donate-sort-desc hover"><a th:href="@{'/column/'+${projectModel.projectID}+'?order=new'}" >
+                <li class="donate-sort-startDate donate-sort-desc hover"><a th:href="@{'/column/'+${projectModel.projectID}+'/search/?order=new'+'&amp;search='+${projectModel.projectSearch}}">
                     <span th:classappend="${projectModel.order} == 'new'?'ft-orange':''">发起时间</span></a></li>
                 <!--<li class="donate-sort-endDate"><a href="/column?order=hot"  ><span>结束时间</span></a></li>-->
-                <li class="donate-sort-amount hover"><a th:href="@{'/column/'+${projectModel.projectID}+'?order=more'}">
+                <li class="donate-sort-amount hover"><a th:href="@{'/column/'+${projectModel.projectID}+'/search/?order=more'+'&amp;search='+${projectModel.projectSearch}}">
                     <span th:classappend="${projectModel.order} == 'more'?'ft-orange':''">已募金额</span></a></li>
             </ul>
         </div>
@@ -112,7 +115,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="donate-item-default-active">
                         <a class="donate-button donate-button-medium-orange donate-button-single" href="#">
                             <span class="donate-button-text" >我要捐助</span>
@@ -144,10 +146,7 @@
                         <p class="donate-list-info donate-info-content-item">
                             已募善款：<em class="ft-orange ft-bold" th:text="${menu.alreadyDonation}"></em>
                             元
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;筹款目标：<span class="donate-info-amount-left" th:text="${menu.aimDonation}"></span> 元
                         </p>
-
-
                         <p class="donate-item-default-dd">项目时间：2012-05-04   至 2020-02-28</p>
                         <dd class="donate-item-default-dd">参捐人数：<span class="ft-green" th:text="${menu.donatePeopleCounter}"></span> 人</dd>
                     </dl>

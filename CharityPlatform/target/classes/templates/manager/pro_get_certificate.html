@@ -7,7 +7,7 @@
     <script src="../js/jquery.min.js"></script>
     <link href="../css/style1.css" rel="stylesheet" type="text/css" media="all" />
     <meta charset="UTF-8"/>
-    <title>用户凭证</title>
+    <title>项目凭证</title>
     <style>
         img {
             margin: 16px;
@@ -30,9 +30,9 @@
     </div>
 </div>
 <div class="container blog-content-container" style="margin-top: 200px" >
-    <div th:each="eachsrc: ${imgModel.imgsrc}">
+    <div th:each="eachsrc: ${pro_imgModel.pro_imgsrc}">
         <h3>凭证:</h3>
-        <img th:src="@{'/userimages/'+${eachsrc}}" />
+        <img th:src="@{'/project_certificate_images/'+${eachsrc}}"/>
     </div>
 </div> <!-- /container -->
 
