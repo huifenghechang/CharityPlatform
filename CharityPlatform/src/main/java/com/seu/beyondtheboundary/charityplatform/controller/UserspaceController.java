@@ -1,36 +1,33 @@
 package com.seu.beyondtheboundary.charityplatform.controller;
 
-		import com.seu.beyondtheboundary.charityplatform.domain.Project;
-		import com.seu.beyondtheboundary.charityplatform.domain.User;
-		import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
-		import com.seu.beyondtheboundary.charityplatform.service.ProjectService;
-		import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
-		import com.seu.beyondtheboundary.charityplatform.util.ConstraintViolationExceptionHandler;
-		import com.seu.beyondtheboundary.charityplatform.vo.Response;
-		import org.springframework.beans.factory.annotation.Autowired;
-		import org.springframework.data.domain.Page;
-		import org.springframework.data.domain.PageRequest;
-		import org.springframework.data.domain.Pageable;
-		import org.springframework.data.domain.Sort;
-		import org.springframework.data.domain.Sort.Direction;
-		import org.springframework.http.HttpRequest;
-		import org.springframework.http.ResponseEntity;
-		import org.springframework.stereotype.Controller;
-		import org.springframework.ui.Model;
-		import org.springframework.util.ClassUtils;
-		import org.springframework.web.bind.annotation.*;
-		import org.springframework.web.multipart.MultipartFile;
-		import org.springframework.web.servlet.ModelAndView;
-		import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.seu.beyondtheboundary.charityplatform.domain.Project;
+import com.seu.beyondtheboundary.charityplatform.domain.User;
+import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
+import com.seu.beyondtheboundary.charityplatform.service.ProjectService;
+import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
+import com.seu.beyondtheboundary.charityplatform.util.ConstraintViolationExceptionHandler;
+import com.seu.beyondtheboundary.charityplatform.vo.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 
-		import javax.servlet.http.HttpServletRequest;
-		import javax.servlet.http.HttpServletResponse;
-		import javax.servlet.http.HttpSession;
-		import javax.validation.ConstraintViolationException;
-		import java.io.IOException;
-		import java.nio.file.Files;
-		import java.nio.file.Paths;
-		import java.util.List;
+import org.springframework.format.datetime.DateFormatter;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolationException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * 用户主页空间控制器.
@@ -87,15 +84,24 @@ public class UserspaceController {
 	}
 
 	@PostMapping("/projects/edit_complete")
-	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String htmlContent,String id) {
+	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String id
+				,String category,String aimDonation,String createdTime, String endTime,String htmlContent
+				,String initiator) {
 		System.out.println("before saving project" );
 		try {
 			if(id!=null){
+				System.out.println(createdTime);
 				Long Lid = Long.parseLong(id);
 				Project project = projectService.getProjectById(Lid);
 				project.setTitle(title);
 				project.setSummary(summary);
 				project.setContent(content);
+				project.setHtmlContent(htmlContent);
+				project.setCategory(Long.parseLong(category));
+				project.setAimDonation(Long.parseLong(aimDonation));
+				project.setInitiator(initiator);
+				project.setCreatedTime(createdTime);
+				project.setEndTime(endTime);
 				projectService.updateProject(project);
 			}
 			System.out.println("这里是更新数据中的Project！！！！！！！！！");
