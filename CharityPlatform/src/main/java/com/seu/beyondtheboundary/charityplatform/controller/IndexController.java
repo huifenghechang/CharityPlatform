@@ -160,27 +160,27 @@ public class IndexController {
         HttpSession session = request.getSession();
         //将数据存储到session中
         if(session.getAttribute("user")==null) {return "redirect:/login";}
-        else{return "/person/personal_center";}
+        else{return "person/personal_center";}
     }
 
     @GetMapping("/contact_us")
     public String contact_us(){
-        return "/bottom_page/contact_us";
+        return "bottom_page/contact_us";
     }
 
     @GetMapping("/about_us")
     public String about_us(){
-        return "/bottom_page/about_us";
+        return "bottom_page/about_us";
     }
 
     @GetMapping("/feedback")
     public String feedback(){
-        return "/bottom_page/feedback";
+        return "bottom_page/feedback";
     }
 
     @GetMapping("/map")
     public String map(){
-        return "/bottom_page/map";
+        return "bottom_page/map";
     }
 
 
