@@ -15,11 +15,19 @@
         div{
             width:100%;
         }
+
+        .ueditor-input{
+            display: block;
+            margin: 25px 118px;
+            width: 170px;
+            height: 30px;
+            font-size: 17px;
+        }
     </style>
 </head>
 <body>
 
-<div class="title">
+<div class="title" style="width: 785px">
     <h6>境界的彼方</h6>
 </div>
 <br/>
@@ -33,17 +41,17 @@
     </div>
     <div>
         <span style="float: left">摘要</span>
-    <textarea placeholder="请填写公益项目摘要" id="summary" name="summary" maxlength="300" style="display: block; margin: 23px 60px;width: 500px;height: 60px;font-size: 17px;"
+    <textarea placeholder="请填写公益项目摘要" id="summary" name="summary" maxlength="300" style="display: block; margin: 23px 60px;width: 458px;height: 60px;font-size: 17px;"
               th:text="${projectModel.project.summary}"></textarea>
     </div>
 
     <div>
-        <div><span style="float: left">项目发起方:</span>    <textarea  type="text" name="initiator" id ="initiator" th:text="${projectModel.project.initiator} "></textarea></div>
-        <div><span style="float: left">项目开始时间:</span>  <input  type="date"  name="start_time" id ="start_time" th:value="${projectModel.project.createdTime} " /></div>
-        <div><span style="float: left">项目结束时间:</span>  <input  type="date" name="end_time" id ="end_time" th:value="${projectModel.project.endTime} " /></div>
-        <div><span style="float: left">目标筹集资金:</span>  <textarea  type="text"  name="aim_donation" id ="aim_donation" th:text="${projectModel.project.aimDonation} " ></textarea></div>
+        <div><span style="float: left">项目发起方</span>    <textarea class="ueditor-input"  type="text" name="initiator" id ="initiator" style="width: 290px" th:text="${projectModel.project.initiator} "></textarea></div>
+        <div><span style="float: left">项目开始时间</span>  <input class="ueditor-input" type="date"  name="start_time" id ="start_time" th:value="${projectModel.project.createdTime} " /></div>
+        <div><span style="float: left">项目结束时间</span>  <input class="ueditor-input" type="date" name="end_time" id ="end_time" th:value="${projectModel.project.endTime} " /></div>
+        <div><span style="float: left">目标筹集资金</span>  <textarea class="ueditor-input" type="text"  name="aim_donation" id ="aim_donation" th:text="${projectModel.project.aimDonation} " ></textarea></div>
 
-        <div><span style="float: left">项目类型:</span> <select name="categories" id="categories">
+        <div><span style="float: left">项目类型</span> <select class="ueditor-input" name="categories" id="categories">
             <option value="1" selected>教育助学</option> //预选设置
             <option value="2" >医疗救助</option>
             <option value="3" >扶贫救灾</option>
@@ -53,16 +61,18 @@
     </div>
 </div>
 
-<div style="height: 0px">
-<textarea    id="html_value" name ="html_value" th:text="${projectModel.project.htmlContent} " style="visibility: hidden"></textarea>
-<textarea    id="id_value" name ="id_value" th:text="${projectModel.project.id} " style="visibility: hidden"></textarea>
-</div>
+    <div style="height: 0px">
+        <textarea id="html_value" name="html_value" th:text="${projectModel.project.htmlContent} "
+                  style="visibility: hidden"></textarea>
+        <textarea id="id_value" name="id_value" th:text="${projectModel.project.id} "
+                  style="visibility: hidden"></textarea>
+    </div>
 
-<script id="editor" type="text/plain" style="width:750px;height:500px;">
+<script id="editor" type="text/plain" style="width:700px;height:500px;margin-left: -11px">
 </script>
 
     <div id="btns">
-            <button class="btn-form" style="margin-left: 318px;" onclick="submitProj()" >提交修改</button>
+            <button class="btn-form" style="margin-left: 284px; margin-bottom: 40px;" onclick="submitProj()" >提交修改</button>
     </div>
 
     <script src="/js/jquery-3.1.1.min.js"></script>
