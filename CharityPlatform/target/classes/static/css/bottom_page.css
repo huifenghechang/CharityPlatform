@@ -42,6 +42,7 @@ li {
 
 .a-upload  input {
     position: absolute;
+    z-index: -1;
     left: 6px;
     top: 0;
     filter: alpha(opacity=0);
