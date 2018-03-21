@@ -36,7 +36,7 @@ public class UEditorController {
             //将数据存储到session中
             User user = (User) session.getAttribute("user");
             System.out.println(user.getVerified());
-            if(user.getVerified() == 1)
+        if(user.getVerified() == 1)
             return "ueditor_index";
         else
             return "redirect:/personal_center";
