@@ -14,20 +14,20 @@
 <div class="table_con">
     <table>
         <tr class="tb_title">
-            <td width="240px">姓名</td>
-            <td width="240px">修改信息</td>
-            <td width="240px">删除管理员</td>
+            <td width="260px">姓名</td>
+            <td width="260px">修改信息</td>
+            <td width="260px">删除管理员</td>
         </tr>
         <tr th:each="menu: ${adminModel.adminList}">
-            <td width="240px" th:text="${menu.realname}"></td>
+            <td width="260px" th:text="${menu.realname}"></td>
 
-            <td width="240px">
+            <td width="260px">
                     <a th:href="'/admins/complete_admin_info?id='+${menu.id}">修改信息</a>
             </td>
 
 
 
-            <td width="240px">
+            <td width="260px">
                 <a id="sj_btn_a" th:href="@{'/admins/deleteAdmin/'+${menu.id}}" style="width:75px">删除信息</a>
             </td>
         </tr>

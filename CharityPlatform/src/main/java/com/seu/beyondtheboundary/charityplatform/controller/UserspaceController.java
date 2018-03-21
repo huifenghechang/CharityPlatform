@@ -6,6 +6,7 @@ package com.seu.beyondtheboundary.charityplatform.controller;
 		import com.seu.beyondtheboundary.charityplatform.service.ProjectService;
 		import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
 		import com.seu.beyondtheboundary.charityplatform.util.ConstraintViolationExceptionHandler;
+		import com.seu.beyondtheboundary.charityplatform.util.MD5;
 		import com.seu.beyondtheboundary.charityplatform.vo.Response;
 		import org.springframework.beans.factory.annotation.Autowired;
 		import org.springframework.data.domain.Page;
@@ -154,7 +155,8 @@ public class UserspaceController {
 			user1.setRealname(user.getRealname());
 		if(user.getEmail() != "")
 			user1.setEmail(user.getEmail());
-
+		if(user.getPassword() != "")
+			user1.setPassword(MD5.EncoderByMd5(user.getPassword()));
 		userRepository.save(user1);
 		return "redirect:/personal_center";
 	}
