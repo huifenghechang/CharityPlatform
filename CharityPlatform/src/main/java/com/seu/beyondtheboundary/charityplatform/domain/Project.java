@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
+import java.sql.Date;
 
 @Entity  //实体
 public class Project implements Serializable {
@@ -20,16 +21,16 @@ public class Project implements Serializable {
     private Long id; // 用户的唯一标识
 
     @Column(name = "category" ,length = 100)
-    private Long category = 1L;  //类别
+    private Long category = 1L;  //类别 1 教育助学，2 医疗救助， 3 扶贫救灾 4 其他
 
     @Column(name = "status")
     private Long status = 1L;  //状态,状态1表示待审核，2表示已审核通过未发布，3，表示审核通过已发布，0表示已审核未通过
 
     @Column(name ="aimDonation")
-    private Long aimDonation = 0L;  //目标金额
+    private Long aimDonation = 1L;  //目标金额
 
     @Column(name ="alreadyDonation")
-    private Long alreadyDonation = 0L;  //目前已筹
+    private Long alreadyDonation = 1L;  //目前已筹
 
     @Column(name = "reading")
     private Long reading = 0L;  //阅读量
@@ -63,12 +64,12 @@ public class Project implements Serializable {
     private User user;
 
 //    @Column(nullable = false)  //映射字段不能为空
-    @org.hibernate.annotations.CreationTimestamp
-    private Timestamp createdTime;  //项目时间开始
+//    @org.hibernate.annotations.CreationTimestamp
+    private String createdTime;  //项目时间开始
 
 //    @Column(nullable = false)  //映射字段不能为空
-    @org.hibernate.annotations.CreationTimestamp
-    private Timestamp endTime;  //项目结束开始
+//    @org.hibernate.annotations.CreationTimestamp
+    private String endTime;  //项目结束开始
 
     private String initiator;  //发起人
     private String propagandaMap;  //首页大图
@@ -181,19 +182,19 @@ public class Project implements Serializable {
         this.htmlContent = htmlContent;
     }
 
-    public Timestamp getCreatedTime() {
+    public String getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Timestamp createdTime) {
+    public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
     }
 
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 

@@ -5,6 +5,7 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="/js/jquery-1.11.0.min.js"></script>
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
 
@@ -12,14 +13,14 @@
 
 <!--header-->
 <!--banner-->
-<script src="js/responsiveslides.min.js"></script>
+<script src="/js/responsiveslides.min.js"></script>
 <script>
     $(function () {
         $("#slider").responsiveSlides({
             auto: true,
             speed: 500,
             namespace: "callbacks",
-            pager: true,
+            pager: true
         });
     });
 </script>
@@ -94,8 +95,7 @@
     <div class="services-in">
         <div class="container">
             <div class="service-grid">
-
-                <div class="col-md-4 ser-in" th:each="menu : ${projectModel.projectList1}">
+                <div class="col-md-4 ser-in" th:each="menu,iterStat : ${projectModel.projectList1}"  th:if="${iterStat.index} lt 3">
                     <a th:href="@{'/activity/'+${menu.id}}" class="b-link-stripe b-animate-go  thickbox"><div class="b-line b-line1"></div><div class="b-line b-line2"></div><div class="b-line b-line3"></div><div class="b-line b-line4"></div><div class="b-line b-line5"></div>
                         <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propagandaMap}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
                         </div></a>
@@ -117,7 +117,7 @@
     <div class="services-in">
         <div class="container">
             <div class="service-grid">
-                <div class="col-md-4 ser-in" th:each="menu : ${projectModel.projectList2}">
+                <div class="col-md-4 ser-in" th:each="menu,iterStat : ${projectModel.projectList2}"  th:if="${iterStat.index} lt 3">
                     <a th:href="@{'/activity/'+${menu.id}}" class="b-link-stripe b-animate-go  thickbox"><div class="b-line b-line1"></div><div class="b-line b-line2"></div><div class="b-line b-line3"></div><div class="b-line b-line4"></div><div class="b-line b-line5"></div>
                         <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propagandaMap}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
                         </div></a>
@@ -138,7 +138,7 @@
     <div class="services-in">
         <div class="container">
             <div class="service-grid">
-                <div class="col-md-4 ser-in" th:each="menu : ${projectModel.projectList3}">
+                <div class="col-md-4 ser-in" th:each="menu,iterStat : ${projectModel.projectList3}"  th:if="${iterStat.index} lt 3">
                     <a th:href="@{'/activity/'+${menu.id}}" class="b-link-stripe b-animate-go  thickbox"><div class="b-line b-line1"></div><div class="b-line b-line2"></div><div class="b-line b-line3"></div><div class="b-line b-line4"></div><div class="b-line b-line5"></div>
                         <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propagandaMap}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
                         </div></a>
@@ -159,14 +159,14 @@
     <div class="services-in">
         <div class="container">
             <div class="service-grid">
-                <div class="col-md-4 ser-in" th:each="menu : ${projectModel.projectList4}">
+                <div class="col-md-4 ser-in" th:each="menu,iterStat : ${projectModel.projectList4}"  th:if="${iterStat.index} lt 3">
                     <a th:href="@{'/activity/'+${menu.id}}" class="b-link-stripe b-animate-go  thickbox"><div class="b-line b-line1"></div><div class="b-line b-line2"></div><div class="b-line b-line3"></div><div class="b-line b-line4"></div><div class="b-line b-line5"></div>
                         <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propagandaMap}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
-                        </div></a>
+                        </div>
+                    </a>
                     <h5 th:text="${menu.title}"></h5>
                     <span th:text="${menu.initiator}"></span>
                     <p th:text="${menu.summary}"></p>
-
                 </div>
             </div>
         </div>

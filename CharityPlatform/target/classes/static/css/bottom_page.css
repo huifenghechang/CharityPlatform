@@ -77,9 +77,14 @@ li {
     color: #8a6d3b;
     font-size: 22px;
     font-weight: 700;
-    width: 817px;
+    width: 805px;
     height: 57px;
     box-shadow: 5px 5px 8px #888888;
+}
+
+.title h3 {
+    font-size: 30px;
+    width: 400px;
 }
 
 .title h6 {

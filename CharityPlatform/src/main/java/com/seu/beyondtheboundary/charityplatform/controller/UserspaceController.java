@@ -32,6 +32,34 @@ package com.seu.beyondtheboundary.charityplatform.controller;
 		import java.nio.file.Files;
 		import java.nio.file.Paths;
 		import java.util.List;
+import com.seu.beyondtheboundary.charityplatform.domain.Project;
+import com.seu.beyondtheboundary.charityplatform.domain.User;
+import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
+import com.seu.beyondtheboundary.charityplatform.service.ProjectService;
+import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
+import com.seu.beyondtheboundary.charityplatform.util.ConstraintViolationExceptionHandler;
+import com.seu.beyondtheboundary.charityplatform.vo.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.format.datetime.DateFormatter;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.ConstraintViolationException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 /**
  * 用户主页空间控制器.
@@ -57,7 +85,7 @@ public class UserspaceController {
 		Project project = projectService.getProjectById(id);
 		System.out.println(project.getContent());
 		model.addAttribute("project", project);
-		return new ModelAndView("/person/project_details", "projectModel", model);}
+		return new ModelAndView("person/project_details", "projectModel", model);}
 
 	//@RequestBody Project project
 	//String title ,String summary, String content
@@ -83,20 +111,29 @@ public class UserspaceController {
 		}
 
 		System.out.println("I am saving project");
-		String redirectUrl="/u/person/project_details?id="+id;
+		String redirectUrl="personal_center";
 		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
 	}
 
 	@PostMapping("/projects/edit_complete")
-	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String htmlContent,String id) {
+	public ResponseEntity<Response> completeProject(String title ,String summary, String content,String id
+				,String category,String aimDonation,String createdTime, String endTime,String htmlContent
+				,String initiator) {
 		System.out.println("before saving project" );
 		try {
 			if(id!=null){
+				System.out.println(createdTime);
 				Long Lid = Long.parseLong(id);
 				Project project = projectService.getProjectById(Lid);
 				project.setTitle(title);
 				project.setSummary(summary);
 				project.setContent(content);
+				project.setHtmlContent(htmlContent);
+				project.setCategory(Long.parseLong(category));
+				project.setAimDonation(Long.parseLong(aimDonation));
+				project.setInitiator(initiator);
+				project.setCreatedTime(createdTime);
+				project.setEndTime(endTime);
 				projectService.updateProject(project);
 			}
 			System.out.println("这里是更新数据中的Project！！！！！！！！！");
@@ -107,7 +144,7 @@ public class UserspaceController {
 		}
 
 		System.out.println("I am saving project");
-		String redirectUrl="/u/person/project_details?id="+id;
+		String redirectUrl="admins/to_publish";
 		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
 	}
 
@@ -121,7 +158,7 @@ public class UserspaceController {
 
 	@GetMapping("/I_want_verify")
 	public String I_want_verify() {
-		return "/person/I_want_verify";
+		return "person/I_want_verify";
 //		System.out.println(title+"||||||"+summary+"||||||"+content);
 //		System.out.println(project.getSummary()+"summary!");
 //		System.out.println("I am saving project");
@@ -131,7 +168,7 @@ public class UserspaceController {
 
 	@GetMapping("/complete_user_info")
 	public String complete_user_info() {
-		return "/person/complete_personal_information";
+		return "person/complete_personal_information";
 	}
 
 
@@ -163,7 +200,7 @@ public class UserspaceController {
 
 	@GetMapping("/user_commit_verify")
 	public String user_commit_verify() {
-		return "/person/I_want_verify";
+		return "person/I_want_verify";
 	}
 
 	@PostMapping("/user_commit_verify")
@@ -191,7 +228,7 @@ public class UserspaceController {
 		user1.setVerified(2);		//设为2，让该用户进入待审核列表
 
 		userRepository.save(user1);
-		return "redirect:/personal_center";
+		return "redirect:personal_center";
 	}
 
 	@PostMapping("user_commit_image")
@@ -219,12 +256,12 @@ public class UserspaceController {
 			redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " because it was empty");
 		}
 
-		return "redirect:/u/user_commit_verify";
+		return "redirect:u/user_commit_verify";
 	}
 
 	@GetMapping("/user_donate")
 	public String user_donate() {
-		return "/person/user_donate";
+		return "person/user_donate";
 	}
 }
 
