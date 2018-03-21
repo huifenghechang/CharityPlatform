@@ -42,11 +42,7 @@ public class IndexController {
         //使用request对象的getSession()获取session，如果session不存在则创建一个
         HttpSession session = request.getSession();
         //将数据存储到session中
-<<<<<<< HEAD
-        if(session.getAttribute("user")==null){return "redirect:/register";}
-=======
         if(session.getAttribute("user")==null){return "redirect:/login";}
->>>>>>> origin/swingFall
         User user = (User) session.getAttribute("user");
         if(user.isAdmin()){
             return "manager/manage_center";}

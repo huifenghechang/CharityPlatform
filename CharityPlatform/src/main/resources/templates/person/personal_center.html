@@ -54,6 +54,10 @@
 <div class="main_content">
     <div class="profile">
         <img src="../images/logo.png"/>
+        <h2 th:if="${session.user.integral} lt 1000">普通会员</h2>
+        <h2 th:if="${session.user.integral} lt 2000 and ${session.user.integral} ge 1000">高级会员</h2>
+        <h2 th:if="${session.user.integral} lt 3000 and ${session.user.integral} ge 2000">超级会员</h2>
+
         <h2 th:text="${session.user.username}"></h2>
         <div class="single_a">
             <a class="btn-primary" href="/u/complete_user_info">完善个人资料</a>

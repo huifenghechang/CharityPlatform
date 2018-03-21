@@ -3,6 +3,8 @@
 <head>
     <title>项目申请</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/style1.css" rel="stylesheet" type="text/css" media="all"/>
     <script type="text/javascript" charset="utf-8" th:src="@{/ueditor.config.js}"></script>
     <script type="text/javascript" charset="utf-8" th:src="@{/ueditor.all.js}"> </script>
     <!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
@@ -16,18 +18,36 @@
     </style>
 </head>
 <body>
-<h1>项目编辑页面</h1>
-<textarea  type="text"  placeholder="请填写公益项目标题"  id="title" name="title"  maxlength="50" style="display: block" th:text="${projectModel.project.title}"></textarea>
-<textarea  placeholder="请填写公益项目摘要"  id="summary" name="summary" maxlength="300" style="display: block" th:text="${projectModel.project.summary}"></textarea>
-<textarea    id="html_value" name ="html_value" th:text="${projectModel.project.html_content} " style="visibility: hidden"></textarea>
-<textarea    id="id_value" name ="id_value" th:text="${projectModel.project.id} " style="visibility: hidden"></textarea>
 
-<script id="editor" type="text/plain" style="width:1024px;height:500px;">
-        这里写你的初始化内容
+<div class="title">
+    <h6>境界的彼方</h6>
+</div>
+<br/>
+
+<div style="margin: 20px 60px 0px;width: 600px">
+    <h3>项目编辑页面</h3>
+    <div>
+        <span style="float: left">标题</span>
+        <textarea type="text" placeholder="请填写公益项目标题" id="title" name="title" maxlength="50" style="display: block;width:  400px;height: 40px;margin: 23px 60px;font-size: 17px;"
+              th:text="${projectModel.project.title}"></textarea>
+    </div>
+    <div>
+        <span style="float: left">摘要</span>
+    <textarea placeholder="请填写公益项目摘要" id="summary" name="summary" maxlength="300" style="display: block; margin: 23px 60px;width: 500px;height: 60px;font-size: 17px;"
+              th:text="${projectModel.project.summary}"></textarea>
+    </div>
+</div>
+
+<div style="height: 0px">
+<textarea    id="html_value" name ="html_value" th:text="${projectModel.project.htmlContent} " style="visibility: hidden"></textarea>
+<textarea    id="id_value" name ="id_value" th:text="${projectModel.project.id} " style="visibility: hidden"></textarea>
+</div>
+
+<script id="editor" type="text/plain" style="width:750px;height:500px;">
 </script>
 
     <div id="btns">
-            <button onclick="submitProj()" >提交修改</button>
+            <button class="btn-form" style="margin-left: 318px;" onclick="submitProj()" >提交修改</button>
     </div>
 
     <script src="/js/jquery-3.1.1.min.js"></script>
@@ -40,8 +60,8 @@
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     var ue = UE.getEditor('editor');
     UE.getEditor('editor').ready(function () {
-        var html_content = document.getElementById("html_value").value;
-        ue.execCommand('insertHtml', html_content);
+        var htmlContent = document.getElementById("html_value").value;
+        ue.execCommand('insertHtml', htmlContent);
     });
 
 
@@ -52,15 +72,16 @@
         var title = document.getElementById("title").value;
         var summary = $('#summary').val();
         var content =  UE.getEditor('editor').getContentTxt();
-        var html_content = UE.getEditor('editor').getContent();
+        var htmlContent = UE.getEditor('editor').getContent();
         $.ajax({
             type: "POST",
             url: '/u/projects/edit_complete',
             datatype:"json",
-            data: {id:id, title: title, summary: summary , content: content,html_content:html_content,},
+            data: {id:id, title: title, summary: summary , content: content,htmlContent:htmlContent,},
             success: function(data){
                 if (data.success) {
                     // 成功后，重定向
+                    alert("恭喜您！成功提交到后台~");
                     window.location = data.body;
                 } else {
                     toastr.error("error! i failed"+data.message);

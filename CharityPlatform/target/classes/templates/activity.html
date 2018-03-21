@@ -143,7 +143,7 @@
                         <p th:text="'已募善款：'+*{alreadyDonation}"></p>
                         <p th:text="'参捐人数：'+*{donatePeopleCounter}"></p>
                         <p>项目时间：2018年1月32日 至 2018年2月29日</p>
-                        <a href="#" style="background:#da7400; font-size: 1em; margin: 0 0 0 0;">
+                        <a th:href="'/pays?id='+${projectModel.project.id}" style="background:#da7400; font-size: 1em; margin: 0 0 0 0;">
                             <h1>我来捐助</h1>
                         </a>
                     </div>
