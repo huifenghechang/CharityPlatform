@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>个人中心</title>
+    <link href="/css/view_all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <meta charset="UTF-8"/>
+    <style type="text/css">
+        .demo { padding: 2em 0; background: #fff; }
+        a:hover, a:focus { outline: none; text-decoration: none; }
+        .single_a a { color: #1b242f; display: inline-block; background: #fff;}
+        .tab .nav-tabs { border-bottom: none;margin-left: 42px; position: relative; }
+        /*.tab .nav-tabs li { margin-right: 60px; z-index: 1; }*/
+        /*.tab .nav-tabs li:after { content: ""; width: 100%; border: 1px solid #ccc6c6; position: absolute; top: 50%; right: -60%; z-index: -1; }*/
+        /*.tab .nav-tabs li:last-child:after { border: none; }*/
+        .tab .nav-tabs li a { display: block; padding: 15px 20px; background: #fff; font-size: 20px; font-weight: 600; color: #956cae; text-transform: uppercase; border-radius: 0; margin-right: 0; border: 2px solid #956cae; position: relative; overflow: hidden; z-index: 1; transition: all 0.3s ease 0s; }
+        .tab .nav-tabs li.active a, .tab .nav-tabs li a:hover { color: #fff; border: 2px solid #956cae; }
+        .tab .nav-tabs li a:after { content: ""; display: block; width: 100%; height: 0; position: absolute; top: 0; left: 0; z-index: -1; transition: all 0.3s ease 0s; }
+        .tab .nav-tabs li.active a:after, .tab .nav-tabs li a:hover:after { height: 100%; background: #956cae; }
+        .tab .tab-content { padding: 0px 10px; margin-top: 40px; font-size: 14px; color: #525151; line-height: 26px; }
+        .tab .tab-content h3 { font-size: 24px; margin-top: 0; }
+        .btn-primary {
+            background-color: #ffffff;
+            margin-top: 30px;
+            padding: 4px 24px;
+            font-size: 22px;
+            border-radius: 15px;
+            border: 2px solid;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .tab .nav-tabs li { margin: 0 25px 0 0; }
+        }
+
+        @media only screen and (max-width: 479px) {
+            .tab .nav-tabs li { width: 100%; text-align: center; margin: 0 0 10px 0; }
+            .tab .nav-tabs li:after { width: 0; height: 100%; top: auto; bottom: -60%; right: 50%; }
+        }
+        .donate-item-default-title a{
+            color: #222;}
+    </style>
+
+
+
+</head>
+<body style="position: relative">
+
+
+<!--顶栏-->
+<div th:include="fragments/header_w::header"></div>
+
+<!--main-content-->
+<div class="main_content">
+    <div class="right-content" style="margin-left: 0px; background: #fff; overflow: hidden">
+        <div class="title">
+            <h6>我的捐赠</h6>
+        </div>
+        <br/>
+        <div class="profile" style="width: 225px">
+            <img src="/images/smile.jpg" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
+            <div style="padding: 29px 6px 0px 3px;">
+                <img src="/level_icon/level_1.png" style="width: 25%" th:if="${session.user.integral} lt 1000"></img>
+                <img src="/level_icon/level_3.png" style="width: 25%" th:if="${session.user.integral} lt 2000 and ${session.user.integral} ge 1000"></img>
+                <img src="/level_icon/level_7.png" style="width: 25%" th:if="${session.user.integral} ge 2000"></img>
+                <h2 style="display: inline" th:text="${session.user.username}"></h2>
+            </div>
+            <div class="single_a">
+                <a class="btn-primary" href="/u/complete_user_info">完善个人资料</a>
+                <br>
+                <a style="margin-left: 19px;" class="btn-primary" href="/u/user_commit_verify">个人认证</a>
+                <br>
+                <a style="margin-left: 19px;" class="btn-primary" href="/ueditor_index">我要求助</a>
+            </div>
+        </div>
+
+        <div class="demo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-6" style="margin-top: 2%">
+                        <div class="tab">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li><a href="#Section1">我的捐赠</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content tabs">
+                                <div class="tab-pane fade in active" id="Section1">
+                                    <li class="donate-item-default-li fn-clear">
+                                        <div class="donate-item-default-left">
+                                            <a class="donate-item-default-pic-a" href="https://love.alipay.com/donate/itemDetail.htm?name=2018022716131764566" seed="donateItemDefaultLeft-donateItemDefaultPicA" smartracker="on">
+                                                <img class="donate-item-default-pic" src="https://tfsimg.alipay.com:443/images/community/TB1ICR.Xj9EDuNjmgXUXXbCKXXa" alt="白血病女子坚强求生" width="157" height="99">
+                                            </a>
+                                        </div>
+                                        <div class="donate-item-default-right" style="float: none">
+                                            <div class="donate-item-default-info">
+                                                <p class="donate-item-default-title">
+                                                    <span class="ft-green">[医疗救助]</span>
+                                                    <a href="https://love.alipay.com/donate/itemDetail.htm?name=2018022716131764566" seed="donateItemDefaultTitle-link" smartracker="on">白血病女子坚强求生</a>
+                                                </p>
+
+                                                <span class="donate-item-default-dd">发  布  人：中国妇女发展基金会</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                                <span class="donate-item-default-dd">有效时间：2018-02-27   至 2018-05-26</span>
+
+                                                <p class="donate-item-default-dd">
+                                                    <span class="ft-green">79518</span>
+                                                    人 参与参捐 &nbsp;&nbsp;
+                                                    我捐助了 <span class="ft-orange">1</span> 次
+                                                    &nbsp;&nbsp;共 <span class="ft-orange">10.00</span> 元
+                                                </p>
+
+                                                <div class="donate-item-default-dd">
+                                                    <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short">
+                                                        <div class="ui-progressbar-s ui-progressbar-s-short" style="width:91.35%">
+                                                            <span>91.35%</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="donate-item-default-active">
+                                                    <a href="https://love.alipay.com/donate/donateSingle.htm?name=2018022716131764566" class="donate-button donate-button-medium-orange donate-button-default" seed="donateItemDefaultActive-donateButton" smartracker="on">
+                                                        <span class="donate-button-text">继续捐助</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                                <div class="tab-pane fade" id="Section2">
+                                    <h3>我要求助</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
+                                </div>
+                                <!--<div class="tab-pane fade" id="Section3">-->
+                                <!--<h3>我的活动</h3>-->
+                                <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>-->
+                                <!--</div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!--footer-->
+<div th:include="fragments/footer_w::footer"></div>
+</body>
+</html>
