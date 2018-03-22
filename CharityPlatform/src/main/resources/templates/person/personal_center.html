@@ -89,7 +89,7 @@
                                 <div class="tab-pane fade in active" id="Section1">
                                     <li class="donate-item-default-li fn-clear" th:each="menu: ${pcModel.orderSortList}">
                                         <div class="donate-item-default-left">
-                                            <a class="donate-item-default-pic-a" href="https://love.alipay.com/donate/itemDetail.htm?name=2018022716131764566" seed="donateItemDefaultLeft-donateItemDefaultPicA" smartracker="on">
+                                            <a class="donate-item-default-pic-a" th:href="@{'/activity/'+${menu.get(0).getProject().getId()}}" seed="donateItemDefaultLeft-donateItemDefaultPicA" smartracker="on">
                                                 <img class="donate-item-default-pic" th:src="@{'/project_img_big/'+${menu.get(0).getProject().getPropagandaMap()}}" alt="" width="157" height="99">
                                             </a>
                                         </div>
@@ -102,7 +102,7 @@
                                                         <span class="ft-green" th:text="'[医疗救助]'" th:case="3"></span>
                                                         <span class="ft-green" th:text="'[其他]'" th:case="4"></span>
                                                     </span>
-                                                    <a href="https://love.alipay.com/donate/itemDetail.htm?name=2018022716131764566" seed="donateItemDefaultTitle-link" smartracker="on" th:text="${menu.get(0).getProject().getTitle()}"></a>
+                                                    <a th:href="@{'/activity/'+${menu.get(0).getProject().getId()}}" seed="donateItemDefaultTitle-link" smartracker="on" th:text="${menu.get(0).getProject().getTitle()}"></a>
                                                 </p>
 
                                                 <span class="donate-item-default-dd">发  布  人：<span th:text="${menu.get(0).getProject().getInitiator()}"></span></span>&nbsp;&nbsp;|&nbsp;&nbsp;
