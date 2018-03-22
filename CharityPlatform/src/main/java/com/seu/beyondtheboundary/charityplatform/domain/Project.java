@@ -7,8 +7,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.sql.Date;
 
 @Entity  //实体
 public class Project implements Serializable {
@@ -89,6 +89,9 @@ public class Project implements Serializable {
     public Project(){
 
     }
+
+//    @OneToMany(mappedBy="project",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//    private Set<OrderItem> orders = new HashSet<OrderItem>();
 
 
     public Long getId() {
