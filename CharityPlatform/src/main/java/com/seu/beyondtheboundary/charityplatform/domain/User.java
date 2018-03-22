@@ -41,8 +41,8 @@ public class User{
 	private Integer verified;
 
 	private boolean admin;
-	@Column(length = 100)
 
+	@Column(length = 100)
 	private String password; // 登录时密码
 
 	//捐助者与活动之间的连接表
@@ -51,6 +51,17 @@ public class User{
 			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
 			inverseJoinColumns = {@JoinColumn(name = "donated_project_id", referencedColumnName = "id")})
 	private Set<Project> projectList = new HashSet<Project>();
+
+
+	private Long integral = 0L;
+
+	public Long getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Long integral) {
+		this.integral = integral;
+	}
 
 	public Long getId() {
 		return id;

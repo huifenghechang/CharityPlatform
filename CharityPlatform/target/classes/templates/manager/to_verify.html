@@ -22,6 +22,7 @@
         <tr th:each="menu : ${projectModel.projectList}">
             <td width="200px" th:text="${menu.title}"></td>
             <td width="330px"><a th:href="'/u/person/project_details?id='+${menu.id}" th:text="${menu.summary}"></a></td>
+<<<<<<< HEAD
             <td width="100px">
                 <form th:action="@{/admins/project_certificate}" method="post" target="_blank">
                     <input type="hidden" name="pro_confirmation_link" th:value="${menu.pro_confirmation_link}" />
@@ -29,6 +30,9 @@
                 </form>
             </td>
 
+=======
+            <td width="100px"><a href="#">获取凭证</a></td>
+>>>>>>> ztwu
             <td width="150px">
                 <!--<input class="bj_btn" type="button" value="通过" />-->
                 <a id="sj_btn_a"  th:href="@{'/admins/change1to2/'+${menu.id}}">通过</a>
