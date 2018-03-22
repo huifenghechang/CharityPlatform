@@ -4,33 +4,10 @@
 
 <head>
     <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/bootstrap1.css" rel="stylesheet"/>
+    <link href="/css/style1.css" rel="stylesheet"/>
     <meta charset="UTF-8"/>
     <title>注册</title>
-    <style>
-
-        .form-group {
-            margin-bottom: 1rem;
-            float: none;
-            font-size: 16px;
-
-        }
-
-        .form-group label {
-            font-weight: 400;
-        }
-        .btn {
-            border: 1px solid #ccc;
-            outline: 0;
-            padding: 5px 15px;
-            cursor: pointer;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            font-size: 18px;
-            line-height: 1.4;
-
-        }
-    </style>
 
 </head>
 <!--<body>-->
@@ -40,7 +17,7 @@
 <div class="container blog-content-container" style="margin: 60px 60px;">
 
     <form th:action="@{/register_admin}" method="post">
-        <h2 class="form-signin-heading" style="margin-bottom: 10px">注册</h2>
+        <h2 class="form-signin-heading" style="margin-bottom: 10px">管理员注册</h2>
 
         <div class="form-group col-md-5">
             <label for="username" class="col-form-label">账号</label>
