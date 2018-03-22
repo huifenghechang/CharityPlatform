@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>捐助成功</title>
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <style type="text/css">
+        .main_content a{
+            padding-left: 22px;
+        }
+    </style>
+
+</head>
+
+<body style="position: relative;overflow-y:scroll;">
+
+<!--header-->
+<div th:include="fragments/header_w::header"></div>
+
+
+<!--main-content-->
+<div class="main_content" style="min-height: 900px;">
+    <div class="left-menu" style="min-height: 896px">
+        <ul>
+            <li><a href=""><i class="glyph-icon icon-chevron-right1"></i>查看更多项目</a></li>
+            <li><a href=""><i class="glyph-icon icon-chevron-right2"></i>返回捐助页面</a></li>
+            <li><a href="/index"><i class="glyph-icon icon-chevron-right3"></i>返回首页</a></li>
+        </ul>
+    </div>
+
+    <div class="right-content" style="overflow: hidden; height: 900px">
+        <div class="title">
+            <h6>境界的彼方</h6>
+        </div>
+        <div style="margin-top: 6em; text-align: center">
+            <img style="display: inline; width: 8%" src="images/success.png"/>
+            <p style="display: inline">您成功捐助2元，感谢您的爱心！</p>
+        </div>
+    </div>
+</div>
+
+<!--footer-->
+<div th:include="fragments/footer_w::footer"></div>
+
+</body>
+</html>
+
