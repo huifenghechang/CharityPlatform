@@ -40,9 +40,11 @@ public class PayController {
 	@Autowired
 	private UserServiceImpl userService;
 	@RequestMapping("")
-	public String  pays(Model model,@RequestParam(value="id") Long id) {
+	public ModelAndView  pays(Model model,@RequestParam(value="id") Long id) {
+		Project project = projectServiceImpl.getProjectById(id);
         model.addAttribute("message", id);
-        return "pay";
+		model.addAttribute("project", project);
+		return new ModelAndView("user_donate", "projectModel", model);
     }
 
 	@RequestMapping("/pay")
