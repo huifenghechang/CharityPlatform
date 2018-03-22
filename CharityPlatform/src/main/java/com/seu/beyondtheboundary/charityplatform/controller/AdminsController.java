@@ -1,8 +1,11 @@
 package com.seu.beyondtheboundary.charityplatform.controller;
 
+import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
+import com.seu.beyondtheboundary.charityplatform.repository.OrderItemRepository;
 import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
+import com.seu.beyondtheboundary.charityplatform.service.OrderItemServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +38,12 @@ public class AdminsController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private OrderItemServiceImpl orderItemService;
 
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id){
@@ -211,8 +220,13 @@ public class AdminsController {
     }
 
     @GetMapping("/admin_order")
-    public String order_show() {
-        return "manager/order_information";
+    public ModelAndView order_show(Model model) {
+
+        List<OrderItem> validOrder = orderItemService.getOrderItemByStatus((long)1);
+
+        model.addAttribute("orderList", validOrder);
+
+        return new ModelAndView("/manager/order_information", "orderModel", model);
     }
 
 }

@@ -97,6 +97,8 @@ public class OrderItem {
         this.user = user;
     }
 
+    public OrderItem() {}
+
     public OrderItem( float price, String orderID, Project project, User user) {
         this.price = price;
         this.orderID = orderID;
