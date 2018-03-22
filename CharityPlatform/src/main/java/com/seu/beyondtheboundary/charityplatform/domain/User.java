@@ -45,14 +45,6 @@ public class User{
 	@Column(length = 100)
 	private String password; // 登录时密码
 
-	//捐助者与活动之间的连接表
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_donate_project",
-			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-			inverseJoinColumns = {@JoinColumn(name = "donated_project_id", referencedColumnName = "id")})
-	private Set<Project> projectList = new HashSet<Project>();
-
-
 	private Long integral = 0L;
 
 	public Long getIntegral() {
@@ -187,11 +179,4 @@ public class User{
 		this.admin = admin;
 	}
 
-	public Set<Project> getProjectList() {
-		return projectList;
-	}
-
-	public void setProjectList(Set<Project> projectList) {
-		this.projectList = projectList;
-	}
 }

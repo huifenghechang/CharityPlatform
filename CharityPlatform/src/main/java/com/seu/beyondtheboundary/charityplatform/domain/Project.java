@@ -7,8 +7,6 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
-import java.util.Set;
-import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
