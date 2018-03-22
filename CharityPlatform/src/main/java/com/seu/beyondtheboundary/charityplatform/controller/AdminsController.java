@@ -210,5 +210,9 @@ public class AdminsController {
         return "manager/apply_for_refund";
     }
 
+    @GetMapping("/admin_order")
+    public String order_show() {
+        return "manager/order_information";
+    }
 
 }
