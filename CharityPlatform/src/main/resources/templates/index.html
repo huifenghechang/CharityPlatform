@@ -5,25 +5,13 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="/js/jquery-1.11.0.min.js"></script>
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
 
 <body style="position: relative;">
 
 <!--header-->
 <!--banner-->
-<script src="/js/responsiveslides.min.js"></script>
-<script>
-    $(function () {
-        $("#slider").responsiveSlides({
-            auto: true,
-            speed: 500,
-            namespace: "callbacks",
-            pager: true
-        });
-    });
-</script>
+
 <div class="banner">
     <h2>历史捐款总额</h2>
     <h2>71,832,612 元</h2>
@@ -176,6 +164,18 @@
 
 <!--footer-->
 <div th:include="fragments/footer_w::footer"></div>
-
+<script src="/js/jquery.min.js"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="/js/responsiveslides.min.js"></script>
+<script>
+    $(function () {
+        $("#slider").responsiveSlides({
+            auto: true,
+            speed: 500,
+            namespace: "callbacks",
+            pager: true
+        });
+    });
+</script>
 </body>
 </html>
