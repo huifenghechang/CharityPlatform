@@ -29,4 +29,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public User findById(Long id);
 
 	public List<User> findAllByVerified(Integer verified);
+
+	public List<User> findAllByAdmin(boolean admin);
 }

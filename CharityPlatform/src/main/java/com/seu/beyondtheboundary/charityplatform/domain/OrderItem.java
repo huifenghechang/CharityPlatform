@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity  //实体
 public class OrderItem {
@@ -90,6 +91,7 @@ public class OrderItem {
     }
 
     public OrderItem( float price, String orderId, Project project, User user) {
+
         this.price = price;
         this.orderId = orderId;
         this.project = project;

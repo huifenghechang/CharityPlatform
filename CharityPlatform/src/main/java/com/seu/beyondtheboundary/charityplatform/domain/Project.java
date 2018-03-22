@@ -13,13 +13,12 @@ import java.util.Set;
 @Entity  //实体
 public class Project implements Serializable {
 
-
     @Id // 主键
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
     private Long id; // 用户的唯一标识
 
     @Column(name = "category" ,length = 100)
-    private Long category = 1L;  //类别
+    private Long category = 1L;  //类别 1 教育助学，2 医疗救助， 3 扶贫救灾 4 其他
 
     @Column(name = "status")
     private Long status = 1L;  //状态,状态1表示待审核，2表示已审核通过未发布，3，表示审核通过已发布，0表示已审核未通过
@@ -56,23 +55,23 @@ public class Project implements Serializable {
 
     private String htmlContent;  //项目html正文,将md 转换为html
 
-
-  /*  @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    //1个求助者可对应多个活动
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;*/
+    private User user;
 
 //    @Column(nullable = false)  //映射字段不能为空
-    @org.hibernate.annotations.CreationTimestamp
-    private Timestamp createdTime;  //项目时间开始
+//    @org.hibernate.annotations.CreationTimestamp
+    private String createdTime;  //项目时间开始
 
 //    @Column(nullable = false)  //映射字段不能为空
-    @org.hibernate.annotations.CreationTimestamp
-    private Timestamp endTime;  //项目结束开始
+//    @org.hibernate.annotations.CreationTimestamp
+    private String endTime;  //项目结束开始
 
     private String initiator;  //发起人
     private String propagandaMap;  //首页大图
 
-
+    private String pro_confirmation_link;
 
     public Project(String title, String summary,String content) {
         this.title = title;
@@ -183,19 +182,19 @@ public class Project implements Serializable {
         this.htmlContent = htmlContent;
     }
 
-    public Timestamp getCreatedTime() {
+    public String getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Timestamp createdTime) {
+    public void setCreatedTime(String createdTime) {
         this.createdTime = createdTime;
     }
 
-    public Timestamp getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Timestamp endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -209,6 +208,22 @@ public class Project implements Serializable {
 
     public String getPropagandaMap() {
         return propagandaMap;
+    }
+
+    public String getPro_confirmation_link() {
+        return pro_confirmation_link;
+    }
+
+    public void setPro_confirmation_link(String pro_confirmation_link) {
+        this.pro_confirmation_link = pro_confirmation_link;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void setPropagandaMap(String propagandaMap) {

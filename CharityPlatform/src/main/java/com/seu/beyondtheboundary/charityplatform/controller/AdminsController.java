@@ -1,7 +1,11 @@
 package com.seu.beyondtheboundary.charityplatform.controller;
 
+import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
+import com.seu.beyondtheboundary.charityplatform.repository.OrderItemRepository;
+import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
+import com.seu.beyondtheboundary.charityplatform.service.OrderItemServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +28,22 @@ import java.util.List;
 @Controller
 @RequestMapping("/admins")
 public class AdminsController {
+
+
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
 
     @Autowired
     private UserServiceImpl userService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private OrderItemServiceImpl orderItemService;
 
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id){
@@ -40,6 +55,13 @@ public class AdminsController {
         userService.removeUser(id);
         return new ModelAndView("redirect:admins/vip_verified");
     }
+
+    @GetMapping("/deleteAdmin/{id}")
+    public ModelAndView deleteAdmin(@PathVariable("id") Long id){
+        userService.removeUser(id);
+        return new ModelAndView("redirect:/admins/edit_admin");
+    }
+
     @GetMapping("/change1to0/{id}")
     public ModelAndView change1to0(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)0);
@@ -73,7 +95,7 @@ public class AdminsController {
             }
         }
         model.addAttribute("projectList", beSelected);
-        return new ModelAndView("manager/to_publish", "projectModel", model);
+        return new ModelAndView("/manager/to_publish", "projectModel", model);
 
     }
 
@@ -103,7 +125,7 @@ public class AdminsController {
             }
         }
         model.addAttribute("projectList", beSelected);
-        return new ModelAndView("manager/published", "projectModel", model);
+        return new ModelAndView("/manager/published", "projectModel", model);
 
     }
     @GetMapping("/vip_to_verify")
@@ -136,7 +158,7 @@ public class AdminsController {
     @GetMapping("/vipcertificate")
     public String showCertificate(Model model) {
 
-        return "/manager/vip_get_certificate";
+        return "manager/vip_get_certificate";
     }
 
     @PostMapping("/vipcertificate")
@@ -147,12 +169,64 @@ public class AdminsController {
         return new ModelAndView("manager/vip_get_certificate", "imgModel", model);
     }
 
+    @PostMapping("/project_certificate")
+    public ModelAndView showCertificate1(Project project, Model model) {
 
+        model.addAttribute("pro_imgsrc", project.getPro_confirmation_link().split(";"));
+
+        return new ModelAndView("manager/pro_get_certificate", "pro_imgModel", model);
+    }
+
+    @GetMapping("/edit_admin")
+    public ModelAndView editadmin(Model model) {
+        List<User> selectAdmins = userService.findAdmins();
+        model.addAttribute("adminList", selectAdmins);
+        return new ModelAndView("/manager/update_admin", "adminModel", model);
+    }
+
+
+
+    @GetMapping("/complete_admin_info")
+    public ModelAndView complete_user_info(@RequestParam(value="id") Long id,Model model) {
+        model.addAttribute("id",id);
+        return new ModelAndView("/manager/complete_admin_info", "adminModel", model);
+    }
+
+
+    @PostMapping("/complete_admin_info")
+    public String complete_user_info1(@RequestParam(value="id") Long id , User user, HttpServletRequest request, HttpServletResponse response) {
+
+        User user1 = userRepository.findById(id);
+        System.out.println(user1.getId());
+        user1.setSex(user.isSex());
+        if(user.getTel() != "")
+            user1.setTel(user.getTel());
+        if(user.getAddress() != "")
+            user1.setAddress(user.getAddress());
+        if(user.getUser_id_card() != "")
+            user1.setUser_id_card(user.getUser_id_card());
+        if(user.getRealname() != "")
+            user1.setRealname(user.getRealname());
+        if(user.getEmail() != "")
+            user1.setEmail(user.getEmail());
+
+        userRepository.save(user1);
+        return "redirect:/admins/edit_admin";
+    }
 
     @GetMapping("/apply_for_refund")
     public String apply_for_refund() {
         return "manager/apply_for_refund";
     }
 
+    @GetMapping("/admin_order")
+    public ModelAndView order_show(Model model) {
+
+        List<OrderItem> validOrder = orderItemService.getOrderItemByStatus((long)1);
+
+        model.addAttribute("orderList", validOrder);
+
+        return new ModelAndView("/manager/order_information", "orderModel", model);
+    }
 
 }

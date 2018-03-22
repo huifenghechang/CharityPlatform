@@ -4,7 +4,8 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 
@@ -43,8 +44,6 @@ public class User{
 
 	@Column(length = 100)
 	private String password; // 登录时密码
-
-
 
 	private Long integral = 0L;
 
@@ -179,4 +178,5 @@ public class User{
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
+
 }

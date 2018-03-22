@@ -96,6 +96,9 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findAllByVerified(1);
 	}
 
-
+	//将所有管理员筛选出来
+	public List<User> findAdmins() {
+		return userRepository.findAllByAdmin(true);
+	}
 
 }

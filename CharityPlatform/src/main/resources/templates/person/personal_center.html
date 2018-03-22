@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <title>个人中心</title>
-    <link href="../css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="../css/style1.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/view_all.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
     <meta charset="UTF-8"/>
-    <script src="../js/jquery.min.js"></script>
-
     <style type="text/css">
         .demo { padding: 2em 0; background: #fff; }
         a:hover, a:focus { outline: none; text-decoration: none; }
         .single_a a { color: #1b242f; display: inline-block; background: #fff;}
-        .tab .nav-tabs { border-bottom: none; position: relative; }
-        .tab .nav-tabs li { margin-right: 60px; z-index: 1; }
-        .tab .nav-tabs li:after { content: ""; width: 100%; border: 1px solid #ccc6c6; position: absolute; top: 50%; right: -60%; z-index: -1; }
-        .tab .nav-tabs li:last-child:after { border: none; }
+        .tab .nav-tabs { border-bottom: none;margin-left: 42px; position: relative; }
+        /*.tab .nav-tabs li { margin-right: 60px; z-index: 1; }*/
+        /*.tab .nav-tabs li:after { content: ""; width: 100%; border: 1px solid #ccc6c6; position: absolute; top: 50%; right: -60%; z-index: -1; }*/
+        /*.tab .nav-tabs li:last-child:after { border: none; }*/
         .tab .nav-tabs li a { display: block; padding: 15px 20px; background: #fff; font-size: 20px; font-weight: 600; color: #956cae; text-transform: uppercase; border-radius: 0; margin-right: 0; border: 2px solid #956cae; position: relative; overflow: hidden; z-index: 1; transition: all 0.3s ease 0s; }
         .tab .nav-tabs li.active a, .tab .nav-tabs li a:hover { color: #fff; border: 2px solid #956cae; }
         .tab .nav-tabs li a:after { content: ""; display: block; width: 100%; height: 0; position: absolute; top: 0; left: 0; z-index: -1; transition: all 0.3s ease 0s; }
         .tab .nav-tabs li.active a:after, .tab .nav-tabs li a:hover:after { height: 100%; background: #956cae; }
-        .tab .tab-content { padding: 20px 10px; margin-top: 40px; font-size: 14px; color: #525151; line-height: 26px; }
+        .tab .tab-content { padding: 0px 10px; margin-top: 40px; font-size: 14px; color: #525151; line-height: 26px; }
         .tab .tab-content h3 { font-size: 24px; margin-top: 0; }
         .btn-primary {
             background-color: #ffffff;
@@ -38,6 +37,8 @@
             .tab .nav-tabs li { width: 100%; text-align: center; margin: 0 0 10px 0; }
             .tab .nav-tabs li:after { width: 0; height: 100%; top: auto; bottom: -60%; right: 50%; }
         }
+        .donate-item-default-title a{
+            color: #222;}
     </style>
 
 
@@ -46,61 +47,107 @@
 <body style="position: relative">
 
 
-
 <!--顶栏-->
 <div th:include="fragments/header_w::header"></div>
 
 <!--main-content-->
 <div class="main_content">
-    <div class="profile">
-        <img src="../images/logo.png"/>
-        <h2 th:if="${session.user.integral} lt 1000">普通会员</h2>
-        <h2 th:if="${session.user.integral} lt 2000 and ${session.user.integral} ge 1000">高级会员</h2>
-        <h2 th:if="${session.user.integral} lt 3000 and ${session.user.integral} ge 2000">超级会员</h2>
-
-        <h2 th:text="${session.user.username}"></h2>
-        <div class="single_a">
-            <a class="btn-primary" href="/u/complete_user_info">完善个人资料</a>
-            <br/>
-            <a style="margin-left: 19px;" class="btn-primary" href="/u/user_commit_verify">个人认证</a>
+    <div class="right-content" style="margin-left: 0px;background: #fff;overflow-x: hidden;overflow-y: visible;">
+        <div class="title">
+            <h6>个人中心</h6>
         </div>
-    </div>
+        <br/>
+        <div class="profile" style="width: 225px">
+            <img src="/images/look_mountain.jpg" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
+            <div style="padding: 29px 6px 0px 3px;">
+                <img src="/level_icon/level_1.png" style="width: 25%" th:if="${session.user.integral} lt 1000"></img>
+                <img src="/level_icon/level_3.png" style="width: 25%" th:if="${session.user.integral} lt 2000 and ${session.user.integral} ge 1000"></img>
+                <img src="/level_icon/level_7.png" style="width: 25%" th:if="${session.user.integral} ge 2000"></img>
+                <h2 style="display: inline" th:text="${session.user.username}"></h2>
+            </div>
+            <div class="single_a">
+                <a class="btn-primary" href="/u/complete_user_info">完善个人资料</a>
+                <br>
+                <a style="margin-left: 19px;" class="btn-primary" href="/u/user_commit_verify">个人认证</a>
+                <br>
+                <a style="margin-left: 19px;" class="btn-primary" href="/ueditor_index">我要求助</a>
+            </div>
+        </div>
 
+        <div class="demo">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-6" style="margin-top: 2%">
+                        <div class="tab">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li><a href="#Section1">我的捐赠</a></li>
+                            </ul>
 
-    <div class="demo">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-offset-3 col-md-6">
-                    <div class="tab" role="tabpanel">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
-<!--
-                            <a href="/u/waylau/blogs/edit" th:href="'/u/' + '/projects/edit'" class="btn btn-outline-success my-2 my-sm-0">发布公益项目</a>
--->
-                            <li role="presentation" class="active"><a href="/ueditor_index" >我要求助</a></li>
-                            <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab">我的捐赠</a></li>
-                            <li role="presentation"><a href="#Section3" aria-controls="messages" role="tab" data-toggle="tab">我的活动</a></li>
-                        </ul>
-                        <!-- Tab panes -->
-                        <div class="tab-content tabs">
-                            <div role="tabpanel" class="tab-pane fade in active" id="Section1">
-                                <h3>我要求助</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="Section2">
-                                <h3>我的捐赠</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="Section3">
-                                <h3>我的活动</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
+                            <!-- Tab panes -->
+                            <div class="tab-content tabs">
+                                <div class="tab-pane fade in active" id="Section1">
+                                    <li class="donate-item-default-li fn-clear" th:each="menu: ${pcModel.orderSortList}">
+                                        <div class="donate-item-default-left">
+                                            <a class="donate-item-default-pic-a" th:href="@{'/activity/'+${menu.get(0).getProject().getId()}}" seed="donateItemDefaultLeft-donateItemDefaultPicA" smartracker="on">
+                                                <img class="donate-item-default-pic" th:src="@{'/project_img_big/'+${menu.get(0).getProject().getPropagandaMap()}}" alt="" width="157" height="99">
+                                            </a>
+                                        </div>
+                                        <div class="donate-item-default-right" style="float: none">
+                                            <div class="donate-item-default-info">
+                                                <p class="donate-item-default-title" th:switch="${menu.get(0).getProject().category}">
+                                                    <span class="ft-green">
+                                                        <span class="ft-green" th:text="'[教育助学]'" th:case="1"></span>
+                                                        <span class="ft-green" th:text="'[扶贫救灾]'" th:case="2"></span>
+                                                        <span class="ft-green" th:text="'[医疗救助]'" th:case="3"></span>
+                                                        <span class="ft-green" th:text="'[其他]'" th:case="4"></span>
+                                                    </span>
+                                                    <a th:href="@{'/activity/'+${menu.get(0).getProject().getId()}}" seed="donateItemDefaultTitle-link" smartracker="on" th:text="${menu.get(0).getProject().getTitle()}"></a>
+                                                </p>
+
+                                                <span class="donate-item-default-dd">发  布  人：<span th:text="${menu.get(0).getProject().getInitiator()}"></span></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                                <span class="donate-item-default-dd">有效时间：<span th:text="${menu.get(0).getProject().getCreatedTime()}"></span>   至 <span th:text="${menu.get(0).getProject().getEndTime()}"></span></span>
+
+                                                <p class="donate-item-default-dd">
+                                                    <span class="ft-green" th:text="${menu.get(0).getProject().getDonatePeopleCounter()}"></span>
+                                                    人 参与参捐 &nbsp;&nbsp;
+                                                    我捐助了 <span class="ft-orange" th:text="${menu.size()-1}" ></span> 次
+                                                    &nbsp;&nbsp;共 <span class="ft-orange" th:text="${ menu.get(menu.size()-1).getPrice()}"></span> 元
+                                                </p>
+
+                                                <div class="donate-item-default-dd">
+                                                    <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short">
+                                                        <div class="ui-progressbar-s ui-progressbar-s-short" th:style="'width:' + ${menu.get(0).getProject().getAlreadyDonation()}/ ${menu.get(0).getProject().getAimDonation()} *100+'%'" th:with="component =${menu.get(0).getProject().getAlreadyDonation()}/ ${menu.get(0).getProject().getAimDonation()}*100">
+                                                            <span th:text="${#numbers.formatDecimal(component,1,2)}+'%'"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="donate-item-default-active">
+                                                    <a href="#" class="donate-button donate-button-medium-orange donate-button-default" seed="donateItemDefaultActive-donateButton" smartracker="on">
+                                                        <span class="donate-button-text">继续捐助</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </div>
+                                <div class="tab-pane fade" id="Section2">
+                                    <h3>我要求助</h3>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
+                                </div>
+                                <!--<div class="tab-pane fade" id="Section3">-->
+                                <!--<h3>我的活动</h3>-->
+                                <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>-->
+                                <!--</div>-->
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+
 </div>
 
 
@@ -108,8 +155,5 @@
 
 <!--footer-->
 <div th:include="fragments/footer_w::footer"></div>
-
-<script src="../js/jquery-1.10.2.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

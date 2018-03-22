@@ -26,8 +26,6 @@ public class ActivityController {
     @GetMapping("/{id}")
     public ModelAndView jump(@PathVariable("id") Long id , Model model){
         Project pro = projectServiceImpl.getProjectById(id);
-
-
         model.addAttribute("project", pro);
         return new ModelAndView("activity", "projectModel", model);
     }

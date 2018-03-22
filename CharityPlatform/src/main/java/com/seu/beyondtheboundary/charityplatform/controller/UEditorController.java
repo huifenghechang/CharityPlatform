@@ -1,18 +1,21 @@
 package com.seu.beyondtheboundary.charityplatform.controller;
 
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
+import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectService;
 import com.seu.beyondtheboundary.charityplatform.ueditor.ActionEnter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -26,8 +29,18 @@ public class UEditorController {
     private ProjectService projectService;
 
     @RequestMapping("/ueditor_index")
-    private String showPage(){
-        return "ueditor_index";
+    private String showPage(HttpServletRequest request, HttpServletResponse response){
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+            //使用request对象的getSession()获取session，如果session不存在则创建一个
+            HttpSession session = request.getSession();
+            //将数据存储到session中
+            User user = (User) session.getAttribute("user");
+            System.out.println(user.getVerified());
+        if(user.getVerified() == 1)
+            return "ueditor_index";
+        else
+            return "redirect:/personal_center";
     }
 
     //这里，返回的是项目的编辑页面，用来方便管理员的修改。
@@ -58,4 +71,5 @@ public class UEditorController {
         }
 
     }
+
 }

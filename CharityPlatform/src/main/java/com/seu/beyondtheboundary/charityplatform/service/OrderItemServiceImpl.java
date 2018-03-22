@@ -6,6 +6,7 @@ import com.seu.beyondtheboundary.charityplatform.repository.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 /**
@@ -37,5 +38,8 @@ public class OrderItemServiceImpl implements OrderItemService {
 	public OrderItem getOrderItemByOrderId(String orderid) {
 		return orderItemRepository.findByOrderId(orderid);
 	}
+
+	public List<OrderItem> getOrderItemByStatus(Long status) { return orderItemRepository.findAllByStatus(status); }
+
 }
 
