@@ -1,6 +1,13 @@
 package com.seu.beyondtheboundary.charityplatform.domain;
 
+<<<<<<< HEAD
 import javax.persistence.*;
+=======
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import java.io.Serializable;
+>>>>>>> ztwu
 import java.sql.Timestamp;
 
 @Entity  //实体
@@ -94,7 +101,11 @@ public class OrderItem {
         this.user = user;
     }
 
+<<<<<<< HEAD
     public OrderItem(float price, String orderID, Project project, User user) {
+=======
+    public OrderItem( float price, String orderID, Project project, User user) {
+>>>>>>> ztwu
         this.price = price;
         this.orderID = orderID;
         this.project = project;
