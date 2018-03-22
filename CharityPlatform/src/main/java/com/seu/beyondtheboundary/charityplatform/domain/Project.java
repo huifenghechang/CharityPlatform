@@ -13,9 +13,6 @@ import java.sql.Date;
 @Entity  //实体
 public class Project implements Serializable {
 
-    @ManyToMany(mappedBy = "projectList")
-    private Set<User> userSet = new HashSet<User>();
-
     @Id // 主键
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 自增长策略
     private Long id; // 用户的唯一标识
@@ -224,14 +221,6 @@ public class Project implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public Set<User> getUserSet() {
-        return userSet;
-    }
-
-    public void setUserSet(Set<User> userSet) {
-        this.userSet = userSet;
     }
 
     public void setPropagandaMap(String propagandaMap) {

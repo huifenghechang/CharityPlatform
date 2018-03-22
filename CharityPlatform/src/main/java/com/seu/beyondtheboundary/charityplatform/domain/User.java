@@ -45,13 +45,6 @@ public class User{
 
 	private String password; // 登录时密码
 
-	//捐助者与活动之间的连接表
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_donate_project",
-			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-			inverseJoinColumns = {@JoinColumn(name = "donated_project_id", referencedColumnName = "id")})
-	private Set<Project> projectList = new HashSet<Project>();
-
 	public Long getId() {
 		return id;
 	}
@@ -176,11 +169,4 @@ public class User{
 		this.admin = admin;
 	}
 
-	public Set<Project> getProjectList() {
-		return projectList;
-	}
-
-	public void setProjectList(Set<Project> projectList) {
-		this.projectList = projectList;
-	}
 }
