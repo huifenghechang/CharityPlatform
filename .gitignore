@@ -3,3 +3,6 @@ CharityPlatform/target/classes/config.json
 CharityPlatform/.idea/workspace.xml
 *.class
 *.class
+CharityPlatform/target/classes/templates/person/my_activity.html
+CharityPlatform/target/classes/templates/person/my_activity.html
+CharityPlatform/target/classes/templates/person/personal_center.html

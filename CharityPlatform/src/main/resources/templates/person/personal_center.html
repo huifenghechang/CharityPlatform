@@ -52,29 +52,6 @@
 
 <!--main-content-->
 <div class="main_content">
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-    <div class="profile" style="width: 225px">
-        <img src="/images/smile.jpg" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
-        <div style="padding: 29px 6px 0px 3px;">
-            <img src="/level_icon/level_1.png" style="width: 25%">
-            <h2 style="display: inline" th:text="${session.user.username}"></h2>
-        </div>
-=======
-    <div class="profile">
-        <img src="../images/logo.png"/>
-        <h2 th:if="${session.user.integral} lt 1000">普通会员</h2>
-        <h2 th:if="${session.user.integral} lt 2000 and ${session.user.integral} ge 1000">高级会员</h2>
-        <h2 th:if="${session.user.integral} lt 3000 and ${session.user.integral} ge 2000">超级会员</h2>
-
-        <h2 th:text="${session.user.username}"></h2>
->>>>>>> ztwu
-        <div class="single_a">
-            <a class="btn-primary" href="/u/complete_user_info">完善个人资料</a>
-            <br>
-            <a style="margin-left: 19px;" class="btn-primary" href="/u/user_commit_verify">个人认证</a>
-=======
     <div class="right-content" style="margin-left: 0px; background: #fff; overflow: hidden">
         <div class="title">
             <h6>我的捐赠</h6>
@@ -83,7 +60,9 @@
         <div class="profile" style="width: 225px">
             <img src="/images/smile.jpg" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
             <div style="padding: 29px 6px 0px 3px;">
-                <img src="/level_icon/level_1.png" style="width: 25%">
+                <img src="/level_icon/level_1.png" style="width: 25%" th:if="${session.user.integral} lt 1000"></img>
+                <img src="/level_icon/level_3.png" style="width: 25%" th:if="${session.user.integral} lt 2000 and ${session.user.integral} ge 1000"></img>
+                <img src="/level_icon/level_7.png" style="width: 25%" th:if="${session.user.integral} ge 2000"></img>
                 <h2 style="display: inline" th:text="${session.user.username}"></h2>
             </div>
             <div class="single_a">
@@ -93,7 +72,6 @@
                 <br>
                 <a style="margin-left: 19px;" class="btn-primary" href="/ueditor_index">我要求助</a>
             </div>
->>>>>>> master
         </div>
 
         <div class="demo">
@@ -105,9 +83,6 @@
                             <ul class="nav nav-tabs">
                                 <li><a href="#Section1">我的捐赠</a></li>
                             </ul>
-                            <div class="single_a" style="float: right; top: -30px; position: relative;">
-                                <a class="btn-primary" href="/ueditor_index" >我要求助</a>
-                            </div>
 
                             <!-- Tab panes -->
                             <div class="tab-content tabs">
