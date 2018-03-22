@@ -7,16 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title></title>
     <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="/css/bootstrap1.css" rel="stylesheet"/>
+    <link href="/css/style1.css" rel="stylesheet"/>
 </head>
 
-<body style="position: relative;overflow-y:scroll;">
+<body style="position: relative;">
 
-<!--main-content-->
-<div class="main_content" style="min-height: 900px;">
-
-        <!-- /container -->
+       <!-- container -->
         <div class="container blog-content-container" style="margin: 20px 60px;">
-            <h2 style="margin: 31px 14px">个人信息完善</h2>
+            <h2 style="margin: 31px 14px">修改管理员信息</h2>
             <form  th:action="'/admins/complete_admin_info?id='+${adminModel.id}" method="post">
                 <div class="form-group col-md-5">
                     <label for="realname" class="col-form-label">姓名</label>
@@ -61,7 +60,6 @@
             });
         </script>
     </div>
-</div>
 
 </body>
 </html>

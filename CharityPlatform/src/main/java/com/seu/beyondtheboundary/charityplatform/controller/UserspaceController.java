@@ -204,7 +204,7 @@ public class UserspaceController {
         return "redirect:personal_center";
     }
 
-    @PostMapping("user_commit_image")
+    @PostMapping("/user_commit_image")
     public String user_upload_image(@RequestParam("image") MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
         if (!image.isEmpty()) {
             try {
@@ -229,7 +229,7 @@ public class UserspaceController {
             redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " because it was empty");
         }
 
-        return "redirect:u/user_commit_verify";
+        return "redirect:/u/user_commit_verify";
     }
 
     @GetMapping("/user_donate")

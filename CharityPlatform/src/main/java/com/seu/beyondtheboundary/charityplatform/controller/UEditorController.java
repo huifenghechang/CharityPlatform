@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +37,7 @@ public class UEditorController {
             //将数据存储到session中
             User user = (User) session.getAttribute("user");
             System.out.println(user.getVerified());
-            if(user.getVerified() == 1)
+        if(user.getVerified() == 1)
             return "ueditor_index";
         else
             return "redirect:/personal_center";
@@ -70,4 +71,5 @@ public class UEditorController {
         }
 
     }
+
 }
