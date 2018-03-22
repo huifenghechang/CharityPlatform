@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity  //实体
 public class OrderItem {
@@ -105,4 +106,5 @@ public class OrderItem {
         this.project = project;
         this.user = user;
     }
+
 }

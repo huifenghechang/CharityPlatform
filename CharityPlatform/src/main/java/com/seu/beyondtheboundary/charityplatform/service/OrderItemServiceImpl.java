@@ -40,5 +40,6 @@ public class OrderItemServiceImpl implements OrderItemService {
 	}
 
 	public List<OrderItem> getOrderItemByStatus(Long status) { return orderItemRepository.findAllByStatus(status); }
+
 }
 

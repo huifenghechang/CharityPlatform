@@ -58,7 +58,7 @@
         </div>
         <br/>
         <div class="profile" style="width: 225px">
-            <img src="/images/smile.jpg" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
+            <img src="/images/look_mountain.jpg" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
             <div style="padding: 29px 6px 0px 3px;">
                 <img src="/level_icon/level_1.png" style="width: 25%" th:if="${session.user.integral} lt 1000"></img>
                 <img src="/level_icon/level_3.png" style="width: 25%" th:if="${session.user.integral} lt 2000 and ${session.user.integral} ge 1000"></img>
@@ -87,38 +87,43 @@
                             <!-- Tab panes -->
                             <div class="tab-content tabs">
                                 <div class="tab-pane fade in active" id="Section1">
-                                    <li class="donate-item-default-li fn-clear">
+                                    <li class="donate-item-default-li fn-clear" th:each="menu: ${pcModel.orderSortList}">
                                         <div class="donate-item-default-left">
                                             <a class="donate-item-default-pic-a" href="https://love.alipay.com/donate/itemDetail.htm?name=2018022716131764566" seed="donateItemDefaultLeft-donateItemDefaultPicA" smartracker="on">
-                                                <img class="donate-item-default-pic" src="https://tfsimg.alipay.com:443/images/community/TB1ICR.Xj9EDuNjmgXUXXbCKXXa" alt="白血病女子坚强求生" width="157" height="99">
+                                                <img class="donate-item-default-pic" th:src="@{'/project_img_big/'+${menu.get(0).getProject().getPropagandaMap()}}" alt="" width="157" height="99">
                                             </a>
                                         </div>
                                         <div class="donate-item-default-right" style="float: none">
                                             <div class="donate-item-default-info">
-                                                <p class="donate-item-default-title">
-                                                    <span class="ft-green">[医疗救助]</span>
-                                                    <a href="https://love.alipay.com/donate/itemDetail.htm?name=2018022716131764566" seed="donateItemDefaultTitle-link" smartracker="on">白血病女子坚强求生</a>
+                                                <p class="donate-item-default-title" th:switch="${menu.get(0).getProject().category}">
+                                                    <span class="ft-green">
+                                                        <span class="ft-green" th:text="'[教育学]'" th:case="1"></span>
+                                                        <span class="ft-green" th:text="'[扶贫救灾]'" th:case="2"></span>
+                                                        <span class="ft-green" th:text="'[医疗救助]'" th:case="3"></span>
+                                                        <span class="ft-green" th:text="'[其他]'" th:case="4"></span>
+                                                    </span>
+                                                    <a href="https://love.alipay.com/donate/itemDetail.htm?name=2018022716131764566" seed="donateItemDefaultTitle-link" smartracker="on" th:text="${menu.get(0).getProject().getTitle()}"></a>
                                                 </p>
 
-                                                <span class="donate-item-default-dd">发  布  人：中国妇女发展基金会</span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                                                <span class="donate-item-default-dd">有效时间：2018-02-27   至 2018-05-26</span>
+                                                <span class="donate-item-default-dd">发  布  人：<span th:text="${menu.get(0).getProject().getInitiator()}"></span></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                                <span class="donate-item-default-dd">有效时间：<span th:text="${menu.get(0).getProject().getCreatedTime()}"></span>   至 <span th:text="${menu.get(0).getProject().getEndTime()}"></span></span>
 
                                                 <p class="donate-item-default-dd">
-                                                    <span class="ft-green">79518</span>
+                                                    <span class="ft-green" th:text="${menu.get(0).getProject().getDonatePeopleCounter()}"></span>
                                                     人 参与参捐 &nbsp;&nbsp;
-                                                    我捐助了 <span class="ft-orange">1</span> 次
-                                                    &nbsp;&nbsp;共 <span class="ft-orange">10.00</span> 元
+                                                    我捐助了 <span class="ft-orange" th:text="${menu.size()-1}" ></span> 次
+                                                    &nbsp;&nbsp;共 <span class="ft-orange" th:text="${ menu.get(menu.size()-1).getPrice()}"></span> 元
                                                 </p>
 
                                                 <div class="donate-item-default-dd">
                                                     <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short">
-                                                        <div class="ui-progressbar-s ui-progressbar-s-short" style="width:91.35%">
-                                                            <span>91.35%</span>
+                                                        <div class="ui-progressbar-s ui-progressbar-s-short" th:style="'width:' + ${menu.get(0).getProject().getAlreadyDonation()}/ ${menu.get(0).getProject().getAimDonation()} *100+'%'" th:with="component =${menu.get(0).getProject().getAlreadyDonation()}/ ${menu.get(0).getProject().getAimDonation()}*100">
+                                                            <span th:text="${#numbers.formatDecimal(component,1,2)}+'%'"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="donate-item-default-active">
-                                                    <a href="https://love.alipay.com/donate/donateSingle.htm?name=2018022716131764566" class="donate-button donate-button-medium-orange donate-button-default" seed="donateItemDefaultActive-donateButton" smartracker="on">
+                                                    <a href="#" class="donate-button donate-button-medium-orange donate-button-default" seed="donateItemDefaultActive-donateButton" smartracker="on">
                                                         <span class="donate-button-text">继续捐助</span>
                                                     </a>
                                                 </div>
