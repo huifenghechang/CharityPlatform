@@ -25,10 +25,7 @@ li {
     font-size: 18px;
     height: 32px;
     width: 99px;
-<<<<<<< HEAD
     right: 57px;
-=======
->>>>>>> ztwu
     padding: 4px 10px;
     line-height: 20px;
     position: relative;
@@ -37,11 +34,7 @@ li {
     background: #fafafa;
     border: 2px solid #11a782;
     border-radius: 4px;
-<<<<<<< HEAD
     /*overflow: hidden;*/
-=======
-    overflow: hidden;
->>>>>>> ztwu
     display: inline-block;
     *display: inline;
     *zoom: 1
@@ -49,16 +42,9 @@ li {
 
 .a-upload  input {
     position: absolute;
-<<<<<<< HEAD
     z-index: -1;
     left: 6px;
     top: 0;
-=======
-    font-size: 100px;
-    right: 0;
-    top: 0;
-    opacity: 0;
->>>>>>> ztwu
     filter: alpha(opacity=0);
     cursor: pointer
 }

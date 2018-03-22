@@ -106,20 +106,15 @@
                         <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propagandaMap}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
                         </div></a>
                     <div class="donate-item-default-progress">
-<<<<<<< HEAD
                         <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short" >
                             <div class="ui-progressbar-s ui-progressbar-s-short" th:style="'width:' + ${menu.alreadyDonation}/ ${menu.aimDonation} *100+'%'" th:with="component =${menu.alreadyDonation}/ ${menu.aimDonation}*100">
-=======
-                        <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short" th:with="component =${menu.alreadyDonation}/ ${menu.aimDonation}*100">
-                            <div class="ui-progressbar-s ui-progressbar-s-short" th:style="'width:' + ${menu.alreadyDonation}/ ${menu.aimDonation} *100+'%'" >
->>>>>>> ztwu
                                 <span th:text="${#numbers.formatDecimal(component,1,2)}+'%'"></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="donate-item-default-active">
-                        <a class="donate-button donate-button-medium-orange donate-button-single" th:href="'/pays?id='+${menu.id}">
+                        <a class="donate-button donate-button-medium-orange donate-button-single" href="#">
                             <span class="donate-button-text" >我要捐助</span>
                         </a>
                     </div>
@@ -153,11 +148,7 @@
                         </p>
 
 
-<<<<<<< HEAD
                         <p class="donate-item-default-dd">项目时间：2012-05-04   至 2020-02-28</p>
-=======
-                        <p class="donate-item-default-dd">项目时间： <span th:text="${menu.createdTime}"></span>  至 <span th:text="${menu.endTime}"></span></p>
->>>>>>> ztwu
                         <dd class="donate-item-default-dd">参捐人数：<span class="ft-green" th:text="${menu.donatePeopleCounter}"></span> 人</dd>
                     </dl>
                 </div>

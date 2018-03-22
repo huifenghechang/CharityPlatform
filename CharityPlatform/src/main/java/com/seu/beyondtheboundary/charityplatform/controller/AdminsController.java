@@ -25,6 +25,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admins")
 public class AdminsController {
+
+
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
 

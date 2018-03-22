@@ -1,6 +1,2 @@
 server:
-<<<<<<< HEAD
   port: 8085
-=======
-  port: 8080
->>>>>>> ztwu
