@@ -16,9 +16,9 @@ public class PayUtil {
 
 	public static String UID = "b807568faa27f60990dda3ad";
 
-	public static String NOTIFY_URL = "http://localhost:8080/pays/notifyPay";
+	public static String NOTIFY_URL = "http://120.79.156.31:8080/pays/notifyPay";
 
-	public static String RETURN_URL = "http://localhost:8080/pays/returnPay";
+	public static String RETURN_URL = "http://120.79.156.31:8080/pays/returnPay";
 
 	public static String BASE_URL = "https://pay.paysapi.com";
 
@@ -36,9 +36,6 @@ public class PayUtil {
 
 	public static String getKey(Map<String, Object> remoteMap) throws UnsupportedEncodingException {
 		String key = "";
-		if (null != remoteMap.get("goodsname")) {
-			key += remoteMap.get("goodsname");
-		}
 		if (null != remoteMap.get("istype")) {
 			key += remoteMap.get("istype");
 		}
@@ -54,6 +51,7 @@ public class PayUtil {
 		if (null != remoteMap.get("price")) {
 			key += remoteMap.get("price");
 		}
+
 		if (null != remoteMap.get("return_url")) {
 			key += remoteMap.get("return_url");
 		}

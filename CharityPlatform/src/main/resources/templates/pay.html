@@ -65,7 +65,7 @@ $().ready(function(){
                     $('#notify_url').val(data.data.notify_url);
                     $('#orderid').val(data.data.orderid);
                     $('#orderuid').val(data.data.orderuid);
-                    $('#price').val(data.data.price);
+                    $('#price').val(parseFloat(data.data.price).toFixed(2));
                     $('#return_url').val(data.data.return_url);
                     $('#uid').val(data.data.uid);
                     $('#submitdemo1').click();

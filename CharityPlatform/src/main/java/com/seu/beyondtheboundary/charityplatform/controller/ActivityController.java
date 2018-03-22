@@ -29,7 +29,7 @@ public class ActivityController {
 
 
         model.addAttribute("project", pro);
-        return new ModelAndView("/activity", "projectModel", model);
+        return new ModelAndView("activity", "projectModel", model);
     }
 
 

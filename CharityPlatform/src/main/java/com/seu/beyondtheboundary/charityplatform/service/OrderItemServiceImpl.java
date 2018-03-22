@@ -34,8 +34,8 @@ public class OrderItemServiceImpl implements OrderItemService {
 		return orderItemRepository.getOne(id);
 	}
 
-	public OrderItem getOrderItemByOrderID(String orderid) {
-		return orderItemRepository.findByOrderID(orderid);
+	public OrderItem getOrderItemByOrderId(String orderid) {
+		return orderItemRepository.findByOrderId(orderid);
 	}
 }
 

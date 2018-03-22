@@ -130,7 +130,7 @@ public class UserspaceController {
 
 	@GetMapping("/complete_user_info")
 	public String complete_user_info() {
-		return "/person/complete_personal_information";
+		return "person/complete_personal_information";
 	}
 
 
@@ -161,7 +161,7 @@ public class UserspaceController {
 
 	@GetMapping("/user_commit_verify")
 	public String user_commit_verify() {
-		return "/person/I_want_verify";
+		return "person/I_want_verify";
 	}
 
 	@PostMapping("/user_commit_verify")
@@ -217,12 +217,12 @@ public class UserspaceController {
 			redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " because it was empty");
 		}
 
-		return "redirect:/u/user_commit_verify";
+		return "redirect:u/user_commit_verify";
 	}
 
 	@GetMapping("/user_donate")
 	public String user_donate() {
-		return "/person/user_donate";
+		return "person/user_donate";
 	}
 }
 

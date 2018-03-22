@@ -1,6 +1,8 @@
 package com.seu.beyondtheboundary.charityplatform.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +17,7 @@ import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.service.OrderItemServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
+import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +37,8 @@ public class PayController {
     private ProjectServiceImpl projectServiceImpl;
     @Autowired
     private OrderItemServiceImpl orderItemService;
-
+	@Autowired
+	private UserServiceImpl userService;
 	@RequestMapping("")
 	public String  pays(Model model,@RequestParam(value="id") Long id) {
         model.addAttribute("message", id);
@@ -50,16 +54,19 @@ public class PayController {
         HttpSession session = request.getSession();
         User user1 = (User) session.getAttribute("user");
         Project project = projectServiceImpl.getProjectById(id);
-        String orderID = PayUtil.getOrderIdByUUId();
-        OrderItem orderItem = new OrderItem(price,orderID,project,user1);
+        String orderId = PayUtil.getOrderIdByUUId();
+        OrderItem orderItem = new OrderItem(price,orderId,project,user1);
         orderItemService.saveOrderItemService(orderItem);
 
-		remoteMap.put("price", price);
+		DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+		String p=decimalFormat.format(price);//format 返回的是字符串
+
+		remoteMap.put("price",p);
 		remoteMap.put("istype", istype);
-		remoteMap.put("orderid", orderID);
+		remoteMap.put("orderid", orderId);
 		remoteMap.put("orderuid", user1.getId());
-		remoteMap.put("goodsname", "您自己的商品名称");
 		resultMap.put("data", PayUtil.payOrder(remoteMap));
+
 		return resultMap;
 	}
 
@@ -67,9 +74,20 @@ public class PayController {
 	public void notifyPay(HttpServletRequest request, HttpServletResponse response, PaySaPi paySaPi) throws UnsupportedEncodingException {
 		// 保证密钥一致性
 		if (PayUtil.checkPayKey(paySaPi)) {
-            orderItemService.getOrderItemByOrderID(paySaPi.getOrderid()).setStatus(1L);
+			OrderItem orderItem = orderItemService.getOrderItemByOrderId(paySaPi.getOrderid());
+			orderItem.setStatus(1L);
+			orderItemService.saveOrderItemService(orderItem);
+			//用户积分增加
+			User user = orderItem.getUser();
+			user.setIntegral((long) (user.getIntegral()+orderItem.getPrice()));
+			userService.saveUser(user);
+			//项目已筹金额,捐款人数增加
+			Project project = orderItem.getProject();
+			project.setAlreadyDonation(project.getAlreadyDonation()+orderItem.getPrice());
+			project.setDonatePeopleCounter((project.getDonatePeopleCounter()+1));
+			projectServiceImpl.saveProject(project);
 		} else {
-			// TODO 该怎么做就怎么做
+
 		}
 	}
 
@@ -77,6 +95,18 @@ public class PayController {
 	public ModelAndView returnPay(HttpServletRequest request, HttpServletResponse response, String orderid) {
 		boolean isTrue = false;
 		ModelAndView view = null;
+//		OrderItem orderItem = orderItemService.getOrderItemByOrderId(orderid);
+//		orderItem.setStatus(1L);
+//		orderItemService.saveOrderItemService(orderItem);
+//		//用户积分增加
+//		User user = orderItem.getUser();
+//		user.setIntegral((long) (user.getIntegral()+orderItem.getPrice()));
+//		userService.saveUser(user);
+//		//项目已筹金额,捐款人数增加
+//		Project project = orderItem.getProject();
+//		project.setAlreadyDonation((long) (project.getAlreadyDonation()+orderItem.getPrice()));
+//		project.setDonatePeopleCounter((project.getDonatePeopleCounter()+1));
+//		projectServiceImpl.saveProject(project);
 		// 根据订单号查找相应的记录:根据结果跳转到不同的页面
 		if (isTrue) {
 			view = new ModelAndView("redirect:/index");

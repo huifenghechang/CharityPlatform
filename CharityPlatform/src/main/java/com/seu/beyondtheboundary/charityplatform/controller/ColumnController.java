@@ -43,7 +43,7 @@ public class ColumnController {
         model.addAttribute("projectList1", beSelected1);
         model.addAttribute("projectID", id);
         model.addAttribute("order", order);
-        return new ModelAndView("/view_all", "projectModel", model);
+        return new ModelAndView("view_all", "projectModel", model);
     }
 
     @RequestMapping("/{id}/search")
@@ -68,7 +68,7 @@ public class ColumnController {
         model.addAttribute("projectID", id);
         model.addAttribute("projectSearch", search);
         model.addAttribute("order", order);
-        return new ModelAndView("/view_all_search", "projectModel", model);
+        return new ModelAndView("view_all_search", "projectModel", model);
     }
 
 
