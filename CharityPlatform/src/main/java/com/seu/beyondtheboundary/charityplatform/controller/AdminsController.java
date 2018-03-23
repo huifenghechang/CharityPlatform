@@ -46,12 +46,12 @@ public class AdminsController {
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id){
         projectServiceImpl.removeProject(id);
-        return new ModelAndView("redirect:admins/published");
+        return new ModelAndView("redirect:/admins/published");
     }
     @GetMapping("/deleteUser/{id}")
     public ModelAndView deleteUser(@PathVariable("id") Long id){
         userService.removeUser(id);
-        return new ModelAndView("redirect:admins/vip_verified");
+        return new ModelAndView("redirect:/admins/vip_verified");
     }
 
     @GetMapping("/deleteAdmin/{id}")
@@ -64,21 +64,21 @@ public class AdminsController {
     public ModelAndView change1to0(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)0);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_verify");
+        return new ModelAndView("redirect:/admins/to_verify");
     }
 
     @GetMapping("/change1to2/{id}")
     public ModelAndView change1to2(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)2);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_verify");
+        return new ModelAndView("redirect:/admins/to_verify");
     }
 
     @GetMapping("/change2to3/{id}")
     public ModelAndView change2to3(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)3);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_publish");
+        return new ModelAndView("redirect:/admins/to_publish");
     }
 
     @GetMapping("/to_publish")
@@ -109,7 +109,7 @@ public class AdminsController {
             }
         }
         model.addAttribute("projectList", beSelected);
-        return new ModelAndView("manager/to_verify", "projectModel", model);
+        return new ModelAndView("/manager/to_verify", "projectModel", model);
     }
 
     @GetMapping("/published")
@@ -132,7 +132,7 @@ public class AdminsController {
         List<User> selectUser = userService.userNotVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_to_verify", "userModel", model);
+        return new ModelAndView("/manager/vip_to_verify", "userModel", model);
     }
 
     @PostMapping("/vip_to_verify")
@@ -143,7 +143,7 @@ public class AdminsController {
         List<User> selectUser = userService.userNotVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_to_verify", "userModel", model);
+        return new ModelAndView("/manager/vip_to_verify", "userModel", model);
     }
     @GetMapping("/vip_verified")
     public ModelAndView vip_verified(Model model) {
@@ -151,12 +151,12 @@ public class AdminsController {
         List<User> selectUser = userService.userHasVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_verified", "userModel", model);
+        return new ModelAndView("/manager/vip_verified", "userModel", model);
     }
     @GetMapping("/vipcertificate")
     public String showCertificate(Model model) {
 
-        return "manager/vip_get_certificate";
+        return "/manager/vip_get_certificate";
     }
 
     @PostMapping("/vipcertificate")
@@ -164,7 +164,7 @@ public class AdminsController {
 
         model.addAttribute("imgsrc", user.getConfirmation_link().split(";"));
 
-        return new ModelAndView("manager/vip_get_certificate", "imgModel", model);
+        return new ModelAndView("/manager/vip_get_certificate", "imgModel", model);
     }
 
     @PostMapping("/project_certificate")
@@ -172,7 +172,7 @@ public class AdminsController {
 
         model.addAttribute("pro_imgsrc", project.getPro_confirmation_link().split(";"));
 
-        return new ModelAndView("manager/pro_get_certificate", "pro_imgModel", model);
+        return new ModelAndView("/manager/pro_get_certificate", "pro_imgModel", model);
     }
 
     @GetMapping("/edit_admin")
@@ -214,7 +214,7 @@ public class AdminsController {
 
     @GetMapping("/apply_for_refund")
     public String apply_for_refund() {
-        return "manager/apply_for_refund";
+        return "/manager/apply_for_refund";
     }
 
     @GetMapping("/admin_order")
