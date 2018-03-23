@@ -15,19 +15,11 @@
         div{
             width:100%;
         }
-
-        .ueditor-input{
-            display: block;
-            margin: 25px 118px;
-            width: 170px;
-            height: 30px;
-            font-size: 17px;
-        }
     </style>
 </head>
 <body>
 
-<div class="title" style="width: 785px">
+<div class="title">
     <h6>境界的彼方</h6>
 </div>
 <br/>
@@ -41,38 +33,21 @@
     </div>
     <div>
         <span style="float: left">摘要</span>
-    <textarea placeholder="请填写公益项目摘要" id="summary" name="summary" maxlength="300" style="display: block; margin: 23px 60px;width: 458px;height: 60px;font-size: 17px;"
+    <textarea placeholder="请填写公益项目摘要" id="summary" name="summary" maxlength="300" style="display: block; margin: 23px 60px;width: 500px;height: 60px;font-size: 17px;"
               th:text="${projectModel.project.summary}"></textarea>
-    </div>
-
-    <div>
-        <div><span style="float: left">项目发起方</span>    <textarea class="ueditor-input"  type="text" name="initiator" id ="initiator" style="width: 290px" th:text="${projectModel.project.initiator} "></textarea></div>
-        <div><span style="float: left">项目开始时间</span>  <input class="ueditor-input" type="date"  name="start_time" id ="start_time" th:value="${projectModel.project.createdTime} " /></div>
-        <div><span style="float: left">项目结束时间</span>  <input class="ueditor-input" type="date" name="end_time" id ="end_time" th:value="${projectModel.project.endTime} " /></div>
-        <div><span style="float: left">目标筹集资金</span>  <textarea class="ueditor-input" type="text"  name="aim_donation" id ="aim_donation" th:text="${projectModel.project.aimDonation} " ></textarea></div>
-
-        <div><span style="float: left">项目类型</span> <select class="ueditor-input" name="categories" id="categories">
-            <option value="1" selected>教育助学</option> //预选设置
-            <option value="2" >医疗救助</option>
-            <option value="3" >扶贫救灾</option>
-            <option value="4" >其他</option>
-        </select>
-
     </div>
 </div>
 
-    <div style="height: 0px">
-        <textarea id="html_value" name="html_value" th:text="${projectModel.project.htmlContent} "
-                  style="visibility: hidden"></textarea>
-        <textarea id="id_value" name="id_value" th:text="${projectModel.project.id} "
-                  style="visibility: hidden"></textarea>
-    </div>
+<div style="height: 0px">
+<textarea    id="html_value" name ="html_value" th:text="${projectModel.project.htmlContent} " style="visibility: hidden"></textarea>
+<textarea    id="id_value" name ="id_value" th:text="${projectModel.project.id} " style="visibility: hidden"></textarea>
+</div>
 
-<script id="editor" type="text/plain" style="width:700px;height:500px;margin-left: -11px">
+<script id="editor" type="text/plain" style="width:750px;height:500px;">
 </script>
 
     <div id="btns">
-            <button class="btn-form" style="margin-left: 284px; margin-bottom: 40px;" onclick="submitProj()" >提交修改</button>
+            <button class="btn-form" style="margin-left: 318px;" onclick="submitProj()" >提交修改</button>
     </div>
 
     <script src="/js/jquery-3.1.1.min.js"></script>
@@ -85,7 +60,6 @@
     //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
     var ue = UE.getEditor('editor');
     UE.getEditor('editor').ready(function () {
-        //初始化编辑框的内容
         var htmlContent = document.getElementById("html_value").value;
         ue.execCommand('insertHtml', htmlContent);
     });
@@ -97,24 +71,13 @@
         var id = document.getElementById("id_value").value;
         var title = document.getElementById("title").value;
         var summary = $('#summary').val();
-        var initiator = $('#initiator').val();
-        var category = $('#categories').val();
-        var aimDonation = $('#aim_donation').val();
-        var createdTime = $('#start_time').val();
-        var endTime = $('#end_time').val();
         var content =  UE.getEditor('editor').getContentTxt();
         var htmlContent = UE.getEditor('editor').getContent();
-
-        //编辑时间的相关属性
-        var val = Date.parse(createdTime);
-        var newDate = new Date(val);
         $.ajax({
             type: "POST",
             url: '/u/projects/edit_complete',
             datatype:"json",
-            data: {id:id, title: title, summary: summary , content: content,htmlContent:htmlContent,
-                category: category,aimDonation: aimDonation, createdTime: createdTime, endTime: endTime,
-                initiator: initiator,},
+            data: {id:id, title: title, summary: summary , content: content,htmlContent:htmlContent,},
             success: function(data){
                 if (data.success) {
                     // 成功后，重定向

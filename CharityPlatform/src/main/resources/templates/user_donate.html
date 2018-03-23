@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>捐助界面</title>
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>-->
+    <!--<script type="text/javascript" src="/js/tether.js"></script>-->
+    <!--<script type="text/javascript" src="/js/bootstrap.js"></script>-->
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body style="position: relative;overflow-y:scroll;">
+
+<!--header-->
+<div th:include="fragments/header_w::header"></div>
+
+
+<!--main-content-->
+<div class="main_content" style="min-height: 900px;">
+    <div class="left-menu" style="min-height: 896px">
+        <ul>
+            <li><a href="#"><i class="glyph-icon icon-chevron-right1"></i>捐助</a></li>
+        </ul>
+    </div>
+
+    <div class="right-content">
+        <div class="title">
+            <h6>境界的彼方</h6>
+        </div>
+        <br/>
+
+
+        <div class="donate-simple-block">
+            <div class="donate-simple-block-left">
+                <div class="donate-item-view-simple">
+                    <dl>
+                        <dd>
+                            <img th:src="@{'/project_img_big/'+${projectModel.project.propagandaMap}}" width="40%" height="40%"/>
+                        </dd>
+                        <dt th:text="${projectModel.project.title}"></dt>
+                        <dd>
+                            已募善款： <em class="ft-amount-16 ft-orange ft-bold" th:text="${projectModel.project.alreadyDonation}"></em>元
+                        </dd>
+                        <dd>参与人数：<span th:text="${projectModel.project.donatePeopleCounter}"></span> 人参与捐助</dd>
+                        <dd>
+                            项目时间：<span th:text="${projectModel.project.createdTime}"></span> 至 <span th:text="${projectModel.project.endTime}"></span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="donate-simple-block-right">
+                <div class="donate-form-block">
+                    <div class="ui-form-item">
+                        <label  class="ui-label">收 款 方：</label> <em class="ui-form-text" th:text="${projectModel.project.initiator}"></em>
+                    </div>
+                    <div class="ui-form-item">
+                        <label  class="ui-label">捐款金额：</label>
+                        <input id="inputprice" type="text" class="ui-input" name="amount"/>&nbsp; 元
+                        <div class="ui-form-explain"> </div>
+                        <button class="btn-form"  id="demoBtn1" type="button">确定</button>
+                    </div>
+                    <!--<div class="ui-form-item ">-->
+                        <!--<label  class="ui-label"></label>-->
+                        <!--<input id="J-isAnonymous" class="ui-hidden" type="checkbox" name="isAnonymous"/>-->
+                        <!--<label for="J-isAnonymous">匿名捐赠</label>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<form style='display:none;' id='formpay' name='formpay' method='post' action='https://pay.paysapi.com'>
+    <input name='goodsname' id='goodsname' type='text' value='' />
+    <input name='istype' id='istype' type='text' value='' />
+    <input name='key' id='key' type='text' value=''/>
+    <input name='notify_url' id='notify_url' type='text' value=''/>
+    <input name='orderid' id='orderid' type='text' value=''/>
+    <input name='orderuid' id='orderuid' type='text' value=''/>
+    <input name='price' id='price' type='text' value=''/>
+    <input name='return_url' id='return_url' type='text' value=''/>
+    <input name='uid' id='uid' type='text' value=''/>
+    <input type='submit' id='submitdemo1'>
+</form>
+
+<!-- Jquery files -->
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/1.11.1/jquery.min.js"></script>
+<script th:inline="javascript" type="text/javascript">
+    $().ready(function(){
+        var message = [[${message}]];
+
+
+        $("#demoBtn1").click(function(){
+            $.post(
+                "/pays/pay",
+                {
+                    price : $("#inputprice").val(),
+                    istype : 1,
+                    id : message
+                },
+                function(data){
+
+                    $("#goodsname").val(data.data.goodsname);
+                    $("#istype").val(data.data.istype);
+                    $('#key').val(data.data.key);
+                    $('#notify_url').val(data.data.notify_url);
+                    $('#orderid').val(data.data.orderid);
+                    $('#orderuid').val(data.data.orderuid);
+                    $('#price').val(parseFloat(data.data.price).toFixed(2));
+                    $('#return_url').val(data.data.return_url);
+                    $('#uid').val(data.data.uid);
+                    $('#submitdemo1').click();
+
+
+                }, "json"
+            );
+        });
+    });
+</script>
+
+
+<!--footer-->
+<div th:include="fragments/footer_w::footer"></div>
+</body>
+</html>

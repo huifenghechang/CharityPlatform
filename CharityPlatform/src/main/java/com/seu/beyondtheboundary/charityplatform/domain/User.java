@@ -38,12 +38,22 @@ public class User{
 
 	private String avatar;
 
-	private Integer verified;
+	private Integer verified=0;
 
 	private boolean admin;
-	@Column(length = 100)
 
+	@Column(length = 100)
 	private String password; // 登录时密码
+
+	private Long integral = 0L;
+
+	public Long getIntegral() {
+		return integral;
+	}
+
+	public void setIntegral(Long integral) {
+		this.integral = integral;
+	}
 
 	public Long getId() {
 		return id;

@@ -137,6 +137,7 @@ public class UserspaceController {
 //		System.out.println("I am saving project");
 //		String redirectUrl="/u/person/hello";
 //		return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
+
     }
 
     @GetMapping("/complete_user_info")
@@ -236,6 +237,8 @@ public class UserspaceController {
     public String user_donate() {
         return "person/user_donate";
     }
+
+
 }
 
 

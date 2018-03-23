@@ -1,11 +1,14 @@
 package com.seu.beyondtheboundary.charityplatform.controller;
 
+import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
+import com.seu.beyondtheboundary.charityplatform.service.OrderItemServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.util.MD5;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -29,6 +34,9 @@ public class IndexController {
 
     @Autowired
     private UserServiceImpl userServiceImpl;
+
+    @Autowired
+    private OrderItemServiceImpl orderItemService;
 
     @GetMapping("/")
     public String root() {
@@ -87,6 +95,15 @@ public class IndexController {
                 if (a == 4 && b==3) {beSelected4.add(select);}
             }
         }
+        List<Project> projects = projectServiceImpl.listProjects();
+        Long sumDonatePeopleCounter = 0L;
+        Long sumAlreadyDonation = 0L;
+        for (Project project : projects){
+            sumDonatePeopleCounter += project.getDonatePeopleCounter();
+            sumAlreadyDonation += (long)project.getAlreadyDonation();
+        }
+        model.addAttribute("sumDonatePeopleCounter", sumDonatePeopleCounter);
+        model.addAttribute("sumAlreadyDonation", sumAlreadyDonation);
         model.addAttribute("projectList1", beSelected1);
         model.addAttribute("projectList2", beSelected2);
         model.addAttribute("projectList3", beSelected3);
@@ -166,15 +183,54 @@ public class IndexController {
     }
 
     @GetMapping("/personal_center")
-    public String personal_center(HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView personal_center(Model model, HttpServletRequest request, HttpServletResponse response){
 
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         //使用request对象的getSession()获取session，如果session不存在则创建一个
         HttpSession session = request.getSession();
         //将数据存储到session中
-        if(session.getAttribute("user")==null) {return "redirect:/login";}
-        else{return "person/personal_center";}
+        User user = (User) session.getAttribute("user");
+
+        List<OrderItem> validOrder = orderItemService.getOrderItemByStatus((long)1);
+
+        Set<Project> selectProject = new HashSet<>();
+
+        List<OrderItem> selectOrder = new ArrayList<>();
+
+        for (OrderItem order:
+             validOrder) {
+            if(order.getUser().getId() == user.getId()) {
+                selectProject.add(order.getProject());
+                selectOrder.add(order);
+            }
+        }
+
+        List<List<OrderItem>> order_sort_by_project = new ArrayList<>();
+
+        for (Project project:
+             selectProject) {
+
+            List<OrderItem> projectOrder = new ArrayList<>();
+            float sum = 0;
+
+            for (OrderItem orderItem:
+                 selectOrder) {
+                if(orderItem.getProject() == project) {
+                    projectOrder.add(orderItem);
+                    sum += orderItem.getPrice();
+                }
+            }
+            //额外声明一个对象存捐款总和
+            OrderItem saveSum = new OrderItem();
+            saveSum.setPrice(sum);
+            projectOrder.add(saveSum);
+
+            order_sort_by_project.add(projectOrder);
+        }
+
+        model.addAttribute("orderSortList", order_sort_by_project);
+        return new ModelAndView("person/personal_center", "pcModel", model);
     }
 
     @GetMapping("/contact_us")

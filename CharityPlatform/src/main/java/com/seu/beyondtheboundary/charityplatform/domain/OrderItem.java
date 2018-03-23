@@ -1,7 +1,11 @@
 package com.seu.beyondtheboundary.charityplatform.domain;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity  //实体
 public class OrderItem {
@@ -16,8 +20,8 @@ public class OrderItem {
     @Column(name = "price")
     private float price;
 
-    @Column(name = "orderID")
-    private String orderID;
+    @Column(name = "orderId")
+    private String orderId;
 
     @ManyToOne(cascade=CascadeType.DETACH)
     @JoinColumn(name="project_id")
@@ -54,12 +58,12 @@ public class OrderItem {
         this.price = price;
     }
 
-    public String getOrderID() {
-        return orderID;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrderID(String orderID) {
-        this.orderID = orderID;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public Project getProject() {
@@ -69,14 +73,6 @@ public class OrderItem {
     public void setProject(Project project) {
         this.project = project;
     }
-
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
 
     public Timestamp getCreateTime() {
         return createTime;
@@ -94,10 +90,15 @@ public class OrderItem {
         this.user = user;
     }
 
-    public OrderItem(float price, String orderID, Project project, User user) {
+    public OrderItem( float price, String orderId, Project project, User user) {
+
         this.price = price;
-        this.orderID = orderID;
+        this.orderId = orderId;
         this.project = project;
         this.user = user;
+    }
+
+    public OrderItem() {
+
     }
 }

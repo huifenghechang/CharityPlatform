@@ -10,114 +10,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+    <style>
+        .project_page_metadata h6{
+            padding: 0.5em 0 0 0;
+            font-size: 0.9em;
+            text-align: center;
+            font-weight:bold;
+        }
+        .project_page_metadata h1{
+            padding: 0 0 0 1em;
+            font-size: 2.4em;
+            font-weight:bold;
+        }
+        .project_page_metadata p{
+            padding: 1em 0 0 2em;
+            font-size: 1.2em;
+            line-height: 1em;
+            font-weight:bold;
+        }
+
+        .project_page_switch_content btn{
+            border: none;
+            font-family: inherit;
+            color: inherit;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            outline: none;
+            position: relative;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+            border-radius:7px !important;
+            text-decoration: none;
+            border: 2px solid #ff0505;
+            /*#3c763dab*/
+            font-weight: 900;
+            background:#ff0505;
+            color:#fff;
+            z-index:1;
+            margin-left: 0px;
+            margin-bottom: 0px;
+            font-size:1.5em;
+        }
+        .project_page_switch_content btn:after {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+            color:#000000;
+        }
+
+        .project_page_main_story h1{
+            padding: 0 0 0.2em 0;
+            width: 100%;
+            font-size: 1.7em;
+            font-weight:600;
+        }
+        .project_page_main_story p{
+            text-indent: 2em;
+            padding: 0 0 0.5em 0;
+            width: 90%;
+            font-size: 1.3em;
+            line-height: 150%
+        }
+        .project_page_main_story img{
+            padding: 1em 0 1em 0;
+            width: 90%
+        }
+        .project_page_progress li{
+            background-color: #f0f4f7;
+            position: relative;
+            border-color: #eff5f5;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+        }
+        .project_page_progress li .listIcon{
+            position: absolute;
+            top: 14px;
+            left: -28px;
+            display: inline-block;
+            height: 14px;
+            width: 30px;
+            background: url('../images/activity_DaShanLiDe/progress_list_icon.png') no-repeat;
+        }
+
+        a{
+            color: #E74C3C;
+        }
+
+        a:hover{
+            color: cyan;
+        }
+    </style>
+
 </head>
 <body style="position: relative">
-<!--login and register-->
 
-<!--<div class="header container">-->
-    <!--<div class="logo">-->
-        <!--<a href="../index.html"><img src="../images/logo.png" alt="click this to homepage" /></a>-->
-    <!--</div>-->
-    <!--<div class="top-nav">-->
-        <!--<nav class="main_nav">-->
-            <!--<ul>-->
-                <!--<li><a href="/login" class="scroll">登录</a></li>-->
-                <!--<li><a href="/register" class="scroll">注册</a></li>-->
-            <!--</ul>-->
-        <!--</nav>-->
-    <!--</div>-->
-<!--</div>-->
 <div th:include="fragments/header_w::header"></div>
-<!---->
-<!-- styles for the page -->
-<style>
-.project_page_metadata h6{
-    padding: 0.5em 0 0 0;
-    font-size: 0.9em;
-    text-align: center;
-    font-weight:bold;
-}
-.project_page_metadata h1{
-    padding: 0 0 0 1em;
-    font-size: 2.4em;
-    font-weight:bold;
-}
-.project_page_metadata p{
-    padding: 1em 0 0 2em;
-    font-size: 1.2em;
-    line-height: 1em;
-    font-weight:bold;
-}
-
-.project_page_switch_content btn{
-	border: none;
-	font-family: inherit;
-	color: inherit;
-	display: inline-block;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	outline: none;
-	position: relative;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-	border-radius:7px !important;
-	text-decoration: none;
-	border: 2px solid #ff0505;
-	/*#3c763dab*/
-	font-weight: 900;
-	background:#ff0505;
-	color:#fff;
-	z-index:1;
-	margin-left: 0px;
-	margin-bottom: 0px;
-	font-size:1.5em;
-}
-.project_page_switch_content btn:after {
-	content: '';
-	position: absolute;
-	z-index: -1;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-	color:#000000;
-}
-
-.project_page_main_story h1{
-    padding: 0 0 0.2em 0;
-    width: 100%;
-    font-size: 1.7em;
-    font-weight:600;
-}
-.project_page_main_story p{
-    text-indent: 2em;
-    padding: 0 0 0.5em 0;
-    width: 90%;
-    font-size: 1.3em;
-    line-height: 150%
-}
-.project_page_main_story img{
-    padding: 1em 0 1em 0;
-    width: 90%
-}
-.project_page_progress li{
-    background-color: #f0f4f7;
-	position: relative;
-	border-color: #eff5f5;
-	margin-bottom: 20px;
-	padding: 10px 20px;
-}
-.project_page_progress li .listIcon{
-	position: absolute;
-	top: 14px;
-	left: -28px;
-	_left: -48px;
-	display: inline-block;
-	height: 14px;
-	width: 30px;
-	background: url('../images/activity_DaShanLiDe/progress_list_icon.png') no-repeat;
-}
-</style>
 
 <!-- 本页的主体 -->
 
@@ -142,9 +135,13 @@
                         <h1 th:text="*{title}"></h1>
                         <p th:text="'已募善款：'+*{alreadyDonation}"></p>
                         <p th:text="'参捐人数：'+*{donatePeopleCounter}"></p>
-                        <p>项目时间：2018年1月32日 至 2018年2月29日</p>
-                        <a href="#" style="background:#da7400; font-size: 1em; margin: 0 0 0 0;">
+                        <p>项目时间：<span th:text="*{createdTime}"></span> 至 <span th:text="*{endTime}"></span></p>
+
+                        <a th:href="'/pays?id='+${projectModel.project.id}" style="background:#da7400;color: #E74C3C; font-size: 1em; margin: 0 0 0 0;">
+
+
                             <h1>我来捐助</h1>
+                        </a>
                         </a>
                     </div>
                 </div>
@@ -169,28 +166,28 @@
             </div>
 
             <!-- 项目进展 -->
-            <div class="row">
-                <div class="project_page_progress">
-                    <ul>
-                        <li>
-                            <span class="listIcon"></span>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                        </li>
-                        <li>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                        </li>
-                        <li>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <!--<div class="row">-->
+                <!--<div class="project_page_progress">-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--<span class="listIcon"></span>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
         <div class="col-md-3">

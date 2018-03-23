@@ -7,8 +7,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.sql.Date;
 
 @Entity  //实体
 public class Project implements Serializable {
@@ -24,10 +24,10 @@ public class Project implements Serializable {
     private Long status = 1L;  //状态,状态1表示待审核，2表示已审核通过未发布，3，表示审核通过已发布，0表示已审核未通过
 
     @Column(name ="aimDonation")
-    private Long aimDonation = 1L;  //目标金额
+    private float aimDonation = 1L;  //目标金额
 
     @Column(name ="alreadyDonation")
-    private Long alreadyDonation = 1L;  //目前已筹
+    private float alreadyDonation = 0L;  //目前已筹
 
     @Column(name = "reading")
     private Long reading = 0L;  //阅读量
@@ -90,6 +90,9 @@ public class Project implements Serializable {
 
     }
 
+//    @OneToMany(mappedBy="project",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//    private Set<OrderItem> orders = new HashSet<OrderItem>();
+
 
     public Long getId() {
         return id;
@@ -115,19 +118,19 @@ public class Project implements Serializable {
         this.status = status;
     }
 
-    public Long getAimDonation() {
+    public float getAimDonation() {
         return aimDonation;
     }
 
-    public void setAimDonation(Long aimDonation) {
+    public void setAimDonation(float aimDonation) {
         this.aimDonation = aimDonation;
     }
 
-    public Long getAlreadyDonation() {
+    public float getAlreadyDonation() {
         return alreadyDonation;
     }
 
-    public void setAlreadyDonation(Long alreadyDonation) {
+    public void setAlreadyDonation(float alreadyDonation) {
         this.alreadyDonation = alreadyDonation;
     }
 
