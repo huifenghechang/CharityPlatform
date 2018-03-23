@@ -123,7 +123,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="donate-item-default-active">
-                                                    <a href="#" class="donate-button donate-button-medium-orange donate-button-default" seed="donateItemDefaultActive-donateButton" smartracker="on">
+                                                    <a th:href="@{'/pays?id='+${menu.get(0).getProject().getId()}}" class="donate-button donate-button-medium-orange donate-button-default" seed="donateItemDefaultActive-donateButton" smartracker="on">
                                                         <span class="donate-button-text">继续捐助</span>
                                                     </a>
                                                 </div>

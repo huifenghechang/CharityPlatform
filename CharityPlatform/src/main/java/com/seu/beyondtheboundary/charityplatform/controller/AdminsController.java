@@ -39,8 +39,6 @@ public class AdminsController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private OrderItemRepository orderItemRepository;
 
     @Autowired
     private OrderItemServiceImpl orderItemService;

@@ -22,7 +22,7 @@
         </tr>
 
         <tr th:each="menu: ${orderModel.orderList}">
-            <td width="130px" th:text="${menu.orderID}"></td>
+            <td width="130px" th:text="${menu.orderId}"></td>
             <td width="190px" th:text="${menu.getProject().getTitle()}">大山里的健康小课桌</td>
             <td width="90px" th:text="${menu.price}"></td>
             <td width="140px" th:text="${menu.getUser().getUsername()}"></td>
