@@ -44,6 +44,7 @@ public class UserspaceController {
 
     public static final String saveRoot = ClassUtils.getDefaultClassLoader().getResource("static/userimages").getPath(); //"src/main/webapp/userimages/";
 
+    public static final String saveAvatarRoot = ClassUtils.getDefaultClassLoader().getResource("static/userimages/avatar").getPath();
     @Autowired
     private ProjectService projectService;
 
@@ -231,6 +232,34 @@ public class UserspaceController {
         }
 
         return "redirect:/u/user_commit_verify";
+    }
+
+    @PostMapping("/user_commit_avatar")
+    public String user_upload_avatar(@RequestParam("image") MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
+        if (!image.isEmpty()) {
+            try {
+                Files.copy(image.getInputStream(), Paths.get(saveAvatarRoot.substring(1, saveAvatarRoot.length()), image.getOriginalFilename()));
+
+                response.setCharacterEncoding("UTF-8");
+                response.setContentType("text/html;charset=UTF-8");
+                //使用request对象的getSession()获取session，如果session不存在则创建一个
+                HttpSession session = request.getSession();
+                //将数据存储到session中
+                User user1 = (User) session.getAttribute("user");
+
+                user1.setAvatar(image.getOriginalFilename());
+
+                userRepository.save(user1);
+
+                redirectAttributes.addFlashAttribute("message", "you successfully uploaded " + image.getOriginalFilename() + "!");
+            } catch (IOException | RuntimeException e) {
+                redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " =>" + e.getMessage());
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " because it was empty");
+        }
+
+        return "redirect:/u/complete_user_info";
     }
 
     @GetMapping("/user_donate")
