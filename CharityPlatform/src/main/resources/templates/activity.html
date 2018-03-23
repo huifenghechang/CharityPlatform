@@ -135,7 +135,7 @@
                         <h1 th:text="*{title}"></h1>
                         <p th:text="'已募善款：'+*{alreadyDonation}"></p>
                         <p th:text="'参捐人数：'+*{donatePeopleCounter}"></p>
-                        <p>项目时间：2018年1月32日 至 2018年2月29日</p>
+                        <p>项目时间：<span th:text="*{createdTime}"></span> 至 <span th:text="*{endTime}"></span></p>
 
                         <a th:href="'/pays?id='+${projectModel.project.id}" style="background:#da7400;color: #E74C3C; font-size: 1em; margin: 0 0 0 0;">
 
@@ -166,28 +166,28 @@
             </div>
 
             <!-- 项目进展 -->
-            <div class="row">
-                <div class="project_page_progress">
-                    <ul>
-                        <li>
-                            <span class="listIcon"></span>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                        </li>
-                        <li>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                        </li>
-                        <li>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                            暂时没有<br/>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <!--<div class="row">-->
+                <!--<div class="project_page_progress">-->
+                    <!--<ul>-->
+                        <!--<li>-->
+                            <!--<span class="listIcon"></span>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                            <!--暂时没有<br/>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
         <div class="col-md-3">

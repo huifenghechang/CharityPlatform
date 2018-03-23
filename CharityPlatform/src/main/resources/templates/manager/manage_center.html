@@ -6,13 +6,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>管理中心</title>
   <style type="text/css">
-    img {
+    .left-menu img {
       display: inline-block;
       width: 14%;
-      margin-left: 15px;
       margin-right: 10px;
+      margin-left: 20px;
       margin-bottom: 2px;
     }
+
   </style>
 </head>
 
@@ -24,7 +25,7 @@
 
 
 <!--菜单-->
-<div class="left-menu" style="min-height: 1024px">
+  <div class="left-menu" style="min-height: 1024px">
   <ul id="menu">
     <li class="menu-list">
       <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>活动管理<s class="sz"></s></a>
@@ -39,7 +40,6 @@
       <ul>
         <li><a href="admins/vip_to_verify" target="menuFrame"><img src="/images/icon_left/wait_verify.png">待审核求助者列表</a></li>
         <li><a href="admins/vip_verified" target="menuFrame"><img src="/images/icon_left/published.png">已审核求助者列表</a></li>
-        <li><a href="admins/apply_for_refund" target="menuFrame"><img src="/images/icon_left/refund.png">退款申请</a></li>
       </ul>
     </li>
     <li class="menu-list">
@@ -53,12 +53,13 @@
       <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>订单管理<s class="sz"></s></a>
       <ul>
         <li><a href="/admins/admin_order" target="menuFrame"><img src="/images/icon_left/info.png">订单信息</a></li>
+        <li><a href="admins/apply_for_refund" target="menuFrame"><img src="/images/icon_left/refund.png">退款申请</a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-<!--菜单右边的iframe页面-->
+  <!--菜单右边的iframe页面-->
 <div id="right-content" class="right-content" style="min-height: 1024px">
   <div class="content">
     <div id="page_content">

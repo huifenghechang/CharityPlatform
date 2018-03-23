@@ -46,12 +46,12 @@ public class AdminsController {
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") Long id){
         projectServiceImpl.removeProject(id);
-        return new ModelAndView("redirect:admins/published");
+        return new ModelAndView("redirect:/admins/published");
     }
     @GetMapping("/deleteUser/{id}")
     public ModelAndView deleteUser(@PathVariable("id") Long id){
         userService.removeUser(id);
-        return new ModelAndView("redirect:admins/vip_verified");
+        return new ModelAndView("redirect:/admins/vip_verified");
     }
 
     @GetMapping("/deleteAdmin/{id}")
@@ -64,21 +64,21 @@ public class AdminsController {
     public ModelAndView change1to0(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)0);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_verify");
+        return new ModelAndView("redirect:/admins/to_verify");
     }
 
     @GetMapping("/change1to2/{id}")
     public ModelAndView change1to2(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)2);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_verify");
+        return new ModelAndView("redirect:/admins/to_verify");
     }
 
     @GetMapping("/change2to3/{id}")
     public ModelAndView change2to3(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)3);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_publish");
+        return new ModelAndView("redirect:/admins/to_publish");
     }
 
     @GetMapping("/to_publish")
@@ -93,7 +93,7 @@ public class AdminsController {
             }
         }
         model.addAttribute("projectList", beSelected);
-        return new ModelAndView("/manager/to_publish", "projectModel", model);
+        return new ModelAndView("manager/to_publish", "projectModel", model);
 
     }
 
@@ -123,7 +123,7 @@ public class AdminsController {
             }
         }
         model.addAttribute("projectList", beSelected);
-        return new ModelAndView("/manager/published", "projectModel", model);
+        return new ModelAndView("manager/published", "projectModel", model);
 
     }
     @GetMapping("/vip_to_verify")
@@ -179,7 +179,7 @@ public class AdminsController {
     public ModelAndView editadmin(Model model) {
         List<User> selectAdmins = userService.findAdmins();
         model.addAttribute("adminList", selectAdmins);
-        return new ModelAndView("/manager/update_admin", "adminModel", model);
+        return new ModelAndView("manager/update_admin", "adminModel", model);
     }
 
 
@@ -187,7 +187,7 @@ public class AdminsController {
     @GetMapping("/complete_admin_info")
     public ModelAndView complete_user_info(@RequestParam(value="id") Long id,Model model) {
         model.addAttribute("id",id);
-        return new ModelAndView("/manager/complete_admin_info", "adminModel", model);
+        return new ModelAndView("manager/complete_admin_info", "adminModel", model);
     }
 
 
@@ -224,7 +224,7 @@ public class AdminsController {
 
         model.addAttribute("orderList", validOrder);
 
-        return new ModelAndView("/manager/order_information", "orderModel", model);
+        return new ModelAndView("manager/order_information", "orderModel", model);
     }
 
 }

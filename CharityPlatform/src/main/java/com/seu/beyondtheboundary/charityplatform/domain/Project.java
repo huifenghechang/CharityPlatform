@@ -27,7 +27,7 @@ public class Project implements Serializable {
     private float aimDonation = 1L;  //目标金额
 
     @Column(name ="alreadyDonation")
-    private float alreadyDonation = 1L;  //目前已筹
+    private float alreadyDonation = 0L;  //目前已筹
 
     @Column(name = "reading")
     private Long reading = 0L;  //阅读量

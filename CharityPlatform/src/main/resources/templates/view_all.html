@@ -109,8 +109,8 @@
                         <img class="img-responsive" th:src="@{'/project_img_big/'+${menu.propagandaMap}}" style="top: 0px;" alt=" " /><div class="b-wrapper"><h2 class="b-animate b-from-left    b-delay03 "><img src="images/plus.png" alt="" style="top: 0px;"/></h2>
                         </div></a>
                     <div class="donate-item-default-progress">
-                        <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short" th:with="component =${menu.alreadyDonation}/ ${menu.aimDonation}*100">
-                            <div class="ui-progressbar-s ui-progressbar-s-short" th:style="'width:' + ${menu.alreadyDonation}/ ${menu.aimDonation} *100+'%'" >
+                        <div class="ui-progressbar-wrapper-s ui-progressbar-wrapper-s-short" th:with="component =${menu.alreadyDonation}/ (${menu.aimDonation+0.01})*100">
+                            <div class="ui-progressbar-s ui-progressbar-s-short" th:style="'width:' + ${component} +'%'" >
                                 <span th:text="${#numbers.formatDecimal(component,1,2)}+'%'"></span>
                             </div>
                         </div>

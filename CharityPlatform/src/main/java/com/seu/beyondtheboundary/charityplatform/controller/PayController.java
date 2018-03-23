@@ -40,10 +40,12 @@ public class PayController {
 	@Autowired
 	private UserServiceImpl userService;
 	@RequestMapping("")
-	public ModelAndView  pays(Model model,@RequestParam(value="id") Long id) {
+	public ModelAndView  pays(Model model,@RequestParam(value="id") Long id,HttpServletRequest request) {
 		Project project = projectServiceImpl.getProjectById(id);
         model.addAttribute("message", id);
 		model.addAttribute("project", project);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user")==null){return new ModelAndView("redirect:/login");}
 		return new ModelAndView("user_donate", "projectModel", model);
     }
 
@@ -55,12 +57,13 @@ public class PayController {
 
         HttpSession session = request.getSession();
         User user1 = (User) session.getAttribute("user");
+
         Project project = projectServiceImpl.getProjectById(id);
         String orderId = PayUtil.getOrderIdByUUId();
         OrderItem orderItem = new OrderItem(price,orderId,project,user1);
         orderItemService.saveOrderItemService(orderItem);
 
-		DecimalFormat decimalFormat=new DecimalFormat(".00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+		DecimalFormat decimalFormat=new DecimalFormat("0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
 		String p=decimalFormat.format(price);//format 返回的是字符串
 
 		remoteMap.put("price",p);
@@ -94,9 +97,8 @@ public class PayController {
 	}
 
 	@RequestMapping("/returnPay")
-	public ModelAndView returnPay(HttpServletRequest request, HttpServletResponse response, String orderid) {
-		boolean isTrue = false;
-		ModelAndView view = null;
+	public ModelAndView returnPay(HttpServletRequest request, HttpServletResponse response, String orderid, Model model) {
+
 //		OrderItem orderItem = orderItemService.getOrderItemByOrderId(orderid);
 //		orderItem.setStatus(1L);
 //		orderItemService.saveOrderItemService(orderItem);
@@ -110,11 +112,13 @@ public class PayController {
 //		project.setDonatePeopleCounter((project.getDonatePeopleCounter()+1));
 //		projectServiceImpl.saveProject(project);
 		// 根据订单号查找相应的记录:根据结果跳转到不同的页面
-		if (isTrue) {
-			view = new ModelAndView("redirect:/index");
-		} else {
-			view = new ModelAndView("redirect:/index");
-		}
-		return view;
+		OrderItem orderItem = orderItemService.getOrderItemByOrderId(orderid);
+		float price = orderItem.getPrice();
+		Long prjectid = orderItem.getProject().getId();
+		model.addAttribute("price", price);
+		model.addAttribute("prjectid", prjectid);
+		return new ModelAndView("person/success_donate", "Model", model);
+
+
 	}
 }

@@ -11,7 +11,7 @@
         .main_content a{
             padding-left: 22px;
         }
-        img {
+        .left-menu  img {
             display: inline-block;
             width: 16%;
             margin-right: 10px;
@@ -31,8 +31,8 @@
 <div class="main_content" style="min-height: 900px;">
     <div class="left-menu" style="min-height: 896px">
         <ul>
-            <li><a href=""><img src="/images/icon_left/more.png">查看更多项目</a></li>
-            <li><a href=""><img src="/images/icon_left/return.png">返回捐助页面</a></li>
+            <li><a href="/column/0"><img src="/images/icon_left/more.png">查看更多项目</a></li>
+            <li><a th:href="'/pays?id='+${Model.prjectid}"><img src="/images/icon_left/return.png">返回捐助页面</a></li>
             <li><a href="/index"><img src="/images/icon_left/index.png">返回首页</a></li>
         </ul>
     </div>
@@ -42,8 +42,8 @@
             <h6>境界的彼方</h6>
         </div>
         <div style="margin-top: 6em; text-align: center">
-            <img style="display: inline; width: 8%" src="images/success.png"/>
-            <p style="display: inline">您成功捐助2元，感谢您的爱心！</p>
+            <img style="display: inline; width: 8%" src="/images/success.png"/>
+            <p style="display: inline">您成功捐助<span th:text="${Model.price}"></span>元，感谢您的爱心！</p>
         </div>
     </div>
 </div>

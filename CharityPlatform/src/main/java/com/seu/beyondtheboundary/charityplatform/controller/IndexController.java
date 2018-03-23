@@ -95,6 +95,15 @@ public class IndexController {
                 if (a == 4 && b==3) {beSelected4.add(select);}
             }
         }
+        List<Project> projects = projectServiceImpl.listProjects();
+        Long sumDonatePeopleCounter = 0L;
+        Long sumAlreadyDonation = 0L;
+        for (Project project : projects){
+            sumDonatePeopleCounter += project.getDonatePeopleCounter();
+            sumAlreadyDonation += (long)project.getAlreadyDonation();
+        }
+        model.addAttribute("sumDonatePeopleCounter", sumDonatePeopleCounter);
+        model.addAttribute("sumAlreadyDonation", sumAlreadyDonation);
         model.addAttribute("projectList1", beSelected1);
         model.addAttribute("projectList2", beSelected2);
         model.addAttribute("projectList3", beSelected3);

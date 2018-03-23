@@ -38,7 +38,7 @@ public class User{
 
 	private String avatar;
 
-	private Integer verified;
+	private Integer verified=0;
 
 	private boolean admin;
 
