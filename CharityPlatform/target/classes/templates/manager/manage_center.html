@@ -5,6 +5,15 @@
 <head lang="en">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>管理中心</title>
+  <style type="text/css">
+    img {
+      display: inline-block;
+      width: 14%;
+      margin-left: 15px;
+      margin-right: 10px;
+      margin-bottom: 2px;
+    }
+  </style>
 </head>
 
 <body style="position: relative;">
@@ -20,17 +29,30 @@
     <li class="menu-list">
       <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>活动管理<s class="sz"></s></a>
       <ul>
-        <li><a href="/admins/to_verify" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>待审核活动列表</a></li>
-        <li><a href="/admins/to_publish" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>待发布活动列表</a></li>
-        <li><a href="/admins/published" target="menuFrame"><i class="glyph-icon icon-chevron-right3"></i>已发布活动列表</a></li>
+        <li><a href="/admins/to_verify" target="menuFrame"><img src="/images/icon_left/wait_verify.png">待审核活动列表</a></li>
+        <li><a href="/admins/to_publish" target="menuFrame"><img src="/images/icon_left/wait_publish.png">待发布活动列表</a></li>
+        <li><a href="/admins/published" target="menuFrame"><img src="/images/icon_left/published.png">已发布活动列表</a></li>
       </ul>
     </li>
     <li class="menu-list">
       <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>求助者管理<s class="sz"></s></a>
       <ul>
-        <li><a href="admins/vip_to_verify" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>待审核求助者列表</a></li>
-        <li><a href="admins/vip_verified" target="menuFrame"><i class="glyph-icon icon-chevron-right1"></i>已审核求助者列表</a></li>
-        <li><a href="admins/apply_for_refund" target="menuFrame"><i class="glyph-icon icon-chevron-right2"></i>退款申请</a></li>
+        <li><a href="admins/vip_to_verify" target="menuFrame"><img src="/images/icon_left/wait_verify.png">待审核求助者列表</a></li>
+        <li><a href="admins/vip_verified" target="menuFrame"><img src="/images/icon_left/published.png">已审核求助者列表</a></li>
+        <li><a href="admins/apply_for_refund" target="menuFrame"><img src="/images/icon_left/refund.png">退款申请</a></li>
+      </ul>
+    </li>
+    <li class="menu-list">
+      <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>管理员管理<s class="sz"></s></a>
+      <ul>
+        <li><a href="/register_admin" target="menuFrame"><img src="/images/icon_left/add.png">添加管理员</a></li>
+        <li><a href="/admins/edit_admin" target="menuFrame"><img src="/images/icon_left/verify.png">修改管理员信息</a></li>
+      </ul>
+    </li>
+    <li class="menu-list">
+      <a style="cursor:pointer" class="firsta"><i  class="glyph-icon xlcd"></i>订单管理<s class="sz"></s></a>
+      <ul>
+        <li><a href="/admins/admin_order" target="menuFrame"><img src="/images/icon_left/info.png">订单信息</a></li>
       </ul>
     </li>
   </ul>
