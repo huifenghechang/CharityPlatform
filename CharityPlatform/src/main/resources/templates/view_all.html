@@ -36,6 +36,14 @@
             color: #08c;}
         .donate-item-default-title a{
             color: #222;}
+
+        .view_bt{width: 78px;
+            height: 29px;
+            display: inline-block;
+            line-height: 29px;
+            background: #f19e06;
+            color: #fff;
+            font-weight: 600;}
     </style>
 </head>
 
@@ -116,10 +124,22 @@
                         </div>
                     </div>
 
-                    <div class="donate-item-default-active">
-                        <a class="donate-button donate-button-medium-orange donate-button-single" th:href="'/pays?id='+${menu.id}">
-                            <span class="donate-button-text" >我要捐助</span>
-                        </a>
+                    <div style="text-align: center" id="html_load">
+
+
+                        <script th:inline="javascript">
+                            function CompareDate(d1,d2)
+                            {
+                                return ((new Date(d1.replace(/-/g,"\/"))) > (new Date(d2.replace(/-/g,"\/"))));
+                            }
+                            var current_time = [[${menu.endTime}]];
+                            var isquotatrue = [[${menu.alreadyDonation}]] < [[${menu.aimDonation}]];
+                            var myDate = new Date();
+                            var nowtime = myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate();
+                            var istimetrue = CompareDate(current_time,nowtime);
+                            if(istimetrue && isquotatrue ){document.write("<a href ='/pays?id=[[${menu.id}]]'><span class=\"view_bt\" >我要捐款</span></a>")}
+                            else {document.write("<a><span class=\"view_bt\" style='background: grey'>捐款停止</span></a>")}
+                        </script>
                     </div>
                 </div>
                 <div class="donate-item-default-right">

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DateFormat;
 import java.util.*;
 
 
@@ -64,6 +65,8 @@ public class ColumnController {
             else if (order.equals("new")) { // 最新查询
                 beSelected1=projectServiceImpl.listProjectsByTitleLikeOrderByIdDesc(search);}
         }
+
+
         model.addAttribute("projectList1", beSelected1);
         model.addAttribute("projectID", id);
         model.addAttribute("projectSearch", search);
