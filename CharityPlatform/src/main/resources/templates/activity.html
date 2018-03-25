@@ -136,12 +136,23 @@
                         <p th:text="'已募善款：'+*{alreadyDonation}"></p>
                         <p th:text="'参捐人数：'+*{donatePeopleCounter}"></p>
                         <p>项目时间：<span th:text="*{createdTime}"></span> 至 <span th:text="*{endTime}"></span></p>
+                        
+                        <script th:inline="javascript">
+                            function CompareDate(d1,d2)
+                            {
+                                return ((new Date(d1.replace(/-/g,"\/"))) > (new Date(d2.replace(/-/g,"\/"))));
+                            }
+                            var current_time = [[${projectModel.project.endTime}]];
+                            var isquotatrue = [[${projectModel.project.alreadyDonation}]] < [[${projectModel.project.aimDonation}]];
+                            var myDate = new Date();
+                            var nowtime = myDate.getFullYear()+"-"+(myDate.getMonth()+1)+"-"+myDate.getDate();
+                            var istimetrue = CompareDate(current_time,nowtime);
+                            if(istimetrue && isquotatrue ){document.write("<a style=\"background:#da7400;color: #E74C3C; font-size: 1em; margin: 0 0 0 0;\" href ='/pays?id=[[${projectModel.project.id}]]'><h1>我要捐款</h1></a>")}
+                            else {document.write("<a style=\"background:#da7400;color: #E74C3C; font-size: 1em; margin: 0 0 0 0;\"><h1>捐款停止</h1></a>")}
+                        </script>
 
-                        <a th:href="'/pays?id='+${projectModel.project.id}" style="background:#da7400;color: #E74C3C; font-size: 1em; margin: 0 0 0 0;">
 
 
-                            <h1>我来捐助</h1>
-                        </a>
                         </a>
                     </div>
                 </div>
