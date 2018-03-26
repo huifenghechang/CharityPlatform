@@ -46,6 +46,8 @@ public class AdminsController {
     @Autowired
     private OrderItemServiceImpl orderItemService;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
     @GetMapping("/cancle_project_verified/{id}")
     public ModelAndView delete(@PathVariable("id") Long id){
 
@@ -206,7 +208,6 @@ public class AdminsController {
     public String complete_user_info1(@RequestParam(value="id") Long id , User user, HttpServletRequest request, HttpServletResponse response) {
 
         User user1 = userRepository.findById(id);
-        System.out.println(user1.getId());
         user1.setSex(user.isSex());
         if(user.getTel() != "")
             user1.setTel(user.getTel());
@@ -224,14 +225,32 @@ public class AdminsController {
     }
 
     @GetMapping("/apply_for_refund")
-    public String apply_for_refund() {
-        return "/manager/apply_for_refund";
+    public ModelAndView apply_for_refund(Model model) {
+        List<OrderItem> refundOrder = orderItemService.getOrderItemByRefund_status(2L, 1L);
+
+        model.addAttribute("refundOrder", refundOrder);
+
+        return new ModelAndView("/manager/refund_order_information", "refundModel", model);
+    }
+
+    @GetMapping("/refund/{id}")
+    public String apply_for_refund(@PathVariable("id") Long id) {
+
+        OrderItem orderItem = orderItemRepository.findById(id);
+
+        orderItem.setRefundStatus(1L);
+        orderItem.getProject().setAlreadyDonation(orderItem.getProject().getAlreadyDonation() - orderItem.getPrice());
+        orderItem.getProject().setDonatePeopleCounter(orderItem.getProject().getDonatePeopleCounter() - 1L);
+        orderItem.getUser().setIntegral(orderItem.getUser().getIntegral() - (long)orderItem.getPrice());
+
+        orderItemRepository.save(orderItem);
+        return "redirect:/admins/apply_for_refund";
     }
 
     @GetMapping("/admin_order")
     public ModelAndView order_show(Model model) {
 
-        List<OrderItem> validOrder = orderItemService.getOrderItemByStatus((long)1);
+        List<OrderItem> validOrder = orderItemService.getOrderItemByStatus(1L);
 
         model.addAttribute("orderList", validOrder);
 

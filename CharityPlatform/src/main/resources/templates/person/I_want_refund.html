@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>退款界面</title>
+    <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+    <style type="text/css">
+        .main_content a{
+            padding-left: 22px;
+        }
+        img {
+            display: inline-block;
+            width: 16%;
+            margin-right: 10px;
+            margin-bottom: 2px;
+        }
+    </style>
+
+</head>
+
+<body style="position: relative;overflow-y:scroll;">
+
+<!--header-->
+<div th:include="fragments/header_w::header"></div>
+
+
+<!--main-content-->
+<div class="main_content" style="min-height: 900px;">
+    <div class="left-menu" style="min-height: 896px">
+        <ul>
+            <li><a href=""><img src="/images/icon_left/more.png">退款</a></li>
+        </ul>
+    </div>
+
+    <div class="right-content" style="overflow: hidden;background: #fff; height: 900px">
+        <div style=" text-align: center">
+            <div class="table_con">
+                <table>
+                    <tr class="tb_title">
+                        <td width="130px">订单序号</td>
+                        <td width="190px">项目名</td>
+                        <td width="90px">捐助金额</td>
+                        <td width="210px">捐助时间</td>
+                        <td width="90px">申请退款</td>
+
+                    </tr>
+
+                    <tr th:each="menu: ${userOrderModel.userOrderList}">
+                        <td width="130px" th:text="${menu.orderId}"></td>
+                        <td width="190px" th:text="${menu.getProject().getTitle()}"></td>
+                        <td width="90px" th:text="${menu.price}"></td>
+                        <td width="210px" th:text="${menu.createTime}"></td>
+                        <td width="90px">
+                            <a id="sj_btn_b" style="padding-left: 0px; width: 65px"  th:href="@{'/u/commit_refund/'+${menu.id}}">申请退款</a>
+                        </td>
+
+
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--footer-->
+<div th:include="fragments/footer_w::footer"></div>
+
+</body>
+</html>
+

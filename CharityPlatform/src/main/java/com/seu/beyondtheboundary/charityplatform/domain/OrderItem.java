@@ -23,6 +23,9 @@ public class OrderItem {
     @Column(name = "orderId")
     private String orderId;
 
+    @Column(name = "refund_status")
+    private Long refundStatus = 0L;
+
     @ManyToOne(cascade=CascadeType.DETACH)
     @JoinColumn(name="project_id")
     private Project project;
@@ -90,7 +93,15 @@ public class OrderItem {
         this.user = user;
     }
 
-    public OrderItem( float price, String orderId, Project project, User user) {
+    public Long getRefundStatus() {
+        return refundStatus;
+    }
+
+    public void setRefundStatus(Long refundStatus) {
+        this.refundStatus = refundStatus;
+    }
+
+    public OrderItem(float price, String orderId, Project project, User user) {
 
         this.price = price;
         this.orderId = orderId;

@@ -1,7 +1,9 @@
 package com.seu.beyondtheboundary.charityplatform.controller;
 
+import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
+import com.seu.beyondtheboundary.charityplatform.repository.OrderItemRepository;
 import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectService;
 import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
@@ -31,6 +33,7 @@ import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * 用户主页空间控制器.
@@ -51,6 +54,8 @@ public class UserspaceController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
     //获取单个项目详情的界面
     @GetMapping("/person/project_details")
     public ModelAndView Test(@RequestParam(value = "id") Long id,
@@ -269,7 +274,22 @@ public class UserspaceController {
         return "/person/user_donate";
     }
 
+    @GetMapping("/user_refund")
+    public ModelAndView user_refund(Model model) {
+        List<OrderItem> orderItemList = orderItemRepository.findAllByRefundStatusAndStatus(0L, 1L);
 
+        model.addAttribute("userOrderList", orderItemList);
+
+        return new ModelAndView("/person/I_want_refund", "userOrderModel", model);
+    }
+
+    @GetMapping("/commit_refund/{id}")
+    public String commit_refund(@PathVariable("id") Long id) {
+        OrderItem orderItem = orderItemRepository.findById(id);
+        orderItem.setRefundStatus(2L);
+        orderItemRepository.save(orderItem);
+        return "redirect:/u/user_refund";
+    }
 }
 
 
