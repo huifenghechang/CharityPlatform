@@ -4,6 +4,7 @@ import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.repository.OrderItemRepository;
+import com.seu.beyondtheboundary.charityplatform.repository.ProjectRepository;
 import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
 import com.seu.beyondtheboundary.charityplatform.service.OrderItemServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
@@ -39,18 +40,24 @@ public class AdminsController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Autowired
     private OrderItemServiceImpl orderItemService;
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/cancle_project_verified/{id}")
     public ModelAndView delete(@PathVariable("id") Long id){
-        projectServiceImpl.removeProject(id);
+        Project project = projectRepository.findOne(id);
+        project.setStatus((long)0);
+        projectRepository.save(project);
         return new ModelAndView("redirect:/admins/published");
     }
-    @GetMapping("/deleteUser/{id}")
-    public ModelAndView deleteUser(@PathVariable("id") Long id){
-        userService.removeUser(id);
+    @GetMapping("/cancle_user_verified/{id}")
+    public ModelAndView cancle_user_verified(@PathVariable("id") Long id){
+        User user = userRepository.findById(id);
+        user.setVerified(0);
+        userRepository.save(user);
         return new ModelAndView("redirect:/admins/vip_verified");
     }
 

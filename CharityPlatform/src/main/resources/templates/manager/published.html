@@ -20,7 +20,7 @@
             <td width="180px">项目名</td>
             <td width="320px">项目简介</td>
             <td width="130px">修改信息</td>
-            <td width="130px">删除活动</td>
+            <td width="130px">取消审核</td>
         </tr>
         <tr th:each="menu : ${projectModel.projectList}">
             <td width="180px" th:text="${menu.title}"></td>
@@ -28,7 +28,7 @@
             <td width="130px"><a th:href="'/u/projects/edit?id='+${menu.id}">修改信息</a></td>
             <!--<td width="130px"><a href="#" class="limit-words">修改信息</a></td>-->
             <td width="130px">
-                <a id="sj_btn_a" th:href="@{'/admins/delete/'+${menu.id}}" style="width:75px">删除信息</a>
+                <a id="sj_btn_a" th:href="@{'/admins/cancle_project_verified/'+${menu.id}}" style="width:75px">取消审核</a>
             </td>
         </tr>
 

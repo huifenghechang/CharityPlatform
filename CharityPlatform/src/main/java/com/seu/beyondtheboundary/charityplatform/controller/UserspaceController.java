@@ -218,8 +218,10 @@ public class UserspaceController {
                 HttpSession session = request.getSession();
                 //将数据存储到session中
                 User user1 = (User) session.getAttribute("user");
-
-                user1.setConfirmation_link(user1.getConfirmation_link() + image.getOriginalFilename() + ";");
+                if(user1.getConfirmation_link() == "" || user1.getConfirmation_link() == null)
+                    user1.setConfirmation_link(image.getOriginalFilename() + ";");
+                else
+                    user1.setConfirmation_link(user1.getConfirmation_link() + image.getOriginalFilename() + ";");
 
                 userRepository.save(user1);
 
