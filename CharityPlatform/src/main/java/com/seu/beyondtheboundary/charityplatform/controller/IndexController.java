@@ -183,7 +183,7 @@ public class IndexController {
         //将数据存储到session中
         User user = (User) session.getAttribute("user");
 
-        List<OrderItem> validOrder = orderItemService.getOrderItemByStatus((long)1);
+        List<OrderItem> validOrder = orderItemService.getOrderItemByRefund_status(0L, 1L);
 
         Set<Project> selectProject = new HashSet<>();
 
