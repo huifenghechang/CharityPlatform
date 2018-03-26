@@ -5,6 +5,7 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="/static/images/favicon.ico"/>
 </head>
 
 <body style="position: relative;">
@@ -46,7 +47,7 @@
 <!--login and register-->
 <div class="header container">
     <div class="logo">
-        <a href="index.html"><img src="images/logo.png" alt="click this to homepage" /></a>
+        <a href="index.html"><img src="images/logo_new.png" style="height: 132px" alt="click this to homepage" /></a>
     </div>
     <div class="top-nav">
         <div class="main_nav" th:if="${session.user} == null">
@@ -76,7 +77,7 @@
 <!--content-->
 <div class="content">
     <!--教育助学-->
-    <div class="container">
+    <div class="container" style="margin-top: 35px">
         <a href="#" class="btn btn-1c">教育助学</a>
         <a href="/column/1" class="all" >查看全部</a>
     </div>
