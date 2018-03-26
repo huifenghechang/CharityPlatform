@@ -16,7 +16,7 @@
         <tr class="tb_title">
             <td width="260px">姓名</td>
             <td width="260px">修改信息</td>
-            <td width="260px">删除管理员</td>
+            <td width="260px">取消权限</td>
         </tr>
         <tr th:each="menu: ${adminModel.adminList}">
             <td width="260px" th:text="${menu.realname}"></td>
@@ -28,7 +28,7 @@
 
 
             <td width="260px">
-                <a id="sj_btn_a" th:href="@{'/admins/deleteAdmin/'+${menu.id}}" style="width:75px">删除信息</a>
+                <a id="sj_btn_a" th:href="@{'/admins/cancle_admin/'+${menu.id}}" style="width:75px">取消权限</a>
             </td>
         </tr>
     </table>

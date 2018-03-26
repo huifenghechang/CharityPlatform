@@ -61,9 +61,11 @@ public class AdminsController {
         return new ModelAndView("redirect:/admins/vip_verified");
     }
 
-    @GetMapping("/deleteAdmin/{id}")
+    @GetMapping("/cancle_admin/{id}")
     public ModelAndView deleteAdmin(@PathVariable("id") Long id){
-        userService.removeUser(id);
+        User user = userRepository.findById(id);
+        user.setAdmin(false);
+        userRepository.save(user);
         return new ModelAndView("redirect:/admins/edit_admin");
     }
 
