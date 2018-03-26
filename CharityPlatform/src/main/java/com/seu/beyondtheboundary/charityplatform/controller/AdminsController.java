@@ -4,6 +4,7 @@ import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.repository.OrderItemRepository;
+import com.seu.beyondtheboundary.charityplatform.repository.ProjectRepository;
 import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
 import com.seu.beyondtheboundary.charityplatform.service.OrderItemServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
@@ -39,18 +40,26 @@ public class AdminsController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Autowired
     private OrderItemServiceImpl orderItemService;
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/cancle_project_verified/{id}")
     public ModelAndView delete(@PathVariable("id") Long id){
-        projectServiceImpl.removeProject(id);
+
+        Project project = projectRepository.findOne(id);
+        project.setStatus((long)0);
+        projectRepository.save(project);
         return new ModelAndView("redirect:/admins/published");
     }
-    @GetMapping("/deleteUser/{id}")
-    public ModelAndView deleteUser(@PathVariable("id") Long id){
-        userService.removeUser(id);
+    @GetMapping("/cancle_user_verified/{id}")
+    public ModelAndView cancle_user_verified(@PathVariable("id") Long id){
+        User user = userRepository.findById(id);
+        user.setVerified(0);
+        userRepository.save(user);
+
         return new ModelAndView("redirect:/admins/vip_verified");
     }
 
@@ -109,7 +118,7 @@ public class AdminsController {
             }
         }
         model.addAttribute("projectList", beSelected);
-        return new ModelAndView("manager/to_verify", "projectModel", model);
+        return new ModelAndView("/manager/to_verify", "projectModel", model);
     }
 
     @GetMapping("/published")
@@ -132,7 +141,7 @@ public class AdminsController {
         List<User> selectUser = userService.userNotVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_to_verify", "userModel", model);
+        return new ModelAndView("/manager/vip_to_verify", "userModel", model);
     }
 
     @PostMapping("/vip_to_verify")
@@ -143,7 +152,7 @@ public class AdminsController {
         List<User> selectUser = userService.userNotVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_to_verify", "userModel", model);
+        return new ModelAndView("/manager/vip_to_verify", "userModel", model);
     }
     @GetMapping("/vip_verified")
     public ModelAndView vip_verified(Model model) {
@@ -151,12 +160,12 @@ public class AdminsController {
         List<User> selectUser = userService.userHasVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_verified", "userModel", model);
+        return new ModelAndView("/manager/vip_verified", "userModel", model);
     }
     @GetMapping("/vipcertificate")
     public String showCertificate(Model model) {
 
-        return "manager/vip_get_certificate";
+        return "/manager/vip_get_certificate";
     }
 
     @PostMapping("/vipcertificate")
@@ -164,7 +173,7 @@ public class AdminsController {
 
         model.addAttribute("imgsrc", user.getConfirmation_link().split(";"));
 
-        return new ModelAndView("manager/vip_get_certificate", "imgModel", model);
+        return new ModelAndView("/manager/vip_get_certificate", "imgModel", model);
     }
 
     @PostMapping("/project_certificate")
@@ -172,7 +181,7 @@ public class AdminsController {
 
         model.addAttribute("pro_imgsrc", project.getPro_confirmation_link().split(";"));
 
-        return new ModelAndView("manager/pro_get_certificate", "pro_imgModel", model);
+        return new ModelAndView("/manager/pro_get_certificate", "pro_imgModel", model);
     }
 
     @GetMapping("/edit_admin")
@@ -214,7 +223,7 @@ public class AdminsController {
 
     @GetMapping("/apply_for_refund")
     public String apply_for_refund() {
-        return "manager/apply_for_refund";
+        return "/manager/apply_for_refund";
     }
 
     @GetMapping("/admin_order")

@@ -67,6 +67,18 @@
           <p class="blog-label-error" th:text="${errorMsg}"></p>
         </div>
       </form>
+
+      <div style="float: left;">
+        <form th:action="@{/u/user_commit_avatar}" method="POST" enctype="multipart/form-data">
+          <div class="a-upload">
+            <label for="image">上传头像</label>
+            <input type="file" id="image" name="image">
+          </div>
+          <div>
+            <input class="btn-form" type="submit" value="上传"/>
+          </div>
+        </form>
+      </div>
     </div>
 
 

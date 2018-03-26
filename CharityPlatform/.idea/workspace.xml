@@ -199,14 +199,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vip_verified.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="vip_verified.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/manager/vip_verified.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="264">
-              <caret line="38" column="102" lean-forward="false" selection-start-line="38" selection-start-column="102" selection-end-line="38" selection-end-column="102" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#td#4;n#tr#1;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+              <caret line="38" column="112" lean-forward="false" selection-start-line="38" selection-start-column="112" selection-end-line="38" selection-end-column="112" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -216,6 +214,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-432">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdminsController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/controller/AdminsController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -263,16 +271,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CharityplatformApplication.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/CharityplatformApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FindInProjectRecents">
@@ -300,7 +298,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/domain/OrderItem.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/controller/UserspaceController.java" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/controller/AdminsController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/manager/order_information.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/repository/OrderItemRepository.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/activity.html" />
@@ -312,6 +309,7 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
         <option value="$PROJECT_DIR$/src/main/resources/application.yml" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/manager/vip_verified.html" />
+        <option value="$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/controller/AdminsController.java" />
       </list>
     </option>
   </component>
@@ -430,6 +428,18 @@
               <item name="seu" type="462c0819:PsiDirectoryNode" />
               <item name="beyondtheboundary" type="462c0819:PsiDirectoryNode" />
               <item name="charityplatform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="charityplatform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CharityPlatform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="seu" type="462c0819:PsiDirectoryNode" />
+              <item name="beyondtheboundary" type="462c0819:PsiDirectoryNode" />
+              <item name="charityplatform" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="charityplatform" type="b2602c69:ProjectViewProjectNode" />
@@ -616,12 +626,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1521959157968</updated>
-      <workItem from="1521959188102" duration="7470000" />
+      <workItem from="1521959188102" duration="7734000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12066000" />
+    <option name="totallyTimeSpent" value="12330000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
@@ -643,7 +653,7 @@
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4029018" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.087053575" sideWeight="0.4978678" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -880,14 +890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/controller/AdminsController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3432">
-          <caret line="165" column="0" lean-forward="false" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/manager/order_information.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="552">
@@ -966,7 +968,7 @@
         <state relative-caret-position="165">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1064,10 +1066,16 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/manager/vip_verified.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
-          <caret line="38" column="102" lean-forward="false" selection-start-line="38" selection-start-column="102" selection-end-line="38" selection-end-column="102" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#td#4;n#tr#1;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+          <caret line="38" column="112" lean-forward="false" selection-start-line="38" selection-start-column="112" selection-end-line="38" selection-end-column="112" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/seu/beyondtheboundary/charityplatform/controller/AdminsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
