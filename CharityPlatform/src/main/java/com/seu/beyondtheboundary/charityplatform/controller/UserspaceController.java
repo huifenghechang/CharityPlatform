@@ -1,7 +1,9 @@
 package com.seu.beyondtheboundary.charityplatform.controller;
 
+import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
+import com.seu.beyondtheboundary.charityplatform.repository.OrderItemRepository;
 import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectService;
 import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
@@ -31,6 +33,7 @@ import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * 用户主页空间控制器.
@@ -44,12 +47,15 @@ public class UserspaceController {
 
     public static final String saveRoot = ClassUtils.getDefaultClassLoader().getResource("static/userimages").getPath(); //"src/main/webapp/userimages/";
 
+    public static final String saveAvatarRoot = ClassUtils.getDefaultClassLoader().getResource("static/userimages/avatar").getPath();
     @Autowired
     private ProjectService projectService;
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private OrderItemRepository orderItemRepository;
     //获取单个项目详情的界面
     @GetMapping("/person/project_details")
     public ModelAndView Test(@RequestParam(value = "id") Long id,
@@ -57,7 +63,7 @@ public class UserspaceController {
         Project project = projectService.getProjectById(id);
         System.out.println(project.getContent());
         model.addAttribute("project", project);
-        return new ModelAndView("person/project_details", "projectModel", model);
+        return new ModelAndView("/person/project_details", "projectModel", model);
     }
 
     //@RequestBody Project project
@@ -117,7 +123,7 @@ public class UserspaceController {
         }
 
         System.out.println("I am saving project");
-        String redirectUrl = "admins/to_publish";
+        String redirectUrl = "/admins/to_publish";
         return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
     }
 
@@ -131,7 +137,7 @@ public class UserspaceController {
 
     @GetMapping("/I_want_verify")
     public String I_want_verify() {
-        return "person/I_want_verify";
+        return "/person/I_want_verify";
 //		System.out.println(title+"||||||"+summary+"||||||"+content);
 //		System.out.println(project.getSummary()+"summary!");
 //		System.out.println("I am saving project");
@@ -142,7 +148,7 @@ public class UserspaceController {
 
     @GetMapping("/complete_user_info")
     public String complete_user_info() {
-        return "person/complete_personal_information";
+        return "/person/complete_personal_information";
     }
 
 
@@ -174,7 +180,7 @@ public class UserspaceController {
 
     @GetMapping("/user_commit_verify")
     public String user_commit_verify() {
-        return "person/I_want_verify";
+        return "/person/I_want_verify";
     }
 
     @PostMapping("/user_commit_verify")
@@ -202,7 +208,7 @@ public class UserspaceController {
         user1.setVerified(2);        //设为2，让该用户进入待审核列表
 
         userRepository.save(user1);
-        return "redirect:personal_center";
+        return "redirect:/personal_center";
     }
 
     @PostMapping("/user_commit_image")
@@ -217,8 +223,10 @@ public class UserspaceController {
                 HttpSession session = request.getSession();
                 //将数据存储到session中
                 User user1 = (User) session.getAttribute("user");
-
-                user1.setConfirmation_link(user1.getConfirmation_link() + image.getOriginalFilename() + ";");
+                if(user1.getConfirmation_link() == "" || user1.getConfirmation_link() == null)
+                    user1.setConfirmation_link(image.getOriginalFilename() + ";");
+                else
+                    user1.setConfirmation_link(user1.getConfirmation_link() + image.getOriginalFilename() + ";");
 
                 userRepository.save(user1);
 
@@ -233,12 +241,55 @@ public class UserspaceController {
         return "redirect:/u/user_commit_verify";
     }
 
-    @GetMapping("/user_donate")
-    public String user_donate() {
-        return "person/user_donate";
+    @PostMapping("/user_commit_avatar")
+    public String user_upload_avatar(@RequestParam("image") MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
+        if (!image.isEmpty()) {
+            try {
+                Files.copy(image.getInputStream(), Paths.get(saveAvatarRoot.substring(1, saveAvatarRoot.length()), image.getOriginalFilename()));
+
+                response.setCharacterEncoding("UTF-8");
+                response.setContentType("text/html;charset=UTF-8");
+                //使用request对象的getSession()获取session，如果session不存在则创建一个
+                HttpSession session = request.getSession();
+                //将数据存储到session中
+                User user1 = (User) session.getAttribute("user");
+
+                user1.setAvatar(image.getOriginalFilename());
+
+                userRepository.save(user1);
+
+                redirectAttributes.addFlashAttribute("message", "you successfully uploaded " + image.getOriginalFilename() + "!");
+            } catch (IOException | RuntimeException e) {
+                redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " =>" + e.getMessage());
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " because it was empty");
+        }
+
+        return "redirect:/u/complete_user_info";
     }
 
+    @GetMapping("/user_donate")
+    public String user_donate() {
+        return "/person/user_donate";
+    }
 
+    @GetMapping("/user_refund")
+    public ModelAndView user_refund(Model model) {
+        List<OrderItem> orderItemList = orderItemRepository.findAllByRefundStatusAndStatus(0L, 1L);
+
+        model.addAttribute("userOrderList", orderItemList);
+
+        return new ModelAndView("/person/I_want_refund", "userOrderModel", model);
+    }
+
+    @GetMapping("/commit_refund/{id}")
+    public String commit_refund(@PathVariable("id") Long id) {
+        OrderItem orderItem = orderItemRepository.findById(id);
+        orderItem.setRefundStatus(2L);
+        orderItemRepository.save(orderItem);
+        return "redirect:/u/user_refund";
+    }
 }
 
 

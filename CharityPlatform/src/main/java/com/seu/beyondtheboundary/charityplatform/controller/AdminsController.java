@@ -4,6 +4,7 @@ import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
 import com.seu.beyondtheboundary.charityplatform.repository.OrderItemRepository;
+import com.seu.beyondtheboundary.charityplatform.repository.ProjectRepository;
 import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
 import com.seu.beyondtheboundary.charityplatform.service.OrderItemServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
@@ -39,24 +40,36 @@ public class AdminsController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Autowired
     private OrderItemServiceImpl orderItemService;
 
-    @GetMapping("/delete/{id}")
+    @Autowired
+    private OrderItemRepository orderItemRepository;
+    @GetMapping("/cancle_project_verified/{id}")
     public ModelAndView delete(@PathVariable("id") Long id){
-        projectServiceImpl.removeProject(id);
+
+        Project project = projectRepository.findOne(id);
+        project.setStatus((long)0);
+        projectRepository.save(project);
         return new ModelAndView("redirect:/admins/published");
     }
-    @GetMapping("/deleteUser/{id}")
-    public ModelAndView deleteUser(@PathVariable("id") Long id){
-        userService.removeUser(id);
+    @GetMapping("/cancle_user_verified/{id}")
+    public ModelAndView cancle_user_verified(@PathVariable("id") Long id){
+        User user = userRepository.findById(id);
+        user.setVerified(0);
+        userRepository.save(user);
+
         return new ModelAndView("redirect:/admins/vip_verified");
     }
 
-    @GetMapping("/deleteAdmin/{id}")
+    @GetMapping("/cancle_admin/{id}")
     public ModelAndView deleteAdmin(@PathVariable("id") Long id){
-        userService.removeUser(id);
+        User user = userRepository.findById(id);
+        user.setAdmin(false);
+        userRepository.save(user);
         return new ModelAndView("redirect:/admins/edit_admin");
     }
 
@@ -109,7 +122,7 @@ public class AdminsController {
             }
         }
         model.addAttribute("projectList", beSelected);
-        return new ModelAndView("manager/to_verify", "projectModel", model);
+        return new ModelAndView("/manager/to_verify", "projectModel", model);
     }
 
     @GetMapping("/published")
@@ -132,7 +145,7 @@ public class AdminsController {
         List<User> selectUser = userService.userNotVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_to_verify", "userModel", model);
+        return new ModelAndView("/manager/vip_to_verify", "userModel", model);
     }
 
     @PostMapping("/vip_to_verify")
@@ -143,7 +156,7 @@ public class AdminsController {
         List<User> selectUser = userService.userNotVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_to_verify", "userModel", model);
+        return new ModelAndView("/manager/vip_to_verify", "userModel", model);
     }
     @GetMapping("/vip_verified")
     public ModelAndView vip_verified(Model model) {
@@ -151,12 +164,12 @@ public class AdminsController {
         List<User> selectUser = userService.userHasVerified();
         model.addAttribute("userList", selectUser);
 
-        return new ModelAndView("manager/vip_verified", "userModel", model);
+        return new ModelAndView("/manager/vip_verified", "userModel", model);
     }
     @GetMapping("/vipcertificate")
     public String showCertificate(Model model) {
 
-        return "manager/vip_get_certificate";
+        return "/manager/vip_get_certificate";
     }
 
     @PostMapping("/vipcertificate")
@@ -164,7 +177,7 @@ public class AdminsController {
 
         model.addAttribute("imgsrc", user.getConfirmation_link().split(";"));
 
-        return new ModelAndView("manager/vip_get_certificate", "imgModel", model);
+        return new ModelAndView("/manager/vip_get_certificate", "imgModel", model);
     }
 
     @PostMapping("/project_certificate")
@@ -172,7 +185,7 @@ public class AdminsController {
 
         model.addAttribute("pro_imgsrc", project.getPro_confirmation_link().split(";"));
 
-        return new ModelAndView("manager/pro_get_certificate", "pro_imgModel", model);
+        return new ModelAndView("/manager/pro_get_certificate", "pro_imgModel", model);
     }
 
     @GetMapping("/edit_admin")
@@ -195,7 +208,6 @@ public class AdminsController {
     public String complete_user_info1(@RequestParam(value="id") Long id , User user, HttpServletRequest request, HttpServletResponse response) {
 
         User user1 = userRepository.findById(id);
-        System.out.println(user1.getId());
         user1.setSex(user.isSex());
         if(user.getTel() != "")
             user1.setTel(user.getTel());
@@ -213,14 +225,32 @@ public class AdminsController {
     }
 
     @GetMapping("/apply_for_refund")
-    public String apply_for_refund() {
-        return "manager/apply_for_refund";
+    public ModelAndView apply_for_refund(Model model) {
+        List<OrderItem> refundOrder = orderItemService.getOrderItemByRefund_status(2L, 1L);
+
+        model.addAttribute("refundOrder", refundOrder);
+
+        return new ModelAndView("/manager/refund_order_information", "refundModel", model);
+    }
+
+    @GetMapping("/refund/{id}")
+    public String apply_for_refund(@PathVariable("id") Long id) {
+
+        OrderItem orderItem = orderItemRepository.findById(id);
+
+        orderItem.setRefundStatus(1L);
+        orderItem.getProject().setAlreadyDonation(orderItem.getProject().getAlreadyDonation() - orderItem.getPrice());
+        orderItem.getProject().setDonatePeopleCounter(orderItem.getProject().getDonatePeopleCounter() - 1L);
+        orderItem.getUser().setIntegral(orderItem.getUser().getIntegral() - (long)orderItem.getPrice());
+
+        orderItemRepository.save(orderItem);
+        return "redirect:/admins/apply_for_refund";
     }
 
     @GetMapping("/admin_order")
     public ModelAndView order_show(Model model) {
 
-        List<OrderItem> validOrder = orderItemService.getOrderItemByStatus((long)1);
+        List<OrderItem> validOrder = orderItemService.getOrderItemByStatus(1L);
 
         model.addAttribute("orderList", validOrder);
 

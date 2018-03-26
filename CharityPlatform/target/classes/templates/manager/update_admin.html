@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title></title>
+    <link href="../css/bootstrap1.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/Iframe.css" rel="stylesheet" type="text/css" media="all" />
+    <style type="text/css">
+        a {color: #2aaf42;}
+    </style>
+</head>
+<body>
+<div class="table_con">
+    <table>
+        <tr class="tb_title">
+            <td width="260px">姓名</td>
+            <td width="260px">修改信息</td>
+            <td width="260px">删除管理员</td>
+        </tr>
+        <tr th:each="menu: ${adminModel.adminList}">
+            <td width="260px" th:text="${menu.realname}"></td>
+
+            <td width="260px">
+                    <a th:href="'/admins/complete_admin_info?id='+${menu.id}">修改信息</a>
+            </td>
+
+
+
+            <td width="260px">
+                <a id="sj_btn_a" th:href="@{'/admins/deleteAdmin/'+${menu.id}}" style="width:75px">删除信息</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

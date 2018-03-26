@@ -41,5 +41,6 @@ public class OrderItemServiceImpl implements OrderItemService {
 
 	public List<OrderItem> getOrderItemByStatus(Long status) { return orderItemRepository.findAllByStatus(status); }
 
+	public List<OrderItem> getOrderItemByRefund_status(Long refund_status, Long status) { return orderItemRepository.findAllByRefundStatusAndStatus(refund_status, status); }
 }
 

@@ -59,7 +59,7 @@
         </div>
         <br/>
         <div class="profile" style="width: 225px">
-            <img src="/images/look_mountain.jpg" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
+            <img th:src="${'/userimages/avatar/' + session.user.getAvatar()}" style="width: 85%;box-shadow: 7px 7px 5px #888888;">
             <div style="padding: 29px 6px 0px 3px;">
                 <img src="/level_icon/level_1.png" style="width: 25%" th:if="${session.user.integral} lt 1000"></img>
                 <img src="/level_icon/level_3.png" style="width: 25%" th:if="${session.user.integral} lt 2000 and ${session.user.integral} ge 1000"></img>
@@ -72,6 +72,8 @@
                 <a style="margin-left: 19px;" class="btn-primary" href="/u/user_commit_verify">个人认证</a>
                 <br>
                 <a style="margin-left: 19px;" class="btn-primary" href="/ueditor_index">我要求助</a>
+                <br>
+                <a style="margin-left: 19px;" class="btn-primary" href="/u/user_refund">我要退款</a>
             </div>
         </div>
 

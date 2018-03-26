@@ -18,7 +18,7 @@
             <td width="230px">身份证</td>
             <td width="200px">手机号</td>
             <td width="100px">获取凭证</td>
-            <td width="150px">删除用户</td>
+            <td width="150px">取消认证</td>
         </tr>
         <tr th:each="menu: ${userModel.userList}">
             <td width="100px" th:text="${menu.realname}"></td>
@@ -36,7 +36,7 @@
 
 
             <td width="150px">
-                <a id="sj_btn_a" th:href="@{'/admins/deleteUser/'+${menu.id}}" style="width:75px">删除信息</a>
+                <a id="sj_btn_a" th:href="@{'/admins/cancle_user_verified/'+${menu.id}}" style="width:75px">取消认证</a>
             </td>
 
         </tr>
