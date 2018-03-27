@@ -1,3 +1,5 @@
+web.upload-path: C:/
+
 spring:
   profiles:
     active: dev
@@ -9,7 +11,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
     show-sql: true
+  mvc:
+    static-path-pattern: /**
+  resources:
+        static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${web.upload-path}
+
 
 
