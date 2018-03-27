@@ -35,7 +35,7 @@
                     <div class="form-group col-md-5">
                         <label for="realname" class="col-form-label">姓名</label>
                         <input type="text" class="form-control" id="realname" name="realname" maxlength="40"
-                               placeholder="请输入真实姓名"/>
+                               placeholder="请输入真实姓名" th:value="${session.user.getRealname()}"/>
                     </div>
                     <div class="form-group col-md-5">
                         <label>性别</label><br/>
@@ -45,22 +45,22 @@
                     <div class="form-group col-md-5">
                         <label for="user_id_card" class="col-form-label">身份证</label>
                         <input type="text" class="form-control" id="user_id_card" name="user_id_card" maxlength="40"
-                               placeholder="请输入身份证号"/>
+                               placeholder="请输入身份证号" th:value="${session.user.getUser_id_card()}"/>
                     </div>
                     <div class="form-group col-md-5">
                         <label for="email" class="col-form-label">邮箱</label>
                         <input type="text" class="form-control" id="email" name="email" maxlength="40"
-                               placeholder="请输入邮箱地址"/>
+                               placeholder="请输入邮箱地址" th:value="${session.user.getEmail()}"/>
                     </div>
                     <div class="form-group col-md-5">
                         <label for="tel" class="col-form-label">手机</label>
                         <input type="text" class="form-control" id="tel" name="tel" maxlength="40"
-                               placeholder="请输入手机号码"/>
+                               placeholder="请输入手机号码" th:value="${session.user.getTel()}"/>
                     </div>
                     <div class="form-group col-md-5">
                         <label for="address" class="col-form-label">住址</label>
                         <input type="text" class="form-control" id="address" name="address" maxlength="40"
-                               placeholder="请输入住址"/>
+                               placeholder="请输入住址" th:value="${session.user.getAddress()}"/>
                     </div>
                     <button class="btn-form" type="submit" style="margin: 20px 150px;">提交</button>
                     <div class=" col-md-5" th:if="${loginError}">
