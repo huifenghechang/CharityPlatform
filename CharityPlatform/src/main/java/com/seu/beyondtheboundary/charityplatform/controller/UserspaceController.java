@@ -33,7 +33,9 @@ import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -216,18 +218,21 @@ public class UserspaceController {
     public String user_upload_image(@RequestParam("image") MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
         if (!image.isEmpty()) {
             try {
-                Files.copy(image.getInputStream(), Paths.get(saveRoot.substring(1, saveRoot.length()), image.getOriginalFilename()));
-
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("text/html;charset=UTF-8");
                 //使用request对象的getSession()获取session，如果session不存在则创建一个
                 HttpSession session = request.getSession();
                 //将数据存储到session中
                 User user1 = (User) session.getAttribute("user");
+
+                Date day = new Date();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+
+                Files.copy(image.getInputStream(), Paths.get(saveRoot.substring(1, saveRoot.length()), user1.getId().toString() + df.format(day) + image.getOriginalFilename()));
                 if(user1.getConfirmation_link() == "" || user1.getConfirmation_link() == null)
-                    user1.setConfirmation_link(image.getOriginalFilename() + ";");
+                    user1.setConfirmation_link(user1.getId().toString() + df.format(day) + image.getOriginalFilename() + ";");
                 else
-                    user1.setConfirmation_link(user1.getConfirmation_link() + image.getOriginalFilename() + ";");
+                    user1.setConfirmation_link(user1.getConfirmation_link() + user1.getId().toString() + df.format(day) + image.getOriginalFilename() + ";");
 
                 userRepository.save(user1);
 
@@ -246,8 +251,6 @@ public class UserspaceController {
     public String user_upload_avatar(@RequestParam("image") MultipartFile image, RedirectAttributes redirectAttributes, HttpServletRequest request, HttpServletResponse response) {
         if (!image.isEmpty()) {
             try {
-                Files.copy(image.getInputStream(), Paths.get(saveAvatarRoot.substring(1, saveAvatarRoot.length()), image.getOriginalFilename()));
-
                 response.setCharacterEncoding("UTF-8");
                 response.setContentType("text/html;charset=UTF-8");
                 //使用request对象的getSession()获取session，如果session不存在则创建一个
@@ -255,7 +258,12 @@ public class UserspaceController {
                 //将数据存储到session中
                 User user1 = (User) session.getAttribute("user");
 
-                user1.setAvatar(image.getOriginalFilename());
+                Date day = new Date();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+
+                Files.copy(image.getInputStream(), Paths.get(saveAvatarRoot.substring(1, saveAvatarRoot.length()), user1.getId().toString() + df.format(day) + image.getOriginalFilename()));
+
+                user1.setAvatar(user1.getId().toString() + df.format(day) + image.getOriginalFilename());
 
                 userRepository.save(user1);
 

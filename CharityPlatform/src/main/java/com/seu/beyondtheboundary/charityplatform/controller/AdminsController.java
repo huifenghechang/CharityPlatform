@@ -28,7 +28,9 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -193,8 +195,11 @@ public class AdminsController {
             try {
                 Files.copy(image.getInputStream(), Paths.get(saveProjectRoot.substring(1, saveProjectRoot.length()), image.getOriginalFilename()));
 
+                Date day = new Date();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+
                 Project project = projectRepository.findOne(id);
-                project.setPropagandaMap(image.getOriginalFilename());
+                project.setPropagandaMap(id.toString() + df.format(day) + image.getOriginalFilename());
                 projectRepository.save(project);
 
                 redirectAttributes.addFlashAttribute("message", "you successfully uploaded " + image.getOriginalFilename() + "!");
