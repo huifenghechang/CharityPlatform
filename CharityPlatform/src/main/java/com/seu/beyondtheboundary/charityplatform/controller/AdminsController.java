@@ -15,13 +15,19 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +36,7 @@ import java.util.List;
 @RequestMapping("/admins")
 public class AdminsController {
 
+    public static final String saveProjectRoot = ClassUtils.getDefaultClassLoader().getResource("static/project_certificate_images").getPath();
 
     @Autowired
     private ProjectServiceImpl projectServiceImpl;
@@ -180,12 +187,27 @@ public class AdminsController {
         return new ModelAndView("/manager/vip_get_certificate", "imgModel", model);
     }
 
-    @PostMapping("/project_certificate")
-    public ModelAndView showCertificate1(Project project, Model model) {
+    @PostMapping("/project_commit_image/{id}")
+    public String showCertificate1(@RequestParam("image") MultipartFile image, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
+        if (!image.isEmpty()) {
+            try {
+                Files.copy(image.getInputStream(), Paths.get(saveProjectRoot.substring(1, saveProjectRoot.length()), image.getOriginalFilename()));
 
-        model.addAttribute("pro_imgsrc", project.getPro_confirmation_link().split(";"));
+                Project project = projectRepository.findOne(id);
+                project.setPropagandaMap(image.getOriginalFilename());
+                projectRepository.save(project);
 
-        return new ModelAndView("/manager/pro_get_certificate", "pro_imgModel", model);
+                redirectAttributes.addFlashAttribute("message", "you successfully uploaded " + image.getOriginalFilename() + "!");
+            } catch (IOException | RuntimeException e) {
+                redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " =>" + e.getMessage());
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("message", "Failed to upload " + image.getOriginalFilename() + " because it was empty");
+        }
+
+        String url = "redirect:"+"/u/projects/edit?id="+id.toString();
+        return url;
+
     }
 
     @GetMapping("/edit_admin")

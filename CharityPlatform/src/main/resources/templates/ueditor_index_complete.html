@@ -32,7 +32,18 @@
 </div>
 <br/>
 
-<div style="margin: 20px 60px 0px;width: 600px">
+<div style="margin: 20px 60px 0px;width: 600px; position: relative" >
+    <div style="float: left; position: absolute; top:45px; left: 589px">
+        <form th:action="@{'/admins/project_commit_image/'+${projectModel.project.id}}" method="POST" enctype="multipart/form-data">
+            <div class="a-upload">
+                <label for="image">选择文件</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <div>
+                <input class="btn-form" type="submit" value="上传"/>
+            </div>
+        </form>
+    </div>
     <h3>项目编辑页面</h3>
     <div>
         <span style="float: left">标题</span>
@@ -52,7 +63,7 @@
         <div><span style="float: left">目标筹集资金</span>  <textarea class="ueditor-input" type="text"  name="aim_donation" id ="aim_donation" th:text="${projectModel.project.aimDonation} " ></textarea></div>
 
         <div><span style="float: left">项目类型</span> <select class="ueditor-input" name="categories" id="categories">
-            <option value="1" selected>教育助学</option> //预选设置
+            <option value="1" selected>教育助学</option>
             <option value="2" >医疗救助</option>
             <option value="3" >扶贫救灾</option>
             <option value="4" >其他</option>
