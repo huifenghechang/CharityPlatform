@@ -33,6 +33,7 @@ import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -275,10 +276,24 @@ public class UserspaceController {
     }
 
     @GetMapping("/user_refund")
-    public ModelAndView user_refund(Model model) {
+    public ModelAndView user_refund(Model model, HttpServletRequest request, HttpServletResponse response) {
         List<OrderItem> orderItemList = orderItemRepository.findAllByRefundStatusAndStatus(0L, 1L);
 
-        model.addAttribute("userOrderList", orderItemList);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        //使用request对象的getSession()获取session，如果session不存在则创建一个
+        HttpSession session = request.getSession();
+        //将数据存储到session中
+        User user1 = (User) session.getAttribute("user");
+
+        List<OrderItem> selectOrder = new ArrayList<>();
+
+        for (OrderItem orderItem:
+             orderItemList) {
+            if(orderItem.getUser().getId() == user1.getId())
+                selectOrder.add(orderItem);
+        }
+        model.addAttribute("userOrderList", selectOrder);
 
         return new ModelAndView("/person/I_want_refund", "userOrderModel", model);
     }
