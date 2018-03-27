@@ -93,7 +93,7 @@
                                     <li class="donate-item-default-li fn-clear" th:each="menu: ${pcModel.orderSortList}">
                                         <div class="donate-item-default-left">
                                             <a class="donate-item-default-pic-a" th:href="@{'/activity/'+${menu.get(0).getProject().getId()}}" seed="donateItemDefaultLeft-donateItemDefaultPicA" smartracker="on">
-                                                <img class="donate-item-default-pic" th:src="@{'/project_img_big/'+${menu.get(0).getProject().getPropagandaMap()}}" alt="" width="157" height="99">
+                                                <img class="donate-item-default-pic" th:src="@{'/project_certificate_images/'+${menu.get(0).getProject().getPropagandaMap()}}" alt="" width="157" height="99">
                                             </a>
                                         </div>
                                         <div class="donate-item-default-right" style="float: none">
