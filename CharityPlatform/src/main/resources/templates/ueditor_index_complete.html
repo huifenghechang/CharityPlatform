@@ -125,18 +125,18 @@
             datatype:"json",
             data: {id:id, title: title, summary: summary , content: content,htmlContent:htmlContent,
                 category: category,aimDonation: aimDonation, createdTime: createdTime, endTime: endTime,
-                initiator: initiator,},
+                initiator: initiator},
             success: function(data){
                 if (data.success) {
                     // 成功后，重定向
                     alert("恭喜您！成功提交到后台~");
                     window.location = data.body;
                 } else {
-                    toastr.error("error! i failed"+data.message);
+                    toastr.error("信息提交错误->"+data.message);
                 }
             },
             error : function() {
-                toastr.error("error!-to-connected!");
+                toastr.error("连接失败!");
             }
         })
 
