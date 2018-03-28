@@ -195,11 +195,11 @@ public class AdminsController {
             try {
                 Files.copy(image.getInputStream(), Paths.get(saveProjectRoot.substring(1, saveProjectRoot.length()), image.getOriginalFilename()));
 
-                Date day = new Date();
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+               // Date day = new Date();
+               // SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
                 Project project = projectRepository.findOne(id);
-                project.setPropagandaMap(id.toString() + df.format(day) + image.getOriginalFilename());
+                project.setPropagandaMap(image.getOriginalFilename());
                 projectRepository.save(project);
 
                 redirectAttributes.addFlashAttribute("message", "you successfully uploaded " + image.getOriginalFilename() + "!");

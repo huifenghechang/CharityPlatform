@@ -35,9 +35,9 @@
 <div style="margin: 20px 60px 0px;width: 600px; position: relative" >
     <div style="float: left; position: absolute; top:45px; left: 589px">
         <form th:action="@{'/admins/project_commit_image/'+${projectModel.project.id}}" method="POST" enctype="multipart/form-data">
-            <div class="a-upload">
+            <div class="a-upload" style="width: 75px; height: 23px">
                 <label for="image">选择文件</label>
-                <input type="file" id="image" name="image">
+                <input type="file" id="image" name="image" style="left: 27px">
             </div>
             <div>
                 <input class="btn-form" type="submit" value="上传"/>

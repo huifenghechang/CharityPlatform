@@ -27,8 +27,14 @@ public class ActivityController {
     public ModelAndView jump(@PathVariable("id") Long id , Model model){
         Project pro = projectServiceImpl.getProjectById(id);
         model.addAttribute("project", pro);
+
+        List<Project> projects = projectServiceImpl.listProjectsByStatusAndCategory(pro.getCategory(),3L);
+        projects.remove(pro);
+        model.addAttribute("projects", projects);
         return new ModelAndView("activity", "projectModel", model);
+
     }
+
 
 
 }

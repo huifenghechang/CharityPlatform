@@ -100,7 +100,10 @@
                         <input type="text" class="form-control" id="address" name="address" maxlength="40"
                                placeholder="请输入住址" th:value="${session.user.getAddress()}"/>
                     </div>
-                    <input id="button-submit-verify" class="btn-form" type="button" style="margin: 20px 150px;" value="提交">
+                    <button id="button-submit-verify" class="btn-form" type="submit" style="margin: 20px 150px;">提交</button>
+                    <script>
+                        document.getElementById("button-submit-verify").onclick = function() { alert("数据提交成功~");}
+                    </script>
                     <div class=" col-md-5" th:if="${loginError}">
                         <p class="blog-label-error" th:text="${errorMsg}"></p>
                     </div>
@@ -126,36 +129,6 @@
                 <!--</div>-->
             <!--</form>-->
         </div>
-
-
-        <script type="text/javascript">
-            //为表单的必填文本框添加提示信息（选择form中的所有后代input元素）
-            $("form :input.required").each(function () {
-                //创建元素
-                var $required = $("<strong class='high'>*</strong>");
-                //将它追加到文档中
-                $(this).parent().append($required);
-            });
-
-            // function uploadImg()
-            // {
-            //     var file=document.getElementById("uploadImgInput").files[0];
-            //     if(!/image\/\w+/.test(file.type)) //判断获取的是否为图片文件
-            //     {
-            //         alert("请确保文件为图像文件");
-            //         return false;
-            //     }
-            // }
-            //     var reader=new FileReader();
-            //     reader.uploadImg(file);
-            //     reader.onload=function(e)
-            //     {
-            //         var result=document.getElementById("result");
-            //         result.innerHTML='<img src="'+this.result+'" alt=""/>'
-            //     }
-            // }
-
-        </script>
     </div>
 </div>
 

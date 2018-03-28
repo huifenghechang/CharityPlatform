@@ -35,9 +35,9 @@
 <div style="margin: 20px 60px 0px;width: 600px; position: relative" >
     <div style="float: left; position: absolute; top:45px; left: 589px">
         <form th:action="@{'/admins/project_commit_image/'+${projectModel.project.id}}" method="POST" enctype="multipart/form-data">
-            <div class="a-upload">
+            <div class="a-upload" style="width: 75px; height: 23px">
                 <label for="image">选择文件</label>
-                <input type="file" id="image" name="image">
+                <input type="file" id="image" name="image" style="left: 27px">
             </div>
             <div>
                 <input class="btn-form" type="submit" value="上传"/>
@@ -125,18 +125,18 @@
             datatype:"json",
             data: {id:id, title: title, summary: summary , content: content,htmlContent:htmlContent,
                 category: category,aimDonation: aimDonation, createdTime: createdTime, endTime: endTime,
-                initiator: initiator,},
+                initiator: initiator},
             success: function(data){
                 if (data.success) {
                     // 成功后，重定向
                     alert("恭喜您！成功提交到后台~");
                     window.location = data.body;
                 } else {
-                    toastr.error("error! i failed"+data.message);
+                    toastr.error("信息提交错误->"+data.message);
                 }
             },
             error : function() {
-                toastr.error("error!-to-connected!");
+                toastr.error("连接失败!");
             }
         })
 

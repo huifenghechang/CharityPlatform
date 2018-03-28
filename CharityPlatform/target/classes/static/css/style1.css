@@ -102,6 +102,27 @@ h2,h3,h4,h5,h6,p{
 	background: #1fb375;
 }
 
+.btn-form-disabled{
+	border: 1px solid #ccc;
+	float: left;
+	outline: 0;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 18px;
+	padding: 0.18em 1.1em;
+	font-weight: bold;
+	line-height: 1.4;
+	margin-bottom: -48px;
+	margin-left: 15px;
+	margin-top: 13px;
+	background-color: grey;
+	color: #fff;
+}
+
+
+
 .content{
 	margin-top: 50px;
 }

@@ -7,6 +7,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>完善个人信息</title>
   <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
+  <style>
+    .main_content span{
+      position: absolute;
+      width: 200px;
+      top: 34px;
+      left: 325px;
+    }
+
+    .container div{
+      position: relative;
+    }
+
+    .container .form-valid{
+      position: absolute;
+      top: 40px;
+      left: 300px;
+      width: 16px;
+      height: 16px;
+      background-image: url(/images/validation.png);
+      background-position: 16px;
+    }
+
+    .container .form-invalid{
+      position: absolute;
+      top: 40px;
+      left: 300px;
+      width: 16px;
+      height: 16px;
+      background-image: url(/images/validation.png);
+      background-position: 0px;
+    }
+  </style>
 </head>
 
 <body style="position: relative;overflow-y:scroll;">
@@ -30,6 +62,7 @@
     <!-- /container -->
     <div class="container blog-content-container" style="margin: 20px 60px;">
       <h2 style="margin: 31px 14px">个人信息完善</h2>
+      <div style="float: left;width: 500px">
       <form  th:action="@{/u/complete_user_info}" method="post">
         <div class="form-group col-md-5">
           <label for="password" class="col-form-label">修改密码</label>
@@ -47,26 +80,40 @@
         </div>
         <div class="form-group col-md-5">
           <label for="user_id_card" class="col-form-label">身份证</label>
-          <input type="text" class="form-control" id="user_id_card" name="user_id_card" maxlength="40" placeholder="请输入身份证号" th:value="${session.user.getUser_id_card()}"/>
+          <input type="text" class="form-control" id="user_id_card" name="user_id_card" maxlength="40"
+                 placeholder="请输入身份证号" th:value="${session.user.getUser_id_card()}"/>
+          <span style="display: none;">身份证格式不正确</span>
+          <i class="form-invalid"></i>
         </div>
         <div class="form-group col-md-5">
           <label for="email" class="col-form-label">邮箱</label>
-          <input type="text" class="form-control" id="email" name="email" maxlength="40" placeholder="请输入邮箱地址" th:value="${session.user.getEmail()}"/>
+          <input type="text" class="form-control" id="email" name="email" maxlength="40"
+                 placeholder="请输入邮箱地址" th:value="${session.user.getEmail()}"/>
+          <span style="display: none;">邮箱格式不正确</span>
+          <i class="form-invalid"></i>
         </div>
         <div class="form-group col-md-5">
           <label for="tel" class="col-form-label">手机</label>
-          <input type="text" class="form-control" id="tel" name="tel" maxlength="40" placeholder="请输入手机号码" th:value="${session.user.getTel()}"/>
+          <input type="text" class="form-control" id="tel" name="tel" maxlength="40"
+                 placeholder="请输入手机号码" th:value="${session.user.getTel()}"/>
+          <span style="display: none;">手机号格式不正确</span>
+          <i class="form-invalid"></i>
         </div>
         <div class="form-group col-md-5">
           <label for="address" class="col-form-label">住址</label>
-          <input type="text" class="form-control" id="address" name="address" maxlength="40" placeholder="请输入住址" th:value="${session.user.getAddress()}"/>
+          <input type="text" class="form-control" id="address" name="address" maxlength="40"
+                 placeholder="请输入住址" th:value="${session.user.getAddress()}"/>
         </div>
 
-        <button class="btn-form" type="submit" >提交</button>
+        <button class="btn-form" type="submit" id="button-submit-complete">提交</button>
+        <script>
+          document.getElementById("button-submit-complete").onclick = function() { alert("数据提交成功~");}
+        </script>
         <div class=" col-md-5" th:if="${loginError}">
           <p class="blog-label-error" th:text="${errorMsg}"></p>
         </div>
       </form>
+      </div>
 
       <div style="float: left;">
         <form th:action="@{/u/user_commit_avatar}" method="POST" enctype="multipart/form-data">
@@ -96,6 +143,45 @@
 
 <!--footer-->
 <div th:include="fragments/footer_w::footer"></div>
+<script type="text/javascript">
+    var reg = {
+        tel:/^1[34578]\d{9}$/,
+        //用来判断电话号码，通常手机号第一位为1，第二位只可能出现3.4.5.7.8，后面剩下的9位数字随机
+        email:/^[1-9a-zA-Z_]\w*@[a-zA-Z0-9]+(\.[a-zA-Z]{2,})+$/,
+        //用来判断邮箱，通常邮箱没有以0开头的，所以第一位为1-9数字或者小写字母或者大写字母，第二位开始任意字符
+        //也可以只有第一位没有第二位，*表示至少0个，@后面同理，小写字母或者大写字母或者数字，.需要转意符，所以写成\.
+        //点后面通常是com或者cn或者com.cn，所以是小写字母或者大写字母至少两位
+        // user_id_card:/^[1-9]\d{7}((0[1-9])|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0[1-9])|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,
+        user_id_card:/^[1-9][0-9]{5}(19|20)[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|31)|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}([0-9]|x|X)$/,
+        //用来判断身份证，身份证号有15位和18位之分，所以写两个，用或者
+    };
+    var arr = [
+        $("[name='tel']")[0],
+        $("[name='email']")[0],
+        $("[name='user_id_card']")[0]
+    ];
+
+    for(var i=0;i<arr.length;i++) {
+        arr[i].onkeyup = function () {
+            if (this.value) {
+                if ( (reg[arr[0].name].test(arr[0].value)) && (reg[arr[1].name].test(arr[1].value)) && (reg[arr[2].name].test(arr[2].value))) {
+                    $("#button-submit-complete")[0].disabled = false;
+                    $("#button-submit-complete")[0].className = "btn-form";
+                }
+                if (reg[this.name].test(this.value)) {
+                    this.nextElementSibling.style.display = 'none'; //判断正确让span隐藏
+                    this.nextElementSibling.nextElementSibling.className = 'form-valid'; //判断正确显示正确的i
+                } else {
+                    this.nextElementSibling.style.display = 'block'; //判断错误显示span进行提示
+                    this.nextElementSibling.nextElementSibling.className = 'form-invalid'; //判断错误显示错误的i
+                    // this.focus();
+                    $("#button-submit-complete")[0].disabled = true;
+                    $("#button-submit-complete")[0].className = "btn-form-disabled";
+                }
+            }
+        };
+    }
+</script>
 </body>
 </html>
 

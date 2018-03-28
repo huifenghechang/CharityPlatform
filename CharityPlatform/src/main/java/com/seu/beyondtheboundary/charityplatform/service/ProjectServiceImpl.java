@@ -67,7 +67,11 @@ public class ProjectServiceImpl implements ProjectService {
 		return projectRepository.findAll(var1);
 	}
 
+	public List<Project> listProjectsByStatusAndCategory(Long category, Long status) {
 
+		List<Project> projects = projectRepository.findByCategoryAndStatus(category , status);
+		return projects;
+	}
 
 	public List<Project> listProjectsByStatusAndCategoryOrderAlreadyDonation(Long category, Long status, String title) {
 		title = "%" + title + "%";

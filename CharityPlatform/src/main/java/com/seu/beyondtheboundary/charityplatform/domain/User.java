@@ -36,7 +36,7 @@ public class User{
 
 	private String confirmation_link;
 
-	private String avatar;
+	private String avatar = "default_profile1.png";
 
 	private Integer verified=0;
 

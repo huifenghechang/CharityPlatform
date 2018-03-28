@@ -195,7 +195,6 @@ public class UserspaceController {
         HttpSession session = request.getSession();
         //将数据存储到session中
         User user1 = (User) session.getAttribute("user");
-
         user1.setSex(user.isSex());
         if (user.getTel() != "")
             user1.setTel(user.getTel());

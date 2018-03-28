@@ -28,7 +28,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
 	public List<Project> findAllByCategoryAndStatus(Long category , Long status);
 
 	//public List<Project> findByCategoryAndStatusByTitleLike(Long category , Long statu);
-
+	public List<Project> findByCategoryAndStatus(Long category , Long statu );
 	public List<Project> findByTitleLikeAndCategoryAndStatusOrderByAlreadyDonationAsc(String title,Long category , Long statu );
 	public List<Project> findByTitleLikeAndCategoryAndStatusOrderByIdDesc(String title,Long category , Long statu);
 	List<Project> findByTitleLikeOrderByIdDesc( String title);

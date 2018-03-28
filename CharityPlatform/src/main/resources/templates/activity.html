@@ -205,16 +205,18 @@
             <div class="store-right">
                 <h6> 推荐项目</h6>
                 <ul class="store-men">
-                    <li><a href="activity_KunJingErTong.html"><span> </span>
-                        [医疗救助] 给困境儿童送面包 </a>
-                        <p>HELLO小孩”爱心套餐是中国儿童少年基金会面向广大贫困家庭儿童和留守儿童以及因自然灾害、突发事故的儿童于2015年底启动的公益项目。包括日常学生套餐和灾后应急套餐两款，根据季节不同，又分为春夏和秋冬两个搭配方案</p>
-                    </li>
-                    <li class="last"><a href="activity_AiDeFenBei.html"><span> </span>
-                        [其他] 爱的分贝 救救耳朵 </a>
-                        <p>2017年9月1日，极重度听力障碍的康康成为了一名一年级的新生，康康妈妈像所有的学生家长一样，开始每天检查康康作业督促他学习；跟其他妈妈不一样是，她要不时开导康康：耳蜗就像眼镜，不能摘，摘了就听不到了。因为康康现在就读于普通小学，他非常渴望和同学们一样不用带他的“小耳朵”去上学</p>
+                    <li th:each="menu,iterStat:${projectModel.projects}" th:if="${iterStat.index} lt 3">
+                        <a th:href="@{'/activity/'+${menu.id}}" th:switch="${menu.category}"><span> </span>
+                            <p  th:text="'[教育助学]'" th:case="1" style="display: inline"></p>
+                            <p  th:text="'[扶贫救灾]'" th:case="2" style="display: inline"></p>
+                            <p  th:text="'[医疗救助]'" th:case="3" style="display: inline"></p>
+                            <p  th:text="'[其他]'" th:case="4" style="display: inline"></p>
+                            [[${menu.title}]]
+                        </a>
+                        <p th:text="${menu.summary}"></p>
                     </li>
                 </ul>
-            </div>									
+            </div>
         </div>
         <div class="clearfix"> </div>
         <div class="row">

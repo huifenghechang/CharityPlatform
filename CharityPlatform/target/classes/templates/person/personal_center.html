@@ -71,7 +71,13 @@
                 <br>
                 <a style="margin-left: 19px;" class="btn-primary" href="/u/user_commit_verify">个人认证</a>
                 <br>
-                <a style="margin-left: 19px;" class="btn-primary" href="/ueditor_index">我要求助</a>
+                <a style="margin-left: 19px;" class="btn-primary" href="/ueditor_index" id="help">我要求助</a>
+                <script>
+                    document.getElementById("help").onclick = function() {
+                        if ([[${session.user.verified}]] == 0) alert("请进行个人认证");
+                        if ([[${session.user.verified}]] == 2) alert("请等待管理员审核");
+                    }
+                </script>
                 <br>
                 <a style="margin-left: 19px;" class="btn-primary" href="/u/user_refund">我要退款</a>
             </div>

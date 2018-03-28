@@ -173,7 +173,7 @@ public class IndexController {
     private boolean register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");//防止乱码
         String username = request.getParameter("username");
-        String password = request.getParameter("password");
+        String password = MD5.EncoderByMd5(request.getParameter("password"));
         List<User> users = userServiceImpl.listUsers();
         boolean flag = false;//默认登录不成功
         for(User user:users){
