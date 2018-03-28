@@ -30,43 +30,46 @@
     <!-- /container -->
     <div class="container blog-content-container" style="margin: 20px 60px;">
       <h2 style="margin: 31px 14px">个人信息完善</h2>
-      <form  th:action="@{/u/complete_user_info}" method="post">
-        <div class="form-group col-md-5">
-          <label for="password" class="col-form-label">修改密码</label>
-          <input type="password" class="form-control" id="password" name="password" maxlength="30"
-                 placeholder="请输入密码，字母或特殊符号和数字结合"/>
-        </div>
-        <div class="form-group col-md-5">
-          <label for="realname" class="col-form-label">姓名</label>
-          <input type="text" class="form-control" id="realname" name="realname" maxlength="40" placeholder="请输入真实姓名" />
-        </div>
-        <div class="form-group col-md-5">
-          <label>性别</label><br/>
-          男<input type="radio" checked="checked" name="sex" value="1" />
-          女<input type="radio" name="sex" value="0" />
-        </div>
-        <div class="form-group col-md-5">
-          <label for="user_id_card" class="col-form-label">身份证</label>
-          <input type="text" class="form-control" id="user_id_card" name="user_id_card" maxlength="40" placeholder="请输入身份证号" />
-        </div>
-        <div class="form-group col-md-5">
-          <label for="email" class="col-form-label">邮箱</label>
-          <input type="text" class="form-control" id="email" name="email" maxlength="40" placeholder="请输入邮箱地址" />
-        </div>
-        <div class="form-group col-md-5">
-          <label for="tel" class="col-form-label">手机</label>
-          <input type="text" class="form-control" id="tel" name="tel" maxlength="40" placeholder="请输入手机号码" />
-        </div>
-        <div class="form-group col-md-5">
-          <label for="address" class="col-form-label">住址</label>
-          <input type="text" class="form-control" id="address" name="address" maxlength="40" placeholder="请输入住址" />
-        </div>
+      <div style="float: left;width: 500px">
+        <form th:action="@{/u/complete_user_info}" method="post">
+          <div class="form-group col-md-5">
+            <label for="password" class="col-form-label">修改密码</label>
+            <input type="password" class="form-control" id="password" name="password" maxlength="30"
+                   placeholder="请输入密码，字母或特殊符号和数字结合"/>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="realname" class="col-form-label">姓名</label>
+            <input type="text" class="form-control" id="realname" name="realname" maxlength="40" placeholder="请输入真实姓名"/>
+          </div>
+          <div class="form-group col-md-5">
+            <label>性别</label><br/>
+            男<input type="radio" checked="checked" name="sex" value="1"/>
+            女<input type="radio" name="sex" value="0"/>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="user_id_card" class="col-form-label">身份证</label>
+            <input type="text" class="form-control" id="user_id_card" name="user_id_card" maxlength="40"
+                   placeholder="请输入身份证号"/>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="email" class="col-form-label">邮箱</label>
+            <input type="text" class="form-control" id="email" name="email" maxlength="40" placeholder="请输入邮箱地址"/>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="tel" class="col-form-label">手机</label>
+            <input type="text" class="form-control" id="tel" name="tel" maxlength="40" placeholder="请输入手机号码"/>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="address" class="col-form-label">住址</label>
+            <input type="text" class="form-control" id="address" name="address" maxlength="40" placeholder="请输入住址"/>
+          </div>
 
-        <button class="btn-form" type="submit" >提交</button>
-        <div class=" col-md-5" th:if="${loginError}">
-          <p class="blog-label-error" th:text="${errorMsg}"></p>
-        </div>
-      </form>
+          <button class="btn-form" type="submit">提交</button>
+          <div class=" col-md-5" th:if="${loginError}">
+            <p class="blog-label-error" th:text="${errorMsg}"></p>
+          </div>
+        </form>
+        <div style="float: left;width: 500px">
 
       <div style="float: left;">
         <form th:action="@{/u/user_commit_avatar}" method="POST" enctype="multipart/form-data">

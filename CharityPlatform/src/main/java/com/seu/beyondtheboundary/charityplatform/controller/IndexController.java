@@ -3,24 +3,23 @@ package com.seu.beyondtheboundary.charityplatform.controller;
 import com.seu.beyondtheboundary.charityplatform.domain.OrderItem;
 import com.seu.beyondtheboundary.charityplatform.domain.Project;
 import com.seu.beyondtheboundary.charityplatform.domain.User;
-import com.seu.beyondtheboundary.charityplatform.repository.UserRepository;
 import com.seu.beyondtheboundary.charityplatform.service.OrderItemServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.ProjectServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.service.UserServiceImpl;
 import com.seu.beyondtheboundary.charityplatform.util.MD5;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -160,13 +159,41 @@ public class IndexController {
     }
 
     //注册方法
-    @PostMapping("/register")
-    public String register(User user){
-        user.setPassword(MD5.EncoderByMd5(user.getPassword()));
-        userServiceImpl.saveUser(user);
-        return "redirect:/login";
 
+//    public String register(User user){
+//        user.setPassword(MD5.EncoderByMd5(user.getPassword()));
+//        userServiceImpl.saveUser(user);
+//        return "redirect:/login";
+//
+//    }
+
+    //用户登录
+    @PostMapping("/register")
+    @ResponseBody
+    private boolean register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");//防止乱码
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        List<User> users = userServiceImpl.listUsers();
+        boolean flag = false;//默认登录不成功
+        for(User user:users){
+            if(username.equals(user.getUsername())) {
+                return false;
+            }
+        }
+
+        User user = new User(username,password);
+        userServiceImpl.saveUser(user);
+        flag = true;
+
+
+        response.setContentType("text/html;charset=utf-8");
+
+        return flag;
     }
+
+
+
 
     @GetMapping("/register_admin")
     public String register_admin(){

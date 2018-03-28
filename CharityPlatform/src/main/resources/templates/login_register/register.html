@@ -59,10 +59,8 @@
         </div>
         <br/>
         <div class="container blog-content-container" style="margin: 60px 60px;">
-
-            <form th:action="@{/register}" method="post">
+            <form name="form_register" id="form_register" method="post">
                 <h2 class="form-signin-heading" style="margin-bottom: 10px">注册</h2>
-
                 <div class="form-group col-md-5">
                     <label for="username" class="col-form-label">账号</label>
                     <input type="text" class="form-control" id="username" name="username" maxlength="50"
@@ -70,7 +68,6 @@
                     <span style="display: none;">账号格式不正确</span>
                     <i class="form-invalid"></i>
                 </div>
-
                 <div class="form-group col-md-5">
                     <label for="password" class="col-form-label">密码</label>
                     <input type="password" class="form-control" id="password" name="password" maxlength="30"
@@ -78,8 +75,7 @@
                     <span style="display: none;">密码格式不正确</span>
                     <i class="form-invalid"></i>
                 </div>
-
-                <button type="submit" class="btn-form">提交</button>
+                <button type="submit" class="btn-form" onclick="register(this.form)">提交</button>
 
             </form>
         </div>
@@ -89,7 +85,37 @@
 
 <!--footer-->
 <div th:include="fragments/footer_w::footer"></div>
+<script language="javascript">
+    function register(login_register){//传入表单参数
+        if(login_register.username.value==""){       //验证用户名是否为空
+            alert("请输入账号！");login_register.username.focus();return false;
+        }
+        if(login_register.password.value==""){       //验证密码是否为空
+            alert("请输入密码！");login_register.password.focus();return false;
+        }
+        var param="/register";  //将登录信息连接成字符串，作为发送请求的参数
+        $.ajax({
+            url:param,
+            type:"POST",
+            data:{username:login_register.username.value,password:login_register.password.value},
+            //dataType:"json",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
+            success:function(data){
+                if(data == false){
+                    alert("登录信息有误！");
+                    login_register.username.focus();
+                    window.location.href = "register.html";
+                }else{
+                    window.location.href = "index.html";//跳转到主页
+                }
+            }
+        });
+    }
+</script>
+
+
 <script type="text/javascript">
+
     var reg = {
         username:/^[A-Za-z0-9\u4e00-\u9fa5]{3,20}$/,
         password:/^[\w]{6,16}$/
@@ -108,6 +134,7 @@
                 } else {
                     this.nextElementSibling.style.display = 'block'; //判断错误显示span进行提示
                     this.nextElementSibling.nextElementSibling.className = 'form-invalid'; //判断错误显示错误的i
+                    this.focus();
                 }
             }
         };
