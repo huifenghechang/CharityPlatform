@@ -6,6 +6,37 @@
     <meta charset="UTF-8"/>
     <link href="/css/bottom_page.css" rel="stylesheet" type="text/css" media="all"/>
     <title>登录</title>
+    <style>
+        .main_content span{
+            position: absolute;
+            top: 34px;
+            left: 325px;
+        }
+
+        .container div{
+            position: relative;
+        }
+
+        .container .form-valid{
+            position: absolute;
+            top: 40px;
+            left: 300px;
+            width: 16px;
+            height: 16px;
+            background-image: url(images/validation.png);
+            background-position: 16px;
+        }
+
+        .container .form-invalid{
+            position: absolute;
+            top: 40px;
+            left: 300px;
+            width: 16px;
+            height: 16px;
+            background-image: url(images/validation.png);
+            background-position: 0px;
+        }
+    </style>
 </head>
 <body style="position: relative">
 
@@ -43,19 +74,7 @@
                     <input type="checkbox" name="remember-me"/> 记住我
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="border: 1px solid #ccc;
-            outline: 0;
-            margin-bottom: -48px;
-            cursor: pointer;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            border-radius: 5px;
-            font-size: 18px;
-            line-height: 1.4;
-                    margin-left: 15px;
-                    background-color: #11A782;
-                    color: #fff;">提交
-                </button>
+                <button type="submit" class="btn-form">提交</button>
                 <div class=" col-md-5" th:if="${loginError}">
                     <p class="blog-label-error" th:text="${errorMsg}"></p>
                 </div>
