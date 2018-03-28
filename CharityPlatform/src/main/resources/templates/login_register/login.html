@@ -57,7 +57,7 @@
         </div>
         <br/>
         <div class="container blog-content-container" style="margin: 60px 60px;">
-            <h2 style="margin-bottom: 10px">请登录</h2>
+            <h2 style="margin-bottom: 30px">请登录</h2>
             <form th:action="@{/login}" method="post">
                 <div class="form-group col-md-5">
                     <label for="username" class="col-form-label">账号</label>
@@ -70,13 +70,10 @@
                     <input type="password" class="form-control" id="password" name="password" maxlength="30"
                            placeholder="请输入密码"/>
                 </div>
-                <div class="form-group col-md-5">
-                    <input type="checkbox" name="remember-me"/> 记住我
-                </div>
 
                 <button type="submit" class="btn-form">提交</button>
                 <div class=" col-md-5" th:if="${loginError}">
-                    <p class="blog-label-error" th:text="${errorMsg}"></p>
+                    <p class="blog-label-error" style="padding: 0 0 0 79px; color: gray;" th:text="${errorMsg}"></p>
                 </div>
 
             </form>

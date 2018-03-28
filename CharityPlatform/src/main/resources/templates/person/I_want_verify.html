@@ -100,7 +100,7 @@
                         <input type="text" class="form-control" id="address" name="address" maxlength="40"
                                placeholder="请输入住址"/>
                     </div>
-                    <button class="btn-form" type="submit" style="margin: 20px 150px;">提交</button>
+                    <input id="button-submit-verify" class="btn-form" type="button" style="margin: 20px 150px;" value="提交">
                     <div class=" col-md-5" th:if="${loginError}">
                         <p class="blog-label-error" th:text="${errorMsg}"></p>
                     </div>
@@ -169,8 +169,8 @@
         //用来判断邮箱，通常邮箱没有以0开头的，所以第一位为1-9数字或者小写字母或者大写字母，第二位开始任意字符
         //也可以只有第一位没有第二位，*表示至少0个，@后面同理，小写字母或者大写字母或者数字，.需要转意符，所以写成\.
         //点后面通常是com或者cn或者com.cn，所以是小写字母或者大写字母至少两位
-        user_id_card:/^[1-9]\d{7}((0[1-9])|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0[1-9])|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,
-        // IDCard:/^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$/,
+        // user_id_card:/^[1-9]\d{7}((0[1-9])|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0[1-9])|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/,
+        user_id_card:/^[1-9][0-9]{5}(19|20)[0-9]{2}((01|03|05|07|08|10|12)(0[1-9]|[1-2][0-9]|31)|(04|06|09|11)(0[1-9]|[1-2][0-9]|30)|02(0[1-9]|[1-2][0-9]))[0-9]{3}([0-9]|x|X)$/,
         //用来判断身份证，身份证号有15位和18位之分，所以写两个，用或者
     };
     var arr = [
@@ -180,14 +180,21 @@
     ];
 
     for(var i=0;i<arr.length;i++) {
-        arr[i].onblur = function () {
+        arr[i].onkeyup = function () {
             if (this.value) {
+                if ( (reg[arr[0].name].test(arr[0].value)) && (reg[arr[1].name].test(arr[1].value)) && (reg[arr[2].name].test(arr[2].value))) {
+                    $("#button-submit-verify")[0].disabled = false;
+                    $("#button-submit-verify")[0].className = "btn-form";
+                }
                 if (reg[this.name].test(this.value)) {
                     this.nextElementSibling.style.display = 'none'; //判断正确让span隐藏
                     this.nextElementSibling.nextElementSibling.className = 'form-valid'; //判断正确显示正确的i
                 } else {
                     this.nextElementSibling.style.display = 'block'; //判断错误显示span进行提示
                     this.nextElementSibling.nextElementSibling.className = 'form-invalid'; //判断错误显示错误的i
+                    // this.focus();
+                    $("#button-submit-verify")[0].disabled = true;
+                    $("#button-submit-verify")[0].className = "btn-form-disabled";
                 }
             }
         };

@@ -60,7 +60,7 @@
         <br/>
         <div class="container blog-content-container" style="margin: 60px 60px;">
             <form name="form_register" id="form_register" method="post">
-                <h2 class="form-signin-heading" style="margin-bottom: 10px">注册</h2>
+                <h2 class="form-signin-heading" style="margin-bottom: 30px">注册</h2>
                 <div class="form-group col-md-5">
                     <label for="username" class="col-form-label">账号</label>
                     <input type="text" class="form-control" id="username" name="username" maxlength="50"
@@ -75,7 +75,7 @@
                     <span style="display: none;">密码格式不正确</span>
                     <i class="form-invalid"></i>
                 </div>
-                <button type="submit" class="btn-form" onclick="register(this.form)">提交</button>
+                <input id="button-submit" type="button" class="btn-form" onclick="register(this.form)" value="提交" />
 
             </form>
         </div>
@@ -102,11 +102,11 @@
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',//防止乱码
             success:function(data){
                 if(data == false){
-                    alert("登录信息有误！");
-                    login_register.username.focus();
-                    window.location.href = "register.html";
+                    alert("填写信息有误~");
+                    window.location.href = "#";
                 }else{
-                    window.location.href = "index.html";//跳转到主页
+                    alert("注册成功~");
+                    window.location.href = "login";//跳转到主页
                 }
             }
         });
@@ -126,15 +126,22 @@
     ];
 
     for(var i=0;i<arr.length;i++) {
-        arr[i].onblur = function () {
+        arr[i].onkeyup = function () {
             if (this.value) {
+                if ( (reg[arr[0].name].test(arr[0].value)) && (reg[arr[1].name].test(arr[1].value))) {
+                    $("#button-submit")[0].disabled = false;
+                    $("#button-submit")[0].className = "btn-form";
+                }
                 if (reg[this.name].test(this.value)) {
                     this.nextElementSibling.style.display = 'none'; //判断正确让span隐藏
                     this.nextElementSibling.nextElementSibling.className = 'form-valid'; //判断正确显示正确的i
-                } else {
+                }
+                else {
                     this.nextElementSibling.style.display = 'block'; //判断错误显示span进行提示
                     this.nextElementSibling.nextElementSibling.className = 'form-invalid'; //判断错误显示错误的i
-                    this.focus();
+                    // this.focus();
+                    $("#button-submit")[0].disabled = true;
+                    $("#button-submit")[0].className = "btn-form-disabled";
                 }
             }
         };
