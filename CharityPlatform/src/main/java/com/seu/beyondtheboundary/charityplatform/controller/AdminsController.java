@@ -193,13 +193,13 @@ public class AdminsController {
     public String showCertificate1(@RequestParam("image") MultipartFile image, @PathVariable("id") Long id, RedirectAttributes redirectAttributes) {
         if (!image.isEmpty()) {
             try {
-                Files.copy(image.getInputStream(), Paths.get(saveProjectRoot.substring(1, saveProjectRoot.length()), image.getOriginalFilename()));
+                Date day = new Date();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 
-               // Date day = new Date();
-               // SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+                Files.copy(image.getInputStream(), Paths.get(saveProjectRoot.substring(1, saveProjectRoot.length()), df.format(day) + image.getOriginalFilename()));
 
                 Project project = projectRepository.findOne(id);
-                project.setPropagandaMap(image.getOriginalFilename());
+                project.setPropagandaMap(df.format(day) + image.getOriginalFilename());
                 projectRepository.save(project);
 
                 redirectAttributes.addFlashAttribute("message", "you successfully uploaded " + image.getOriginalFilename() + "!");
