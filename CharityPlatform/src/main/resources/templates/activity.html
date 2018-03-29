@@ -13,10 +13,9 @@
 
     <style>
         .project_page_metadata h6{
-            padding: 0.5em 0 0 0;
-            font-size: 0.9em;
-            text-align: center;
-            font-weight:bold;
+            padding: 14.5px 0 0 12px;
+            font-size: 1.3em;
+            font-weight: bold;
         }
         .project_page_metadata h1{
             padding: 0 0 0 1em;
@@ -127,8 +126,9 @@
                     <!-- cover image -->
                     <div class="col-md-4 ">
                         <!-- insert image, scaled to column width -->
-                        <img th:src="@{'/project_certificate_images/'+${projectModel.project.propagandaMap}}" width="100%" style="margin:1em 0 0 0;"/>
-                        <h6 th:text="'运营机构：'+*{initiator}"></h6>
+                        <img th:src="@{'/project_certificate_images/'+${projectModel.project.propagandaMap}}" width="100%" style="margin:1em 0 0 0;box-shadow: 5px 4px 8px 0px #655d5d;"/>
+                        <h6>运营机构：</h6>
+                        <h6 th:text="*{initiator}"></h6>
                     </div>
                     <!-- meta data -->
                     <div class="col-md-7" >
@@ -153,7 +153,6 @@
 
 
 
-                        </a>
                     </div>
                 </div>
                 <div class="col-md-1 ">
@@ -170,7 +169,7 @@
             </div> -->
 
             <!-- 项目故事的主体，文字和图 -->
-            <div class="row">
+            <div class="row" style="margin-top: 50px">
                 <div class="project_page_main_story" th:utext="${projectModel.project.htmlContent}">
 
                 </div>

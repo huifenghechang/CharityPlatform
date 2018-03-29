@@ -661,7 +661,7 @@ margin:0 0 1em;
 
 /*--what--*/
 .banner-in{
-	background:url(/images/nav_top2.jpeg) no-repeat center;
+	background:url(/images/nav_top2.jpeg) no-repeat 0 0;
 	width:100%;
 	min-height:300px;
 	display:block;
