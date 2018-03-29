@@ -16,9 +16,9 @@ public class PayUtil {
 
 	public static String UID = "b807568faa27f60990dda3ad";
 
-	public static String NOTIFY_URL = "http://120.79.156.31:80/pays/notifyPay";
+	public static String NOTIFY_URL = "http://localhost/pays/notifyPay";
 
-	public static String RETURN_URL = "http://120.79.156.31:80/pays/returnPay";
+	public static String RETURN_URL = "http://localhost/pays/returnPay";
 
 	public static String BASE_URL = "https://pay.paysapi.com";
 

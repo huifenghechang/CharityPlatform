@@ -99,20 +99,22 @@ public class PayController {
 	@RequestMapping("/returnPay")
 	public ModelAndView returnPay(HttpServletRequest request, HttpServletResponse response, String orderid, Model model) {
 
-//		OrderItem orderItem = orderItemService.getOrderItemByOrderId(orderid);
-//		orderItem.setStatus(1L);
-//		orderItemService.saveOrderItemService(orderItem);
-//		//用户积分增加
-//		User user = orderItem.getUser();
-//		user.setIntegral((long) (user.getIntegral()+orderItem.getPrice()));
-//		userService.saveUser(user);
-//		//项目已筹金额,捐款人数增加
-//		Project project = orderItem.getProject();
-//		project.setAlreadyDonation((long) (project.getAlreadyDonation()+orderItem.getPrice()));
-//		project.setDonatePeopleCounter((project.getDonatePeopleCounter()+1));
-//		projectServiceImpl.saveProject(project);
-		// 根据订单号查找相应的记录:根据结果跳转到不同的页面
 		OrderItem orderItem = orderItemService.getOrderItemByOrderId(orderid);
+		orderItem.setStatus(1L);
+		orderItemService.saveOrderItemService(orderItem);
+		//用户积分增加
+		User user = orderItem.getUser();
+		user.setIntegral((long) (user.getIntegral()+orderItem.getPrice()));
+		userService.saveUser(user);
+		//项目已筹金额,捐款人数增加
+		Project project = orderItem.getProject();
+		project.setAlreadyDonation((long) (project.getAlreadyDonation()+orderItem.getPrice()));
+		project.setDonatePeopleCounter((project.getDonatePeopleCounter()+1));
+		projectServiceImpl.saveProject(project);
+
+
+		// 根据订单号查找相应的记录:根据结果跳转到不同的页面
+		//OrderItem orderItem = orderItemService.getOrderItemByOrderId(orderid);
 		float price = orderItem.getPrice();
 		Long prjectid = orderItem.getProject().getId();
 		model.addAttribute("price", price);
