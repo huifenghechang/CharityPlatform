@@ -126,7 +126,7 @@ public class UserspaceController {
         }
 
         System.out.println("I am saving project");
-        String redirectUrl = "admins/to_publish";
+        String redirectUrl = "/admins/to_publish";
         return ResponseEntity.ok().body(new Response(true, "处理成功", redirectUrl));
     }
 

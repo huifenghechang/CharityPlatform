@@ -63,7 +63,7 @@ public class AdminsController {
         Project project = projectRepository.findOne(id);
         project.setStatus((long)0);
         projectRepository.save(project);
-        return new ModelAndView("redirect:admins/published");
+        return new ModelAndView("redirect:/admins/published");
     }
     @GetMapping("/cancle_user_verified/{id}")
     public ModelAndView cancle_user_verified(@PathVariable("id") Long id){
@@ -71,7 +71,7 @@ public class AdminsController {
         user.setVerified(0);
         userRepository.save(user);
 
-        return new ModelAndView("redirect:admins/vip_verified");
+        return new ModelAndView("redirect:/admins/vip_verified");
     }
 
     @GetMapping("/cancle_admin/{id}")
@@ -79,28 +79,28 @@ public class AdminsController {
         User user = userRepository.findById(id);
         user.setAdmin(false);
         userRepository.save(user);
-        return new ModelAndView("redirect:admins/edit_admin");
+        return new ModelAndView("redirect:/admins/edit_admin");
     }
 
     @GetMapping("/change1to0/{id}")
     public ModelAndView change1to0(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)0);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_verify");
+        return new ModelAndView("redirect:/admins/to_verify");
     }
 
     @GetMapping("/change1to2/{id}")
     public ModelAndView change1to2(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)2);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_verify");
+        return new ModelAndView("redirect:/admins/to_verify");
     }
 
     @GetMapping("/change2to3/{id}")
     public ModelAndView change2to3(@PathVariable("id") Long id){
         projectServiceImpl.getProjectById(id).setStatus((long)3);
         projectServiceImpl.saveProject(projectServiceImpl.getProjectById(id));
-        return new ModelAndView("redirect:admins/to_publish");
+        return new ModelAndView("redirect:/admins/to_publish");
     }
 
     @GetMapping("/to_publish")
